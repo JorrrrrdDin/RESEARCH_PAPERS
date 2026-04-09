@@ -22,13 +22,13 @@ making AI **verifiable, governable, and accountable**.
 **"From Plausibility to Permissibility"**  
 A Layered Neuro-Symbolic Runtime for Reliable and Auditable AI Interpretation
 
-📄 DOI: *(coming soon)*
+📄 DOI: [https://doi.org/10.5281/zenodo.19485143](https://doi.org/10.5281/zenodo.19485143)
 
 ## Author
 
-**Myungjun Cho (조명준)**  
-Independent AI Researcher, South Korea  
-🔗 ORCID: [0009-0006-9540-4666](https://orcid.org/0009-0006-9540-4666)
+**Myeong Jun Jo**
+Independent AI Researcher, South Korea
+ORCID: [0009-0006-9540-4666](https://orcid.org/0009-0006-9540-4666)
 
 ---
 
