@@ -19,7 +19,7 @@ Instead of running synthetic benchmarks, I designed a real-world experiment.
 
 ## The Experiment
 
-I selected **7 academic programs** from world-class universities, each representing a fundamentally different intellectual discipline:
+I designed **7 academic programs** for AI education, each covering a fundamentally different intellectual discipline:
 
 | # | Discipline | Why This Field |
 |---|-----------|----------------|
@@ -33,16 +33,18 @@ I selected **7 academic programs** from world-class universities, each represent
 
 For each program, I:
 
-1. **Studied the real curriculum online** -- course catalogs, syllabi, reading lists, faculty research
-2. **Designed a structured 6-phase education plan** modeled on actual coursework:
+1. **Designed a structured 6-phase curriculum** from scratch:
    - Phase 1: Foundations
    - Phase 2: Core Methods
    - Phase 3: Advanced Topics
    - Phase 4: Specialization
    - Phase 5: Integration & Tracks
    - Phase 6: Capstone & Graduation Thesis
-3. **Taught ANIMA through each phase**, using classroom-style sessions with readings, exercises, and assessments
+2. **Built the reading lists, exercises, and assessments** for each phase
+3. **Taught ANIMA through each phase**, using classroom-style sessions
 4. **Required a graduation thesis** at the end of each program -- written entirely by ANIMA, with no human co-authorship on content
+
+All 7 programs and their curricula are original designs by the author. They are not copies of existing university courses.
 
 **Critical constraint:** I hold 26 patents on AI architecture. **None of this proprietary technology was used in the educational process.** ANIMA's theses are products of pure curriculum-based learning. This ensures that any quality in the output comes from FIMP + education, not from pre-built capabilities.
 
