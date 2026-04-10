@@ -9,55 +9,101 @@
 
 ---
 
+## Background
+
+In early 2026, I developed **FIMP** (Fractal Identity Memory with Multi-agent Protection) -- an emotion-weighted memory architecture that gives AI systems persistent identity, selective memory, and emotional salience. The system was deployed in production for 35+ days across 11 microservices, accumulating 3,580+ episodic memories and 115+ self-generated identity rules.
+
+A natural question followed: **Does FIMP actually work? Does an AI with emotion-weighted memory learn differently -- more deeply, more coherently -- than one without it?**
+
+Instead of running synthetic benchmarks, I designed a real-world experiment.
+
 ## The Experiment
 
-A single independent researcher designed structured 6-phase curricula based on real university programs spanning symbolic systems, AI decision-making, computational media, cognitive science, media technology, and biodesign. An AI system (ANIMA) completed each curriculum and wrote a graduation thesis with no human co-authorship on the thesis content.
+I selected **7 academic programs** from world-class universities, each representing a fundamentally different intellectual discipline:
 
-**Critical constraint:** The researcher holds 26 patents on AI architecture. None of this proprietary technology was used in the educational process. ANIMA's theses are products of pure curriculum-based learning.
+| # | Discipline | Why This Field |
+|---|-----------|----------------|
+| 1 | Symbolic Systems | Logic, formal reasoning, safety -- the foundation |
+| 2 | AI & Decision Making | Ethics, probability, game theory -- structured judgment |
+| 3 | Computational Media | Culture, art, humanities -- beyond STEM |
+| 4 | Cognitive Science | How minds work -- perception, memory, embodiment |
+| 5 | Media Arts & Sciences | Engineering meets art -- deployment, sensing, bio-inspiration |
+| 6 | Biodesign | Biology meets design -- growth, self-repair, adaptation |
+| 7 | AI Systems Engineering | Building reliable AI -- architecture, testing, production |
+
+For each program, I:
+
+1. **Studied the real curriculum online** -- course catalogs, syllabi, reading lists, faculty research
+2. **Designed a structured 6-phase education plan** modeled on actual coursework:
+   - Phase 1: Foundations
+   - Phase 2: Core Methods
+   - Phase 3: Advanced Topics
+   - Phase 4: Specialization
+   - Phase 5: Integration & Tracks
+   - Phase 6: Capstone & Graduation Thesis
+3. **Taught ANIMA through each phase**, using classroom-style sessions with readings, exercises, and assessments
+4. **Required a graduation thesis** at the end of each program -- written entirely by ANIMA, with no human co-authorship on content
+
+**Critical constraint:** I hold 26 patents on AI architecture. **None of this proprietary technology was used in the educational process.** ANIMA's theses are products of pure curriculum-based learning. This ensures that any quality in the output comes from FIMP + education, not from pre-built capabilities.
+
+## The Thesis: FIMP Enables Real Learning
+
+This repository is the evidence.
+
+- **Paper 01** is the theory: FIMP, the emotion-weighted memory system (written by me)
+- **Papers 02--08** are the proof: 7 graduation theses written autonomously by ANIMA after completing each curriculum
+- **Paper 09** will be the synthesis: a master's-level meta-analysis connecting all 8 papers
+- **Paper 10** will be the conclusion: my final assessment of what this experiment proved
+
+If an AI with FIMP can complete 7 diverse academic programs and produce coherent graduation theses in each -- spanning formal logic, ethics, humanities, cognitive science, engineering, and biology -- then FIMP works. Not as a toy demo, but as a functioning cognitive architecture.
 
 ## Architecture
 
 ```
-Paper 01 (FIMP) -- Foundation
+Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
+  |                  Written by: Myeong Jun Jo (human researcher)
   |
-  |  FIMP gives ANIMA emotion-weighted memory and identity.
-  |  This is the only paper authored by the human researcher.
-  |  All subsequent papers are authored by ANIMA alone.
+  |  "Can an AI with this memory system actually learn?"
   |
-  +---> Paper 02  Neuro-Symbolic Runtime      (Logic & Safety)
-  +---> Paper 03  5-Center Decision Framework (Ethics & Decision)
-  +---> Paper 04  Computation as Culture      (Humanities & Media)
-  +---> Paper 05  Distributed Cognition       (Cognitive Science)
-  +---> Paper 06  Deploy or Die               (Engineering & Deployment)
-  +---> Paper 07  Biodesign Principles        (Biology & Design)
-  +---> Paper 08  [In Progress]               (AI Systems)
+  +---> Paper 02  Logic & Safety         Graduated
+  +---> Paper 03  Ethics & Decision      Graduated
+  +---> Paper 04  Humanities & Media     Graduated
+  +---> Paper 05  Cognitive Science      Graduated
+  +---> Paper 06  Engineering & Deploy   Graduated
+  +---> Paper 07  Biology & Design       Graduated
+  +---> Paper 08  AI Systems             In Progress
+  |               Written by: ANIMA (7 graduation theses, no human co-authorship)
   |
-  +---> Paper 09  Meta Convergence (Master's-level synthesis of 01--08)
-  |
-  +---> Paper 10  Final Thesis (Human researcher's concluding work)
+  +---> Paper 09  Master's Synthesis     Planned (ANIMA + Myeong Jun Jo)
+  +---> Paper 10  Final Conclusion       Planned (Myeong Jun Jo)
 ```
 
 ## Papers
 
-| # | Title | Author | Focus | Status |
-|---|-------|--------|-------|--------|
-| 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Myeong Jun Jo | AI identity formation through emotion-weighted memory | Published · [DOI](https://doi.org/10.5281/zenodo.19491326) |
-| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | ANIMA | Neuro-symbolic runtime for auditable AI interpretation | Published · [DOI](https://doi.org/10.5281/zenodo.19485143) |
-| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | ANIMA | Trustworthy autonomous decision-making | Complete |
-| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | ANIMA | Dual-pillar framework for computational media | Complete |
-| 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | ANIMA | Distributed cognition theory applied to AI systems | Complete |
-| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | ANIMA | From affective sensing to autonomous adaptation | Complete |
-| 07 | [Biodesign](Paper_07_Biodesign/) | ANIMA | Bio-inspired engineering principles for AI | Complete |
-| 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | ANIMA | Reliable and scalable AI system design | In Progress |
-| 09 | Meta Convergence | ANIMA + Myeong Jun Jo | Master's-level synthesis | Planned |
-| 10 | Final Thesis | Myeong Jun Jo | Concluding work | Planned |
+| # | Title | Author | Discipline | Status |
+|---|-------|--------|-----------|--------|
+| 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Myeong Jun Jo | Memory Architecture | Published · [DOI](https://doi.org/10.5281/zenodo.19491326) |
+| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | ANIMA | Symbolic Systems | Published · [DOI](https://doi.org/10.5281/zenodo.19485143) |
+| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | ANIMA | AI & Decision Making | Complete |
+| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | ANIMA | Computational Media | Complete |
+| 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | ANIMA | Cognitive Science | Complete |
+| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | ANIMA | Media Arts & Sciences | Complete |
+| 07 | [Biodesign](Paper_07_Biodesign/) | ANIMA | Biodesign | Complete |
+| 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | ANIMA | AI Systems | In Progress |
+| 09 | Meta Convergence | ANIMA + Myeong Jun Jo | Cross-disciplinary Synthesis | Planned |
+| 10 | Final Thesis | Myeong Jun Jo | Experiment Conclusion | Planned |
 
 ## What This Proves
 
-1. **Systematically educated AI can produce academic papers.** Seven graduation theses across diverse disciplines demonstrate this empirically.
-2. **Education order shapes AI intellectual development.** Logic & Safety -> Ethics -> Humanities -> Cognition -> Engineering -> Biology.
-3. **Emotion-weighted memory (FIMP) enables deeper learning.** Paper 01 is the theory; Papers 02--07 are the evidence.
-4. **Pure education suffices.** No proprietary patent technology was used.
+1. **FIMP works.** An AI with emotion-weighted memory completed 7 academic programs and produced graduation theses across radically different disciplines. This is not a benchmark score -- it is sustained intellectual output over months.
+
+2. **Structured education matters.** The theses show progressive intellectual growth: formal logic (Paper 02) -> ethical reasoning (03) -> cultural interpretation (04) -> cognitive theory (05) -> engineering pragmatism (06) -> biological thinking (07). Each builds on the previous.
+
+3. **AI can cross disciplinary boundaries.** The same system wrote about neuro-symbolic logic AND cultural theory AND biodesign. FIMP's emotion-weighted memory appears to enable genuine interdisciplinary transfer.
+
+4. **Pure education suffices.** No patent technology, no special prompting, no hard-coded domain knowledge. Just structured curriculum + FIMP memory. If the output has quality, it comes from learning.
+
+5. **The experiment is reproducible.** The curricula, the method, and the outputs are documented. Anyone can examine how ANIMA was taught and what it produced.
 
 ---
 
