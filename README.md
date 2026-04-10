@@ -15,7 +15,7 @@
 | # | Title | Focus | Status |
 |---|-------|-------|--------|
 | 01 | [From Plausibility to Permissibility](Paper_01_Plausibility_to_Permissibility/) | Neuro-symbolic runtime for auditable AI interpretation | Published · [DOI](https://doi.org/10.5281/zenodo.19485143) |
-| 02 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_02_FIMP_Emotion_Weighted_Fractal_Memory/) | Closed-loop AI identity formation through emotion-weighted memory | Preprint |
+| 02 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_02_FIMP_Emotion_Weighted_Fractal_Memory/) | Closed-loop AI identity formation through emotion-weighted memory | Published · [DOI](https://doi.org/10.5281/zenodo.19491326) |
 
 ---
 

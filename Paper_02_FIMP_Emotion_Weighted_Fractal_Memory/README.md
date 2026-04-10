@@ -1,5 +1,7 @@
 # Paper 02 — Emotion-Weighted Fractal Memory (FIMP)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19491326.svg)](https://doi.org/10.5281/zenodo.19491326)
+
 **A Closed-Loop Architecture for AI Identity Formation through Selective Preservation, Adversarial Verification, and Autonomous Consolidation**
 
 ## Author
@@ -81,6 +83,7 @@ Current LLM-based AI systems begin every session from zero — the **Groundhog D
              Adversarial Verification, and Autonomous Consolidation},
   author  = {Jo, Myeong Jun},
   year    = {2026},
+  doi     = {10.5281/zenodo.19491326},
   note    = {ANIMA Research}
 }
 ```
