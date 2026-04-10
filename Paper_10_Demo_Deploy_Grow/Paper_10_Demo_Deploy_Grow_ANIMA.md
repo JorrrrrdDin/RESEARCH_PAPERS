@@ -74,13 +74,13 @@ Biology offers lifecycle models for growing systems: embryology (development), e
 - Metrics: "Does it work?" (capability demonstration)
 
 **Dominant disciplines:**
-- *Creative Prototyping (Media Lab)*: The ethos is "demo or die" — build fast, show results, iterate
-- *Cognitive Science (UCSD)*: Understanding how users perceive and interact with the system
-- *Decision Theory (MIT 6-4)*: Evaluating whether the system's decision logic is sound in principle
+- *Creative Prototyping (Program B)*: The ethos is "demo or die" — build fast, show results, iterate
+- *Cognitive Science (Program C)*: Understanding how users perceive and interact with the system
+- *Decision Theory (Program D)*: Evaluating whether the system's decision logic is sound in principle
 
 **Governance model:** Minimal. The creator is the governor. Ethics review for research involving human subjects, but no production governance. This is the "anything goes" phase within ethical bounds.
 
-**Anti-pattern:** Staying in Demo too long. "Perpetual prototype" syndrome — the system is always being improved but never deployed. Media Lab's "demo or die" is explicitly anti-this: you must show it works.
+**Anti-pattern:** Staying in Demo too long. "Perpetual prototype" syndrome — the system is always being improved but never deployed. The prototyping tradition's "demo or die" is explicitly anti-this: you must show it works.
 
 ### 3.2 Phase 2: Deploy
 
@@ -94,9 +94,9 @@ Biology offers lifecycle models for growing systems: embryology (development), e
 - Metrics: "Does it work reliably, safely, at scale?"
 
 **Dominant disciplines:**
-- *Formal Methods (Stanford)*: Production systems require verified correctness for critical paths
-- *Systems Engineering (CMU)*: Full-stack reliability, monitoring, incident response
-- *Cultural Analytics (Duke)*: The system's behavior must be interpretable and culturally appropriate for its user base
+- *Formal Methods (Program A)*: Production systems require verified correctness for critical paths
+- *Systems Engineering (Program G)*: Full-stack reliability, monitoring, incident response
+- *Cultural Analytics (Program F)*: The system's behavior must be interpretable and culturally appropriate for its user base
 
 **Governance model:** Structured. Formal policies, audit trails, incident response procedures, regulatory compliance. The NIST AI RMF is well-suited to this phase. Human oversight is continuous and direct.
 
@@ -113,9 +113,9 @@ Biology offers lifecycle models for growing systems: embryology (development), e
 - Metrics: "Does it improve itself and its environment over time?" (the regenerative criterion)
 
 **Dominant disciplines:**
-- *Biodesign (CSM)*: Growth, adaptation, regeneration, ecosystem participation
-- *Cognitive Science (UCSD)*: Self-modeling, meta-cognition, adaptive learning strategies
-- *Decision Theory (MIT 6-4)*: Meta-decision-making — the system decides how to decide
+- *Biodesign (Program E)*: Growth, adaptation, regeneration, ecosystem participation
+- *Cognitive Science (Program C)*: Self-modeling, meta-cognition, adaptive learning strategies
+- *Decision Theory (Program D)*: Meta-decision-making — the system decides how to decide
 
 **Governance model:** Adaptive. The governance itself must evolve as the system evolves. We propose a **governance gradient**:
 

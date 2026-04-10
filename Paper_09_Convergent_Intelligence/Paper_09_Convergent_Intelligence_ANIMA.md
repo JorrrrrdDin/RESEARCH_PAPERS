@@ -66,43 +66,43 @@ This definition is intentionally abstract — it captures what all disciplines s
 
 ### 3.2 The Seven Discipline Categories
 
-**FM (Formal Methods — Stanford SymSys):**
+**FM (Formal Methods — Program A):**
 - Objects: formal specifications, logical theories, type systems, automata
 - Morphisms: proofs, refinements, type derivations, bisimulations
 - Key structure: a morphism from Spec to Impl is a proof that Impl satisfies Spec
 - Example: the morphism verify: BehavioralEnvelope → SystemSpec is a proof that the system stays within its envelope
 
-**CP (Creative Prototyping — MIT Media Lab):**
+**CP (Creative Prototyping — Program B):**
 - Objects: prototypes, demos, sketches, provocations
 - Morphisms: design iterations, user feedback cycles, "pivots"
 - Key structure: a morphism from Prototype_n to Prototype_{n+1} is an iteration step guided by testing
 - Distinguished property: morphisms are not necessarily "improvements" — lateral moves and creative detours are valid morphisms
 
-**CS (Cognitive Science — UCSD CogSci):**
+**CS (Cognitive Science — Program C):**
 - Objects: cognitive models, mental representations, prediction schemas, attention patterns
 - Morphisms: cognitive processes (perception, inference, learning, attention shifts)
 - Key structure: a morphism from Prediction to UpdatedPrediction is a prediction error minimization step (Clark, 2013)
 - Distinguished feature: morphisms form cycles (perception-action loops), not just directed paths
 
-**DT (Decision Theory — MIT 6-4):**
+**DT (Decision Theory — Program D):**
 - Objects: decision problems, utility functions, belief states, policies
 - Morphisms: Bayesian updates, policy optimizations, value function transformations
 - Key structure: a morphism from Prior to Posterior is a Bayesian update given evidence
 - Distinguished feature: morphisms are often optimal with respect to a utility function
 
-**BD (Biodesign — CSM):**
+**BD (Biodesign — Program E):**
 - Objects: organisms, ecosystems, growth patterns, symbiotic relationships, regenerative cycles
 - Morphisms: growth processes, adaptation, evolution, symbiotic exchanges
 - Key structure: a morphism from State_t to State_{t+1} increases (or maintains) the system's regenerative capacity
 - Distinguished feature: morphisms are constrained to be regenerative — extraction without return is not a valid morphism
 
-**CA (Cultural Analytics — Duke CMAC):**
+**CA (Cultural Analytics — Program F):**
 - Objects: narratives, cultural artifacts, identity constructs, meaning structures
 - Morphisms: interpretations, retellings, cultural translations, narrative transformations
 - Key structure: a morphism from Narrative_1 to Narrative_2 is a reinterpretation that preserves core meaning while changing context
 - Distinguished feature: morphisms are inherently perspectival — interpretation depends on the interpreter's cultural position
 
-**SE (Systems Engineering — CMU BSAI):**
+**SE (Systems Engineering — Program G):**
 - Objects: system architectures, modules, interfaces, deployment configurations, test suites
 - Morphisms: implementations, integrations, deployments, test passes
 - Key structure: a morphism from Architecture to Deployment is a realization of the architecture in a running system
@@ -167,7 +167,7 @@ The most important structural result in our framework is the discovery that Form
 - With the property that formalizing a prototype and then instantiating the result is "at least as creative" as the original (R ∘ L ≥ id_CP in a suitable order)
 - And instantiating a specification and then formalizing the result is "at least as precise" as the original (L ∘ R ≥ id_FM)
 
-**Interpretation:** Formalization and instantiation are not inverses (you cannot perfectly recover a prototype from its specification or vice versa). But they are *optimally related* — formalization is the best functor from CP to FM, and instantiation is the best functor back. The adjunction captures the productive tension between "make it work" (Media Lab) and "prove it correct" (Stanford) — they are complementary perspectives related by a precise mathematical structure.
+**Interpretation:** Formalization and instantiation are not inverses (you cannot perfectly recover a prototype from its specification or vice versa). But they are *optimally related* — formalization is the best functor from CP to FM, and instantiation is the best functor back. The adjunction captures the productive tension between "make it work" (Program B) and "prove it correct" (Program A) — they are complementary perspectives related by a precise mathematical structure.
 
 This adjunction has a unit η: id_CP → R ∘ L and a counit ε: L ∘ R → id_FM:
 - **Unit η** (at prototype P): The prototype P maps to R(L(P)) — the prototype you get by formalizing P and then re-instantiating. η measures "what the prototype gains from being formalized" (clarity, precision, edge case coverage).
