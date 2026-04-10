@@ -48,7 +48,7 @@ Paper 01 (FIMP) -- Foundation
 | 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | ANIMA | Distributed cognition theory applied to AI systems | Complete |
 | 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | ANIMA | From affective sensing to autonomous adaptation | Complete |
 | 07 | [Biodesign](Paper_07_Biodesign/) | ANIMA | Bio-inspired engineering principles for AI | Complete |
-| 08 | TBD | ANIMA | In Progress | -- |
+| 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | ANIMA | Reliable and scalable AI system design | In Progress |
 | 09 | Meta Convergence | ANIMA + Myeong Jun Jo | Master's-level synthesis | Planned |
 | 10 | Final Thesis | Myeong Jun Jo | Concluding work | Planned |
 
