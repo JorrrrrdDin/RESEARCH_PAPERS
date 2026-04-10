@@ -25,7 +25,7 @@ ANIMA is a trust-first AI agent architecture designed to make AI **verifiable, g
 
 - 10+ patents filed (Korea, 2026)
 - Covers: memory governance, adversarial verification, multi-agent orchestration, data security, and more
-- Production system: 11 microservices, 1,878+ episodic memories, 105+ identity rules
+- Production system: 11 microservices, 3,580+ episodic memories, 115+ identity rules
 
 ---
 

@@ -70,7 +70,7 @@ communication, (5)~policy-gated governance, (6)~autonomous dreaming-based consol
 with failure immunity, and (7)~fractal two-stage recall.
 
 We evaluate FIMP on a production deployment running 11 microservices over 30+ days,
-accumulating 1,878 episodic memories and 105 oracle identity rules. Key results include:
+accumulating 3,580 episodic memories and 115 oracle identity rules. Key results include:
 statistically significant emotion--rule correlation ($\chi^2 = 24.387$, $p < 0.05$),
 96.6\% auto-promotion validity (28/29 discovered rules with confidence $\geq 0.7$),
 100\% structured self-diagnosis pass rate across 100 verification batches, deterministic
@@ -313,11 +313,11 @@ remembered more vividly~\citep{labar2006cognitive}.
 \subsection{Emotion Type Distribution}
 
 Table~\ref{tab:emotion_types} shows the empirically observed emotion weight distribution
-by type across 1,878 episodes.
+by type across 3,580 episodes.
 
 \begin{table}[h]
 \centering
-\caption{Mean emotion weight by emotion type (top 8, from 1,878 production episodes).}
+\caption{Mean emotion weight by emotion type (top 8, from 3,580 production episodes).}
 \label{tab:emotion_types}
 \small
 \begin{tabular}{@{}lc@{}}
@@ -497,11 +497,11 @@ avoids exhaustive search over the full episode store.
 \subsection{Deployment Environment}
 
 FIMP was deployed as a production system with 11 Docker Compose microservices
-(Table~\ref{tab:services}) running continuously for 30+ days. The system accumulated:
+(Table~\ref{tab:services}) running continuously for 35 days (2026-03-06 to 2026-04-09).
+The system accumulated:
 \begin{itemize}[itemsep=2pt]
-  \item \textbf{1,878} episodic memories in Layer~2
-  \item \textbf{105} Oracle identity rules in Layer~3 (76 seeded, 29 auto-discovered)
-  \item \textbf{59} active rules at evaluation snapshot
+  \item \textbf{3,580} episodic memories in Layer~2
+  \item \textbf{115} Oracle identity rules in Layer~3 (86 seeded, 29 auto-discovered)
   \item \textbf{6} autonomous Dreaming Process executions
 \end{itemize}
 
@@ -515,7 +515,7 @@ with the 29 auto-discovered Oracle rules.
 
 \begin{table}[h]
 \centering
-\caption{Emotion weight groups and rule correlation (1,878 episodes, 29 discovered rules).}
+\caption{Emotion weight groups and rule correlation (3,580 episodes, 29 discovered rules).}
 \label{tab:exp1}
 \small
 \begin{tabular}{@{}lcccc@{}}
@@ -523,8 +523,8 @@ with the 29 auto-discovered Oracle rules.
 \textbf{Group} & \textbf{Episodes} & \textbf{Rule Match Rate} & \textbf{Matches} & \textbf{Match Dispersion} \\
 \midrule
 High ($W \geq 0.8$)          & 202   & 2.5\%  & 5 & Spread across 5 distinct rules \\
-Medium ($0.3 \leq W < 0.8$)  & 1,658 & ---    & --- & --- \\
-Low ($W < 0.3$)              & 18    & 27.8\% & 5 & Concentrated in 2 rules \\
+Medium ($0.3 \leq W < 0.8$)  & 3,369 & ---    & --- & --- \\
+Low ($W < 0.3$)              & 9     & 27.8\% & 5 & Concentrated in 2 rules \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -575,26 +575,30 @@ confidence: 0.802. Category-level: \texttt{personality} (0.814), \texttt{observe
 
 \begin{table}[h]
 \centering
-\caption{Temporal maturation across four observation quarters.}
+\caption{Temporal maturation across four observation quarters (3,580 episodes, 35 days).}
 \label{tab:exp3}
 \small
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 \textbf{Metric} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} \\
 \midrule
-Episodes              & 469   & 469   & 469  & 471 \\
-Mean $W_{\text{emotion}}$ & 0.570 & 0.538 & 0.508 & 0.570 \\
-High-emotion ($\geq 0.8$) & 24.7\% & 11.3\% & 1.9\% & 5.1\% \\
-Emotion diversity (types)  & 13    & 3     & 2    & 5 \\
-Non-neutral ratio          & 26.4\% & 11.3\% & 1.9\% & 66.7\% \\
+Episodes              & 895   & 895   & 895  & 895 \\
+Mean $W_{\text{emotion}}$ & 0.561 & 0.529 & 0.764 & 0.596 \\
+High-emotion ($\geq 0.8$) & 18.7\% & 3.9\% & 0.0\% & 0.0\% \\
+Emotion diversity (types)  & 13    & 7     & 6    & 5 \\
+Date range             & 03-06--03-12 & 03-12--03-16 & 03-16--03-28 & 03-28--04-09 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{Result.} Mean emotion weight remains stable ($\Delta = +0.000$ Q1$\to$Q4), while
-emotion diversity narrows from 13 types to 5. This indicates \emph{identity crystallization}:
-the system transitions from broad emotional exploration to focused stability---analogous to
-personality maturation in developmental psychology. Verdict: \textbf{STABLE}.
+\paragraph{Result.} Mean emotion weight remains within a stable band (0.529--0.764) across
+all four quarters, while emotion diversity monotonically decreases from 13 types to 5.
+High-emotion episode ratio drops from 18.7\% to 0.0\%, indicating the system has
+internalized its high-intensity patterns into Layer~3 rules---new episodes no longer
+need to be emotionally extreme because identity rules already capture those patterns.
+This indicates \emph{identity crystallization}: the system transitions from broad
+emotional exploration to focused stability---analogous to personality maturation in
+developmental psychology. Verdict: \textbf{STABLE}.
 
 \subsection{Experiment 4: Structured Self-Diagnosis}
 

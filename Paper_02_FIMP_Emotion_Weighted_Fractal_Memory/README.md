@@ -14,7 +14,7 @@ Current LLM-based AI systems begin every session from zero — the **Groundhog D
 
 ## Key Results
 
-30+ day production deployment · 11 microservices · 1,878 episodes · 105 oracle rules
+35-day production deployment · 11 microservices · 3,580 episodes · 115 oracle rules
 
 | Experiment | Key Finding | Verdict |
 |------------|-------------|---------|
