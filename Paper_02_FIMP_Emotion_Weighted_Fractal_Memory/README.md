@@ -47,9 +47,9 @@ Current LLM-based AI systems begin every session from zero — the **Groundhog D
 │  ┌─────────────────────────────────────────────────────────┐    │
 │  │              Three-Layer Memory Hierarchy                │    │
 │  │                                                         │    │
-│  │  Layer 3: Core Identity Kernel     [59 active rules]    │    │
+│  │  Layer 3: Core Identity Kernel     [115 active rules]   │    │
 │  │     ▲ promote                          ▼ backprop       │    │
-│  │  Layer 2: Episodic Memory         [1,878 episodes]      │    │
+│  │  Layer 2: Episodic Memory         [3,580 episodes]      │    │
 │  │     ▲ compress                         ▼ recall         │    │
 │  │  Layer 1: Working Memory          [real-time buffer]    │    │
 │  └─────────────────────────────────────────────────────────┘    │
@@ -65,7 +65,7 @@ Current LLM-based AI systems begin every session from zero — the **Groundhog D
 │  Infrastructure: Gateway · PostgreSQL+pgvector · Redis          │
 │  Domain Agents:  Trader · Stock Expert Bot                      │
 └─────────────────────────────────────────────────────────────────┘
-         11 Docker Compose Microservices · 30+ Days Production
+         11 Docker Compose Microservices · 35 Days Production
 ```
 
 ## Files
