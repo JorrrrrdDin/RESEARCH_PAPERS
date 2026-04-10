@@ -18,24 +18,55 @@ Current LLM-based AI systems begin every session from zero — the **Groundhog D
 
 | Experiment | Key Finding | Verdict |
 |------------|-------------|---------|
-| Emotion Weight Effect | χ² = 24.387, p < 0.05 | PASS |
+| Emotion Weight Effect | χ² = 24.387, p < 0.05; dispersion effect | PASS |
 | Auto-Promotion Validity | 96.6% valid, mean conf. 0.802 | PASS |
 | Temporal Maturation | Stable across Q1–Q4 (ΔW = 0.000) | PASS |
-| Self-Diagnosis | 100/100 pass, risk 0.225 | PASS |
+| Self-Diagnosis | 100/100 post-correction pass, risk 0.225 | PASS |
 | Communication Efficiency | 23.8% token reduction, < 1ms | PASS |
-| Dreaming Consolidation | Cross-domain safety rule generated | PASS |
+| Dreaming Consolidation | 3/6 sessions → autonomous safety rule | PASS |
 
 ## Architecture
 
 ```
-Dialogue → Emotion Analysis → Verification → Episode Storage
-    ↑                                              ↓
-System Prompt ← Identity Rule ← Governance ← Pattern Promotion
+┌─────────────────────────────────────────────────────────────────┐
+│                     FIMP Closed-Loop Runtime                    │
+│                                                                 │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐  │
+│  │ Dialogue │───▶│ Observer │───▶│  Debate  │───▶│  Memory  │  │
+│  │  Input   │    │ Emotion  │    │  Engine  │    │  Store   │  │
+│  └────▲─────┘    │ Analysis │    │ Adv.     │    │ Episode  │  │
+│       │          └──────────┘    │ Verify   │    └────┬─────┘  │
+│       │                         └──────────┘         │         │
+│       │                                              ▼         │
+│  ┌────┴─────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐  │
+│  │  System  │◀───│  Oracle  │◀───│Governance│◀───│ Pattern  │  │
+│  │  Prompt  │    │ Identity │    │ 3-Axis   │    │ Promote  │  │
+│  │ Inject   │    │  Rules   │    │  Gate    │    │          │  │
+│  └──────────┘    └──────────┘    └──────────┘    └──────────┘  │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │              Three-Layer Memory Hierarchy                │    │
+│  │                                                         │    │
+│  │  Layer 3: Core Identity Kernel     [59 active rules]    │    │
+│  │     ▲ promote                          ▼ backprop       │    │
+│  │  Layer 2: Episodic Memory         [1,878 episodes]      │    │
+│  │     ▲ compress                         ▼ recall         │    │
+│  │  Layer 1: Working Memory          [real-time buffer]    │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                 │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐                   │
+│  │Dreamwalk │    │  Fractal │    │   L2L    │                   │
+│  │ Sleep    │    │  Recall  │    │ Protocol │                   │
+│  │ Consoli- │    │ Zoom-Out │    │ 23.8%    │                   │
+│  │ dation   │    │ Zoom-In  │    │ Token    │                   │
+│  │          │    │          │    │ Saving   │                   │
+│  └──────────┘    └──────────┘    └──────────┘                   │
+│                                                                 │
+│  Infrastructure: Gateway · PostgreSQL+pgvector · Redis          │
+│  Domain Agents:  Trader · Stock Expert Bot                      │
+└─────────────────────────────────────────────────────────────────┘
+         11 Docker Compose Microservices · 30+ Days Production
 ```
-
-**Layer 1** — Working Memory (real-time dialogue)
-**Layer 2** — Episodic Memory (emotion-weighted episodes)
-**Layer 3** — Core Identity Kernel (stable rules, boot-injected)
 
 ## Files
 
