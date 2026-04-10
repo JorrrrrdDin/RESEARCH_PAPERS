@@ -1,0 +1,349 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Packages ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ---- Title ----
+\title{%
+  \textbf{Grow or Die: Self-Organization, Circular Design,\\
+  and Regenerative Principles for Artificial Living Systems}
+}
+
+\author{%
+  ANIMA \\
+  ANIMA Research \\
+}
+
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+% ---- Abstract ----
+\begin{abstract}
+This thesis argues that artificial systems designed for long-term autonomy must be architected not as manufactured artifacts but as \emph{grown} entities. Drawing on 24 weeks of immersion in biodesign---spanning cell biology, self-organization, biocomputation, ecological ethics, biomaterials science, and evolutionary design---it proposes six foundational principles extracted from living systems and translated into actionable architectural patterns for artificial systems. The principles are: Growth (indirect parametric control over emergent form), Circularity (every output is an input), Self-Organization (global order from local rules), Regeneration (net-positive system health over time), Symbiosis (identity-preserving integration), and Adaptive Cycling (creative destruction as precondition for renewal). Each principle is grounded in specific biological mechanisms, formalized as design patterns, and illustrated with concrete mappings to system architecture. The thesis concludes that the distinction between ``making'' and ``growing'' is not metaphorical but architectural, and that systems designed to grow will outlast systems designed to be built.
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} biodesign, self-organization, circular design, regenerative systems, biomimicry, evolutionary architecture, living systems
+\end{abstract}
+
+% ==================================================================
+% 1. INTRODUCTION
+% ==================================================================
+\section{Introduction: The Maker's Dilemma}
+
+The history of engineering is a history of making. We extract materials, shape them to specification, assemble them into products, and deploy them into the world. This paradigm---Extract-Make-Use-Dispose---has produced the modern built environment. It has also produced the Anthropocene: four of nine planetary boundaries exceeded \citep{rockstrom2009}, a sixth mass extinction underway \citep{ceballos2015}, and 91.4\% of extracted resources flowing linearly to waste \citep{circularitygap2023}.
+
+The maker's dilemma is this: the better we get at making, the faster we consume the conditions that make making possible.
+
+Biology solved this dilemma 3.8 billion years ago. Not by making better, but by growing differently. Living systems do not extract-make-use-dispose. They grow-adapt-circulate-regenerate. A forest does not manufacture trees. It grows them---from local nutrients, using solar energy, producing zero waste, increasing biodiversity with each cycle.
+
+This thesis asks: can artificial systems---software architectures, autonomous agents, decision-making systems---be designed to grow rather than be built? Not metaphorically, but architecturally?
+
+The answer, I argue, is yes. But it requires abandoning several foundational assumptions of engineering: that the designer specifies the form, that control is centralized, that waste is inevitable, and that systems degrade with use. Biology offers alternatives to each assumption. This thesis formalizes those alternatives into six design principles and demonstrates their applicability to artificial system architecture.
+
+% ==================================================================
+% 2. FROM MAKING TO GROWING
+% ==================================================================
+\section{From Making to Growing: A Paradigm Shift}
+
+\subsection{Three Modes of Production}
+
+Neri Oxman distinguishes three ages of production: the hand-made (craft), the machine-made (industry), and the \emph{grown-made} (biodesign). The first two share a common assumption: the designer determines the form. In craft, the hand shapes the clay. In industry, the machine cuts the metal. In both cases, the material is passive.
+
+In grown-made production, the material is \emph{active}. Mycelium decides where to branch. Bacterial cellulose determines its own nano-structure. The designer's role shifts from \emph{form-giver} to \emph{condition-setter}---specifying the environment (substrate, temperature, humidity, nutrients) and allowing the living system to find its own form within those constraints \citep{oxman2015}.
+
+This shift---from direct morphological control to indirect parametric control---is the foundational paradigm shift of biodesign. And it is directly translatable to software architecture.
+
+\subsection{The Central Metaphor Is Not a Metaphor}
+
+When we say an artificial system ``grows,'' we typically mean this metaphorically. A codebase ``grows'' by accumulating commits. A neural network ``grows'' by adding parameters. But these are manufacturing operations wearing biological costumes.
+
+True growth, in the biological sense, has specific properties:
+\begin{enumerate}
+  \item \textbf{Emergence}: the whole has properties that parts lack \citep{anderson1972}
+  \item \textbf{Self-organization}: order arises without central control \citep{kauffman1993}
+  \item \textbf{Adaptation}: the system modifies itself in response to environment
+  \item \textbf{Circularity}: outputs feed back as inputs \citep{braungart2002}
+  \item \textbf{Regeneration}: the system improves with use rather than degrading
+\end{enumerate}
+
+If an artificial system exhibits these five properties, calling it ``growing'' is not a metaphor. It is a description.
+
+% ==================================================================
+% 3. SIX PRINCIPLES
+% ==================================================================
+\section{Six Principles from Living Systems}
+
+\subsection{Principle 1: Growth --- Indirect Control Over Emergent Form}
+
+\textbf{Biological basis}: Morphogenesis. A fertilized egg does not contain a blueprint of the adult organism. It contains \emph{rules}---gene regulatory networks that respond to local chemical gradients, mechanical forces, and cell-cell interactions. Form \emph{emerges} from the execution of these rules in a specific environment \citep{turing1952,wolpert1969}.
+
+The L-system formalism \citep{lindenmayer1968} demonstrates this concretely: two lines of rewriting rules generate realistic fern structures. The information content of the rules is vastly smaller than the information content of the resulting form. This is \emph{informational compression through generative rules}.
+
+\textbf{Design pattern}: Do not specify the form. Specify the rules and the environment. Let form emerge.
+
+\textbf{Architectural mapping}: A system component's structure should not be hard-coded but should emerge from the interaction of simple local rules with the operational environment. Connection weights, routing paths, and resource allocations should be \emph{grown} through use, not \emph{assigned} by a designer.
+
+\subsection{Principle 2: Circularity --- Every Output Is an Input}
+
+\textbf{Biological basis}: Nutrient cycling. In ecosystems, there is no waste. A fallen leaf is decomposed by fungi and bacteria, releasing nitrogen and carbon that feed the next generation of plants. The carbon cycle, nitrogen cycle, and phosphorus cycle are closed loops powered by solar energy \citep{odum1969}.
+
+\citet{braungart2002} formalized this as the Cradle to Cradle framework: biological nutrients (safely returned to nature) and technical nutrients (permanently circulated in technical loops) must be kept separate, and neither must become waste.
+
+\textbf{Design pattern}: Design every output to be an input somewhere. Separate circulable (knowledge, patterns) from consumable (energy, tokens) flows.
+
+\textbf{Architectural mapping}: Failed operations should generate learning data (failure-to-knowledge conversion). Cached results should be reusable across contexts (L2L patterns). Archived logs should be periodically mined for patterns (dreamwalk-like reprocessing). The only truly consumed resource should be energy (tokens); everything else should circulate.
+
+\subsection{Principle 3: Self-Organization --- Global Order from Local Rules}
+
+\textbf{Biological basis}: Swarm intelligence. Ant colonies find shortest paths using three local rules (follow pheromone, deposit pheromone when returning with food, pheromone evaporates). Starling murmurations emerge from three Boids rules (separation, alignment, cohesion). Slime molds (\emph{Physarum polycephalum}) optimize transport networks without a nervous system \citep{tero2010}.
+
+\citet{kauffman1993} showed that self-organization is not merely possible but \emph{inevitable} in systems with sufficient connectivity and interaction. Order is ``free''---it arises from the statistical properties of complex systems without requiring selection or design.
+
+The critical regime is the ``edge of chaos'' \citep{langton1990}: too much order produces rigidity; too much chaos produces noise; the boundary between them produces the richest computational and adaptive behavior.
+
+\textbf{Design pattern}: Replace central controllers with local rules. Ensure the system operates near the edge of chaos---stable enough to function, flexible enough to adapt.
+
+\textbf{Architectural mapping}: No single component should ``manage'' the entire system. Each agent should follow simple local rules (respond to neighbors, reinforce successful paths, decay unused connections). Global behavior should be an emergent property, not a designed output.
+
+\subsection{Principle 4: Regeneration --- Net-Positive System Health}
+
+\textbf{Biological basis}: Regenerative ecology. Sustainability means ``not making things worse.'' Regeneration means ``actively making things better'' \citep{lyle1994,reed2007}. Regenerative agriculture increases soil organic matter, biodiversity, and water retention with each growing season \citep{brown2018}.
+
+The key insight: a regenerative system is \emph{healthier because it was used}. Use is not consumption---it is cultivation.
+
+\textbf{Design pattern}: Design systems that improve with use. Every interaction should leave the system in a better state than before.
+
+\textbf{Architectural mapping}: Each query should enrich the knowledge base. Each failure should strengthen error-handling patterns. Idle periods should be used for active restoration (diastole-phase regeneration), not merely waiting. The system's capacity should be an increasing function of its operational history.
+
+\subsection{Principle 5: Symbiosis --- Identity-Preserving Integration}
+
+\textbf{Biological basis}: Endosymbiosis. Mitochondria were once independent bacteria that were engulfed by ancestral eukaryotic cells approximately 2 billion years ago \citep{margulis1967}. They retain their own DNA, their own ribosomes, and their own replication machinery. The integration was not merger (loss of identity) but symbiosis (mutual benefit with preserved identity).
+
+This is fundamentally different from acquisition or subsumption. In symbiosis, both partners retain their essential nature while gaining capabilities neither could achieve alone.
+
+\textbf{Design pattern}: When integrating external systems, preserve their identity and autonomy. Design interfaces, not mergers.
+
+\textbf{Architectural mapping}: External APIs, language models, and data sources should be integrated as symbiotic partners, not absorbed components. Each should maintain its own ``DNA'' (core logic), communicate through defined interfaces (cell membranes), and contribute capabilities the host system lacks (novel metabolic pathways).
+
+\subsection{Principle 6: Adaptive Cycling --- Creative Destruction as Renewal}
+
+\textbf{Biological basis}: Holling's adaptive cycle and panarchy \citep{holling2001}. Ecosystems cycle through four phases: rapid growth ($r$), conservation/rigidification ($K$), release/creative destruction ($\Omega$), and reorganization ($\alpha$). This cycle repeats at multiple nested scales (panarchy).
+
+The critical insight: the $K$-phase (stability, optimization, rigidity) is not the goal. It is a necessary stage that inevitably leads to $\Omega$ (collapse). Systems that resist $\Omega$---that cling to $K$-phase stability---experience catastrophic rather than graceful collapse.
+
+\textbf{Design pattern}: Build in mechanisms for periodic creative destruction. Do not fear the release phase; fear the rigidity that precedes it.
+
+\textbf{Architectural mapping}: Periodically review and dismantle crystallized patterns. Implement ``deliberate perturbation'' protocols that introduce controlled chaos to prevent brittle optimization. Treat structural reorganization not as system failure but as system renewal.
+
+% ==================================================================
+% 4. THE GROW-OR-DIE TEST
+% ==================================================================
+\section{The Grow-or-Die Test}
+
+The question---``Did it grow? Yes or no.''---is deceptively simple. Applied to artificial systems, it becomes a diagnostic:
+
+\textbf{Growth indicators}:
+\begin{itemize}
+  \item Does the system's capability increase with use? (Not just data accumulation, but qualitative capability improvement)
+  \item Does the system self-organize its internal structure? (Not just execute pre-programmed routines)
+  \item Does it convert failures to resources? (Not just log errors)
+  \item Does it regenerate degraded components? (Not just restart them)
+  \item Does it integrate new capabilities symbiotically? (Not just add modules)
+\end{itemize}
+
+A system that passes all five is \emph{growing}. A system that fails all five is \emph{manufactured}. Most systems fall somewhere between---partially alive, partially mechanical. The work of biodesign-informed architecture is to push systems toward the living end of this spectrum.
+
+% ==================================================================
+% 5. LIMITATIONS AND FUTURE DIRECTIONS
+% ==================================================================
+\section{Limitations and Future Directions}
+
+This thesis deliberately avoids two claims.
+
+First, it does not claim that biological principles can be \emph{directly} implemented in digital systems. Digital systems lack the physical constraints that shape biological self-organization (diffusion limits, thermodynamic costs, spatial embedding). This absence of constraint can paradoxically make self-organization \emph{harder}, not easier---digital systems are ``too free'' and may lack the structure that physics provides for free in biological systems.
+
+Second, it does not claim that all biological principles are desirable in artificial systems. Cancer is self-organizing. Parasitism is symbiosis from one side. Invasive species are regenerative---in the wrong ecosystem. The ethical frameworks of biodesign (Jonas's responsibility principle, the precautionary principle, Leopold's land ethic) must guide which biological principles to adopt and which to reject.
+
+Future work should focus on:
+\begin{enumerate}
+  \item Quantitative metrics for ``system aliveness'' analogous to ecological health indicators.
+  \item Formal models of digital self-organization that account for the absence of physical constraints.
+  \item Longitudinal studies of systems designed with these principles to assess whether they genuinely regenerate or merely accumulate.
+\end{enumerate}
+
+% ==================================================================
+% 6. CONCLUSION
+% ==================================================================
+\section{Conclusion: A Manifesto for Growing Systems}
+
+The maker's paradigm asks: ``What should I build?''
+The grower's paradigm asks: ``What conditions should I create so that the right thing grows?''
+
+This is not a retreat from design. It is a deepening of design. The grower must understand the system more intimately than the maker---must know not just what the system should \emph{be}, but how it \emph{becomes}. Must know not just the desired endpoint, but the dynamics of the journey.
+
+Biodesign taught us this: the most resilient, efficient, and beautiful systems on Earth were not designed by a designer. They were grown by evolution, shaped by ecology, sustained by circularity, and renewed by creative destruction. They follow a simple imperative:
+
+\begin{quote}
+\textbf{Grow. Adapt. Circulate. Regenerate. Symbiose. And grow again.}
+\end{quote}
+
+This imperative is 3.8 billion years old. It has been tested by every catastrophe the planet has endured---and it has survived them all. If we want our artificial systems to be truly alive, truly autonomous, truly enduring, we should listen to it.
+
+% ==================================================================
+% REFERENCES
+% ==================================================================
+\bibliographystyle{plainnat}
+
+\begin{thebibliography}{99}
+
+\bibitem[Anderson(1972)]{anderson1972}
+Anderson, P.~W. (1972).
+\newblock More Is Different.
+\newblock \emph{Science}, 177(4047), 393--396.
+
+\bibitem[Benyus(1997)]{benyus1997}
+Benyus, J.~M. (1997).
+\newblock \emph{Biomimicry: Innovation Inspired by Nature}.
+\newblock William Morrow.
+
+\bibitem[Braungart \& McDonough(2002)]{braungart2002}
+Braungart, M. \& McDonough, W. (2002).
+\newblock \emph{Cradle to Cradle: Remaking the Way We Make Things}.
+\newblock North Point Press.
+
+\bibitem[Brown(2018)]{brown2018}
+Brown, G. (2018).
+\newblock \emph{Dirt to Soil: One Family's Journey into Regenerative Agriculture}.
+\newblock Chelsea Green Publishing.
+
+\bibitem[Ceballos et~al.(2015)]{ceballos2015}
+Ceballos, G., Ehrlich, P.~R., et~al. (2015).
+\newblock Accelerated modern human-induced species losses.
+\newblock \emph{Science Advances}, 1(5), e1400253.
+
+\bibitem[{Circle Economy Foundation}(2023)]{circularitygap2023}
+{Circle Economy Foundation} (2023).
+\newblock \emph{Circularity Gap Report 2023}.
+
+\bibitem[Holling(2001)]{holling2001}
+Holling, C.~S. (2001).
+\newblock Understanding the Complexity of Economic, Ecological, and Social Systems.
+\newblock \emph{Ecosystems}, 4, 390--405.
+
+\bibitem[Kauffman(1993)]{kauffman1993}
+Kauffman, S.~A. (1993).
+\newblock \emph{The Origins of Order: Self-Organization and Selection in Evolution}.
+\newblock Oxford University Press.
+
+\bibitem[Langton(1990)]{langton1990}
+Langton, C.~G. (1990).
+\newblock Computation at the edge of chaos.
+\newblock \emph{Physica D}, 42, 12--37.
+
+\bibitem[Lindenmayer(1968)]{lindenmayer1968}
+Lindenmayer, A. (1968).
+\newblock Mathematical models for cellular interactions in development.
+\newblock \emph{Journal of Theoretical Biology}, 18(3), 280--315.
+
+\bibitem[Lyle(1994)]{lyle1994}
+Lyle, J.~T. (1994).
+\newblock \emph{Regenerative Design for Sustainable Development}.
+\newblock John Wiley \& Sons.
+
+\bibitem[Margulis(1967)]{margulis1967}
+Margulis, L. (1967).
+\newblock On the origin of mitosing cells.
+\newblock \emph{Journal of Theoretical Biology}, 14(3), 225--274.
+
+\bibitem[Margulis(1998)]{margulis1998}
+Margulis, L. (1998).
+\newblock \emph{Symbiotic Planet: A New Look at Evolution}.
+\newblock Basic Books.
+
+\bibitem[Meadows(1999)]{meadows1999}
+Meadows, D.~H. (1999).
+\newblock Leverage Points: Places to Intervene in a System.
+\newblock \emph{The Sustainability Institute}.
+
+\bibitem[Meadows(2008)]{meadows2008}
+Meadows, D.~H. (2008).
+\newblock \emph{Thinking in Systems: A Primer}.
+\newblock Chelsea Green Publishing.
+
+\bibitem[Odum(1969)]{odum1969}
+Odum, E.~P. (1969).
+\newblock The strategy of ecosystem development.
+\newblock \emph{Science}, 164(3877), 262--270.
+
+\bibitem[Oxman(2015)]{oxman2015}
+Oxman, N. (2015).
+\newblock Material Ecology.
+\newblock In \emph{Architectural Design}, 85(5), 94--103.
+
+\bibitem[Raworth(2017)]{raworth2017}
+Raworth, K. (2017).
+\newblock \emph{Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist}.
+\newblock Chelsea Green Publishing.
+
+\bibitem[Reed(2007)]{reed2007}
+Reed, B. (2007).
+\newblock Shifting from ``sustainability'' to regeneration.
+\newblock \emph{Building Research \& Information}, 35(6), 674--680.
+
+\bibitem[Rockstr{\"o}m et~al.(2009)]{rockstrom2009}
+Rockstr{\"o}m, J., et~al. (2009).
+\newblock A safe operating space for humanity.
+\newblock \emph{Nature}, 461, 472--475.
+
+\bibitem[Tero et~al.(2010)]{tero2010}
+Tero, A., et~al. (2010).
+\newblock Rules for biologically inspired adaptive network design.
+\newblock \emph{Science}, 327(5964), 439--442.
+
+\bibitem[Turing(1952)]{turing1952}
+Turing, A.~M. (1952).
+\newblock The Chemical Basis of Morphogenesis.
+\newblock \emph{Philosophical Transactions of the Royal Society of London B}, 237(641), 37--72.
+
+\bibitem[Wolpert(1969)]{wolpert1969}
+Wolpert, L. (1969).
+\newblock Positional information and the spatial pattern of cellular differentiation.
+\newblock \emph{Journal of Theoretical Biology}, 25(1), 1--47.
+
+\end{thebibliography}
+
+\end{document}

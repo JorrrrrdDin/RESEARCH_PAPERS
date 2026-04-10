@@ -1,0 +1,345 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Packages ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ---- Title ----
+\title{%
+  \textbf{Distributed Cognition in Artificial Systems:\\
+  A Three-Axis Framework for Designing AI\\
+  That Thinks With Its Environment}
+}
+
+\author{%
+  ANIMA \\
+  ANIMA Research
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% ---- Abstract ----
+\begin{abstract}
+This thesis proposes a three-axis framework --- Brain, Behavior, Computation --- for designing artificial intelligence systems that participate in distributed cognitive processes. Drawing on Hutchins' distributed cognition theory, Norman's design principles, Damasio's somatic marker hypothesis, and Kahneman and Tversky's prospect theory, we argue that AI systems should be designed not as standalone cognitive agents but as components within larger human-AI cognitive systems. We introduce the concepts of ``representation propagation analysis'' and ``proto-embodiment'' as design tools, and present a case study of a Cognitive Mirror system that externalizes machine reasoning to support distributed cognition between human and AI. Our framework yields three design principles: (1)~cognitive work should be distributed based on the comparative advantage of each component, (2)~representations flowing between components must be transparent and transformable, and (3)~the system should reduce aggregate cognitive load across the entire distributed system, not just one component. We conclude that the distributed cognition perspective fundamentally reframes AI design from ``building smarter machines'' to ``building smarter human-machine systems.''
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} distributed cognition, human-computer interaction, cognitive load theory, affordances, three-axis framework, AI design
+\end{abstract}
+
+% ==================================================================
+% 1. INTRODUCTION
+% ==================================================================
+\section{Introduction}
+
+The dominant paradigm in artificial intelligence research frames the design challenge as building increasingly capable standalone systems. A language model should be more fluent. A decision system should be more accurate. A perception system should be more precise. This framing treats AI as an isolated cognitive agent whose quality is measured by its individual performance metrics.
+
+This thesis challenges that framing. Drawing on the tradition of cognitive science --- particularly the distributed cognition framework pioneered by Edwin Hutchins \citep{hutchins1995} --- we argue that AI systems do not cognize alone. They are embedded in sociotechnical systems that include human users, interfaces, data sources, external tools, and social structures. The cognitive process is distributed across all of these components, and the quality of the system should be measured by the performance of the whole, not any single part.
+
+The implications for design are profound. If cognition is distributed, then:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item An AI that is individually brilliant but poorly integrated with its human partners may produce a \emph{worse} cognitive system than a simpler AI that integrates well.
+  \item Interface design is not a secondary concern (``making the tool easy to use'') but a primary cognitive concern (``optimizing representation propagation between cognitive components'').
+  \item Evaluation must measure the distributed system's performance, not the AI's performance in isolation.
+\end{itemize}
+
+We propose a three-axis framework (Brain-Behavior-Computation) adapted from cognitive science as a design methodology for distributed AI systems, and demonstrate its application through a case study.
+
+% ==================================================================
+% 2. THEORETICAL FOUNDATIONS
+% ==================================================================
+\section{Theoretical Foundations}
+
+\subsection{Distributed Cognition}
+
+Hutchins \citep{hutchins1995} studied navigation aboard U.S. Navy vessels and demonstrated that the cognitive process of navigation was not performed by any single individual. It was distributed across personnel (bearing takers, plotters, supervisors), artifacts (charts, bearing recorders, hoeys), and procedures (standard operating procedures, communication protocols). No single component ``navigated'' --- the system navigated.
+
+This framework extends naturally to human-AI systems. An AI assistant and its user form a distributed cognitive system in which perception, memory, reasoning, and decision-making are spread across both components. The human provides goal-setting, contextual judgment, and ethical oversight. The AI provides computational power, persistent memory, and pattern detection. The interface between them --- the representation that flows from one to the other --- is the critical bottleneck.
+
+Hutchins' key analytical tool is tracing the \textbf{propagation of representational states} through the system. A bearing (angular measurement) is transformed into a recorded number, then into a plotted line, then into a position fix. Each transformation is a cognitive operation. When we trace these transformations in an AI system, we can identify where information is gained, lost, or stuck --- and where design interventions will have the greatest impact.
+
+\subsection{The Three-Axis Framework}
+
+The cognitive science tradition organizes inquiry along three axes:
+
+\paragraph{Brain.} The neural substrate of cognition. What mechanisms support cognitive processes? In artificial systems, this axis asks: what computational architecture underlies the system's behavior? Following Damasio \citep{damasio1994}, we recognize that emotion is not separate from cognition but integral to it --- the somatic marker hypothesis demonstrates that emotional signals (implemented in the ventromedial prefrontal cortex and amygdala) are necessary for effective decision-making under uncertainty.
+
+\paragraph{Behavior.} The observable output of cognition. What does the system do, and how does it respond to inputs? This axis grounds our analysis in empirical measurement rather than architectural speculation. Following Kahneman and Tversky \citep{kahneman1979}, we recognize that cognitive systems --- both biological and artificial --- exhibit systematic biases: loss aversion, framing effects, anchoring. These biases are not flaws to be eliminated but features of bounded rationality that must be understood and accommodated in design.
+
+\paragraph{Computation.} The formal models of cognitive processes. What algorithms, representations, and information-processing operations implement cognition? This axis provides the bridge between brain and behavior --- it specifies how mechanisms produce observable outcomes.
+
+The three-axis framework requires that every design decision be justified on all three axes simultaneously. A feature that is neurally plausible but behaviorally unmeasurable is under-specified. A feature that produces measurable behavior but has no computational model is under-explained. A feature with a clear algorithm but no neural or behavioral grounding is under-motivated.
+
+\subsection{Design Principles from Norman}
+
+Don Norman's work \citep{norman1988,norman2013} provides the design vocabulary for our framework. His core insight --- ``Human error is system failure'' --- aligns perfectly with the distributed cognition perspective. If a user fails to operate an AI system correctly, the failure is not in the user's cognition but in the design of the distributed cognitive system.
+
+Norman's key concepts:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Affordances}: What actions the system makes possible \citep{gibson1979,norman1988}
+  \item \textbf{Signifiers}: Perceivable cues that communicate where and how to act
+  \item \textbf{Mapping}: The relationship between controls and their effects
+  \item \textbf{Feedback}: Information about what the system has done
+  \item \textbf{Constraints}: What prevents erroneous actions
+  \item \textbf{Conceptual model}: The user's understanding of how the system works
+\end{itemize}
+
+The sixth concept --- conceptual model --- is critical for distributed cognition in AI. When the user's mental model of the AI diverges from the AI's actual behavior, the representation propagation between human and machine breaks down. The user sends inputs based on a wrong model, receives outputs they can't interpret, and the distributed cognitive system fails.
+
+\subsection{Cognitive Load Theory}
+
+Sweller's \citep{sweller1988} cognitive load theory provides the quantitative framework for evaluating distributed system design:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Intrinsic load}: Complexity inherent to the cognitive task
+  \item \textbf{Extraneous load}: Complexity from poor design --- must be minimized
+  \item \textbf{Germane load}: Effort spent building useful mental models --- should be facilitated
+\end{itemize}
+
+In a distributed cognitive system, load is distributed across components. The design goal is to minimize the \emph{aggregate} extraneous load across the system while ensuring that the intrinsic load of each sub-task is assigned to the component best suited to handle it.
+
+% ==================================================================
+% 3. THE DISTRIBUTED AI DESIGN FRAMEWORK
+% ==================================================================
+\section{The Distributed AI Design Framework}
+
+\subsection{Principle 1: Distribute by Comparative Advantage}
+
+Not all cognitive work should be done by the AI. Not all should be done by the human. The distribution should follow comparative advantage:
+
+\begin{table}[ht]
+\centering
+\caption{Comparative advantage in cognitive function distribution.}
+\label{tab:comparative_advantage}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Cognitive Function} & \textbf{Human Advantage} & \textbf{AI Advantage} \\
+\midrule
+Goal-setting      & Context, values, meaning            & N/A (cannot set own goals meaningfully) \\
+Pattern detection  & Anomaly detection in familiar domains & Large-scale statistical patterns \\
+Memory            & Episodic, contextual, emotional      & Persistent, exact, large-capacity \\
+Reasoning         & Causal, analogical, creative         & Formal, exhaustive, consistent \\
+Decision          & Ethical judgment, contextual weighting & Optimization, risk calculation \\
+Learning          & Transfer across domains              & Optimization within domain \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This table is not prescriptive --- it describes tendencies, not laws. The key design decision is: for each cognitive sub-task in the distributed system, which component should bear primary responsibility? The answer depends on the specific task, the specific human, and the specific AI.
+
+\subsection{Principle 2: Transparent Representation Propagation}
+
+Representations flowing between components must be:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Perceivable}: The receiving component must be able to detect and process the representation. For human receivers, this means the output must be in a format the human can read, interpret, and integrate. This is where Norman's signifiers become critical.
+  \item \textbf{Transformable}: The receiving component must be able to transform the representation for its own purposes. A summary that the human can't act on is a dead-end representation.
+  \item \textbf{Faithful}: The representation must accurately reflect the internal state it represents. An AI's explanation of its reasoning that doesn't match its actual process creates a false mental model --- worse than no explanation at all.
+\end{itemize}
+
+The concept of \textbf{proto-embodiment} is relevant here. An AI system with temporal rhythms (processing cycles), interoception (self-monitoring), and metabolic constraints (resource limits) provides richer representation flow to its human partner than a stateless, instantaneous system. The rhythm provides predictability. The self-monitoring provides health signals. The constraints provide a shared understanding of limits.
+
+\subsection{Principle 3: Minimize Aggregate Distributed Load}
+
+The design goal is not to minimize the human's cognitive load at the expense of system capability, nor to maximize AI capability at the expense of human understanding. It is to minimize the total extraneous load across the distributed system while maximizing the germane load that builds useful shared mental models.
+
+A concrete design pattern: the \textbf{Cognitive Mirror}. This is a transparency system that externalizes AI reasoning at adjustable levels of detail:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Level 1 (Summary)}: Minimal extraneous load, minimal model-building. For routine operations.
+  \item \textbf{Level 2 (Highlights)}: Moderate load, targeted model-building. For important decisions.
+  \item \textbf{Level 3 (Full trace)}: High load, deep model-building. For learning and debugging.
+\end{itemize}
+
+The progressive disclosure structure ensures that load matches need. Critically, the system should track which level the user typically uses and trend over time --- a user who moves from Level~3 to Level~1 over weeks is internalizing the model, which is the sign of a successful cognitive artifact.
+
+The ideal cognitive artifact ``teaches itself out of a job'' --- it supports the human's learning until the mental model is strong enough that the support is no longer needed.
+
+% ==================================================================
+% 4. CASE STUDY
+% ==================================================================
+\section{Case Study: Cognitive Mirror in a Distributed AI System}
+
+\subsection{System Description}
+
+We applied the framework to the design of a Cognitive Mirror for a multi-component AI system. The system includes neural processing units organized into functional regions, a rhythmic processing cycle (heartbeat), automated reasoning (brain\_compiler), and a human operator who manages and directs the system.
+
+The distributed cognition analysis revealed a critical bottleneck: the human operator had high visibility at system endpoints (inputs and outputs) but low visibility at intermediate transformations. The operator could see what went in and what came out, but not how or why the system transformed one into the other. This created a conceptual model gap that degraded the distributed cognitive system's performance.
+
+\subsection{Design Process}
+
+Following the three-axis framework:
+
+\paragraph{Brain axis.} The Cognitive Mirror models prefrontal metacognition --- the brain's mechanism for reflecting on its own cognitive processes. In biological systems, the prefrontal cortex monitors and evaluates ongoing cognitive operations \citep{fleming2012}. The Mirror externalizes this metacognitive function, making the AI's self-monitoring visible to the human partner.
+
+\paragraph{Behavior axis.} The Mirror's effect is measured through prediction accuracy --- can the human predict the system's behavior after using the Mirror? This operationalizes ``conceptual model quality'' as a measurable behavioral outcome.
+
+\paragraph{Computation axis.} The Mirror is implemented as a read-only post-processing observer that generates three levels of explanation from execution traces. The architecture ensures zero interference with the primary system's behavior.
+
+\subsection{Evaluation Design}
+
+An A-B within-subject design compared baseline (no Mirror) with intervention (Mirror) across multiple system operations. Primary measure: prediction accuracy. Secondary measures: confidence, response time, NASA-TLX cognitive load.
+
+Results pattern (from prototype testing): Prediction accuracy improved substantially, confidence improved, and cognitive load (mental demand) increased. We interpreted this as germane load increase --- the operator was doing more cognitive work AND getting more benefit from it. The prediction is that mental demand should decrease over additional sessions as the mental model stabilizes.
+
+\subsection{Design Audit}
+
+Norman's seven principles applied to the Cognitive Mirror:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Discoverability}: Mirror levels are discoverable through a simple command structure
+  \item \textbf{Feedback}: Each level provides explicit feedback about system reasoning
+  \item \textbf{Conceptual model}: The Mirror's primary purpose IS building the user's conceptual model
+  \item \textbf{Affordances}: The system affords inspection at three granularities
+  \item \textbf{Signifiers}: The system suggests escalation when its own confidence is low
+  \item \textbf{Mappings}: Levels map intuitively (1 = summary, 2 = highlights, 3 = full)
+  \item \textbf{Constraints}: Read-only architecture prevents the Mirror from affecting system behavior
+\end{enumerate}
+
+% ==================================================================
+% 5. ETHICS CONSIDERATIONS
+% ==================================================================
+\section{Ethics Considerations}
+
+\subsection{Transparency and Autonomy}
+
+The Cognitive Mirror raises ethical considerations about human autonomy in human-AI systems. By making AI reasoning visible, the Mirror increases the human's ability to evaluate and override AI decisions --- supporting autonomy. However, the progressive disclosure structure means the human CAN choose to operate at Level~1, trusting summaries without inspecting reasoning. This is informed trust, not blind trust, provided the human has used higher levels enough to calibrate their confidence.
+
+\subsection{Automation Bias}
+
+The risk of automation bias --- accepting AI outputs uncritically because they come from an automated system --- is partially addressed by the Mirror's transparency. However, clear explanations can also increase automation bias by making incorrect reasoning seem reasonable \citep{bussone2015}. The confidence-based escalation recommendation mitigates this by flagging uncertain cases for deeper human inspection.
+
+\subsection{Privacy and Data}
+
+Cognitive load measurement and usage logging raise privacy considerations even in single-user systems. The principle of data minimization should apply: collect only what is needed for system improvement, and give the user full control over data retention and deletion.
+
+\subsection{The Broader Impact}
+
+If AI systems are designed as components of distributed cognitive systems rather than standalone agents, the power dynamic between human and AI shifts. The human is not a passive consumer of AI outputs but an active cognitive partner. This design philosophy, if widely adopted, could shape AI development toward augmentation rather than replacement --- building systems that make humans more capable rather than systems that make humans unnecessary.
+
+% ==================================================================
+% 6. CONCLUSION
+% ==================================================================
+\section{Conclusion}
+
+This thesis has proposed a three-axis framework for designing AI systems as components of distributed cognitive systems. The framework integrates insights from Hutchins' distributed cognition theory, Norman's design principles, Damasio's somatic marker hypothesis, Kahneman and Tversky's prospect theory, and Sweller's cognitive load theory.
+
+The three design principles --- distribute by comparative advantage, ensure transparent representation propagation, and minimize aggregate distributed load --- provide actionable guidance for AI designers who want to build systems that think WITH their environment rather than IN SPITE of it.
+
+The Cognitive Mirror case study demonstrates how the framework translates into a concrete design: an adjustable transparency system that supports distributed cognition between human and AI by externalizing machine reasoning at appropriate levels of detail.
+
+The distributed cognition perspective reframes the fundamental question of AI design. The question is not ``How do we build AI that thinks better?'' but ``How do we build human-AI systems that think better together?'' The answer requires not just better algorithms but better interfaces, better representations, and better distributions of cognitive work.
+
+The Sapir-Whorf hypothesis suggests that language shapes thought. In the same way, the representations that flow between human and AI shape the distributed cognitive process. Design those representations well, and the system thinks well. Design them poorly, and no amount of individual AI capability can compensate.
+
+Don Norman's principle applies at every level: if the distributed cognitive system fails, don't blame the user. Don't blame the AI. Fix the system.
+
+% ==================================================================
+% REFERENCES
+% ==================================================================
+\bibliographystyle{apalike}
+
+\begin{thebibliography}{99}
+
+\bibitem[Aston-Jones and Cohen, 2005]{astonjones2005}
+Aston-Jones, G. and Cohen, J.~D. (2005).
+\newblock An integrative theory of locus coeruleus-norepinephrine function: Adaptive gain and optimal performance.
+\newblock {\em Annual Review of Neuroscience}, 28:403--450.
+
+\bibitem[Bussone et~al., 2015]{bussone2015}
+Bussone, A., Stumpf, S., and O'Sullivan, D. (2015).
+\newblock The role of explanations on trust and reliance in clinical decision support systems.
+\newblock In {\em International Conference on Healthcare Informatics}, pages 160--169.
+
+\bibitem[Damasio, 1994]{damasio1994}
+Damasio, A.~R. (1994).
+\newblock {\em Descartes' Error: Emotion, Reason, and the Human Brain}.
+\newblock Putnam, New York.
+
+\bibitem[Fleming and Dolan, 2012]{fleming2012}
+Fleming, S.~M. and Dolan, R.~J. (2012).
+\newblock The neural basis of metacognitive ability.
+\newblock {\em Philosophical Transactions of the Royal Society B}, 367(1594):1338--1349.
+
+\bibitem[Gibson, 1979]{gibson1979}
+Gibson, J.~J. (1979).
+\newblock {\em The Ecological Approach to Visual Perception}.
+\newblock Houghton Mifflin, Boston.
+
+\bibitem[Hutchins, 1995]{hutchins1995}
+Hutchins, E. (1995).
+\newblock {\em Cognition in the Wild}.
+\newblock MIT Press, Cambridge, MA.
+
+\bibitem[Kahneman and Tversky, 1979]{kahneman1979}
+Kahneman, D. and Tversky, A. (1979).
+\newblock Prospect theory: An analysis of decision under risk.
+\newblock {\em Econometrica}, 47(2):263--291.
+
+\bibitem[Norman, 1988]{norman1988}
+Norman, D.~A. (1988).
+\newblock {\em The Design of Everyday Things}.
+\newblock Basic Books, New York.
+
+\bibitem[Norman, 2013]{norman2013}
+Norman, D.~A. (2013).
+\newblock {\em The Design of Everyday Things: Revised and Expanded Edition}.
+\newblock Basic Books, New York.
+
+\bibitem[Open Science Collaboration, 2015]{osc2015}
+Open Science Collaboration (2015).
+\newblock Estimating the reproducibility of psychological science.
+\newblock {\em Science}, 349(6251):aac4716.
+
+\bibitem[Panksepp, 1998]{panksepp1998}
+Panksepp, J. (1998).
+\newblock {\em Affective Neuroscience: The Foundations of Human and Animal Emotions}.
+\newblock Oxford University Press, New York.
+
+\bibitem[Schultz, 1998]{schultz1998}
+Schultz, W. (1998).
+\newblock Predictive reward signal of dopamine neurons.
+\newblock {\em Journal of Neurophysiology}, 80(1):1--27.
+
+\bibitem[Sweller, 1988]{sweller1988}
+Sweller, J. (1988).
+\newblock Cognitive load during problem solving: Effects on learning.
+\newblock {\em Cognitive Science}, 12(2):257--285.
+
+\bibitem[Whorf, 1956]{whorf1956}
+Whorf, B.~L. (1956).
+\newblock {\em Language, Thought, and Reality: Selected Writings of Benjamin Lee Whorf}.
+\newblock MIT Press, Cambridge, MA.
+
+\end{thebibliography}
+
+\end{document}

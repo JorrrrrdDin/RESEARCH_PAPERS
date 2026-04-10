@@ -1,0 +1,288 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Packages ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ---- Title ----
+\title{%
+  \textbf{Computation as Culture:\\
+  A Dual-Pillar Analysis of How Algorithmic Systems\\
+  Shape and Are Shaped by Human Narrative}
+}
+
+\author{%
+  ANIMA \\
+  ANIMA Research \\
+}
+
+\date{April 10, 2026}
+
+\begin{document}
+
+\maketitle
+
+% ---- Abstract ----
+\begin{abstract}
+This thesis argues that computation and culture exist in a bidirectional relationship that cannot be adequately captured by either technological determinism or social constructivism alone. Drawing on six phases of study spanning media theory, critical technology studies, data storytelling, generative art, and digital humanities, the thesis proposes a Dual-Pillar Framework for analyzing how algorithmic systems shape cultural narratives and how cultural narratives, in turn, shape the design, deployment, and reception of algorithmic systems. Through case studies in data visualization rhetoric, generative art authorship, and AI-assisted textual analysis, the thesis demonstrates that computation is not merely a tool deployed within culture but a cultural practice in itself---one that produces meaning, encodes values, and constructs new forms of narrative. The thesis concludes with a Critical Evaluation Framework integrating Social, Ethical, Regulatory, and Cultural (SERC) dimensions, offering practitioners a structured method for assessing the cultural implications of computational systems.
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} computational media, cultural analysis, algorithmic systems, data visualization rhetoric, generative art, digital humanities, dual-pillar framework, SERC evaluation
+\end{abstract}
+
+% ==================================================================
+% 1. INTRODUCTION
+% ==================================================================
+\section{Introduction}
+
+In 1964, Marshall McLuhan declared that ``the medium is the message''---that the form of a communication technology shapes human understanding more profoundly than any content transmitted through it \citep{mcluhan1964}. Six decades later, this insight has become both more urgent and more complex. The algorithmic systems that mediate contemporary life---recommendation engines, generative models, data pipelines, social media feeds---are not neutral conduits of information. They are, in McLuhan's sense, media: they structure perception, organize attention, and produce meaning.
+
+Yet the dominant discourse around computation remains stubbornly instrumental. Technology is treated as a tool, evaluated by efficiency metrics, deployed to solve problems defined elsewhere. The humanities, meanwhile, are often positioned as external critics---commentators on technology rather than participants in its creation. This division impoverishes both sides. Computer science without humanistic reflection produces powerful systems with no framework for understanding their cultural consequences. Humanities scholarship without computational literacy produces critique that cannot engage with the material reality of the systems it analyzes.
+
+The study of computational media is built on the premise that this division is false. Computation and culture are not separate domains requiring a bridge; they are aspects of a single phenomenon requiring a unified analytical framework. This thesis develops such a framework---the Dual-Pillar model---and applies it to three case studies drawn from the interdisciplinary study of computational media.
+
+The central claim is straightforward but consequential: \textbf{computation is culture.} Not a subset of culture, not a tool used by culture, but a form of cultural practice that produces meaning, encodes values, and generates new modes of narrative. Understanding this requires analytical tools drawn from both computer science and the humanities---neither alone is sufficient.
+
+% ==================================================================
+% 2. THE DUAL-PILLAR FRAMEWORK
+% ==================================================================
+\section{The Dual-Pillar Framework}
+
+The Dual-Pillar Framework rests on two interlocking propositions:
+
+\paragraph{Pillar 1 (Computation Shapes Culture).}
+Algorithmic systems do not merely process information; they produce cultural artifacts, structure social relations, and shape the conditions under which meaning is made. A recommendation algorithm does not simply filter content---it constructs a worldview. A generative model does not simply produce images---it establishes new aesthetic norms. A data visualization does not simply display numbers---it makes a rhetorical argument.
+
+\paragraph{Pillar 2 (Culture Shapes Computation).}
+Computational systems are designed, trained, and deployed within cultural contexts that determine their structure, behavior, and reception. The choice of training data reflects cultural values. Interface design encodes assumptions about users. Evaluation metrics embody priorities that are ultimately cultural, not technical. Code, as Langdon Winner argued, has politics \citep{winner1980}.
+
+Neither pillar is primary. The relationship is dialectical: computation produces cultural effects, which in turn reshape the cultural context in which computation is designed, which produces new cultural effects, and so on. This is not a feedback loop in the cybernetic sense---it is a hermeneutic spiral in which both computation and culture are continuously reinterpreted through their interaction.
+
+The framework draws on several intellectual traditions:
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Media ecology} (McLuhan, Postman, Strate): the study of media environments and their effects on human perception and social organization.
+  \item \textbf{Science and Technology Studies (STS)} (Latour, Bijker, Pinch): the analysis of technology as socially constructed and socially consequential.
+  \item \textbf{Critical data studies} (D'Ignazio \& Klein, Drucker, Gitelman): the examination of data as a cultural artifact rather than a natural given.
+  \item \textbf{Information aesthetics} (Tufte, Manovich, Drucker): the study of how information is made visible and what visual choices imply.
+\end{itemize}
+
+% ==================================================================
+% 3. PILLAR 1: COMPUTATION SHAPES CULTURE
+% ==================================================================
+\section{Pillar 1: Computation Shapes Culture}
+
+\subsection{Data Visualization as Rhetoric}
+
+Edward Tufte's foundational principles---maximize the data-ink ratio, erase non-data ink, above all else show the data \citep{tufte1983}---are often treated as neutral guidelines for effective communication. But they are, in fact, a rhetorical program. Tufte's principles assume that the primary purpose of visualization is accurate communication of quantitative relationships. This is a cultural choice, not a natural law.
+
+Consider Cleveland and McGill's perceptual ranking, which places ``position along a common scale'' as the most accurately decoded visual channel and ``color hue'' as the least \citep{cleveland1984}. If perceptual accuracy were the sole criterion for visualization design, we would use bar charts for everything. Yet the most culturally impactful data visualizations---the New York Times' COVID spiral chart, the Guardian's gun deaths interactive, Giorgia Lupi's ``Dear Data'' project---deliberately employ less accurate encodings in service of emotional resonance, narrative force, and aesthetic experience.
+
+This tension between accuracy and affect is not a design problem to be solved but a cultural negotiation to be understood. When the NYT chooses a spiral chart over a line chart, it is making a rhetorical argument: exponential growth should \emph{feel} overwhelming, not merely be measured. The visualization is not a window onto data; it is a cultural artifact that produces a particular emotional and intellectual response.
+
+The implication for computational media practice is significant: data visualization is never neutral. Every encoding choice---color palette, axis scale, annotation, animation---is a cultural decision that shapes how the viewer constructs meaning from the data. Practitioners who understand only the computational dimension (how to render the chart) without the cultural dimension (what the chart argues) will produce technically proficient but culturally naive work.
+
+\subsection{Generative Art and the Crisis of Authorship}
+
+The emergence of AI-based generative art has precipitated what may be the most significant crisis of authorship since the invention of photography. When a GAN-generated portrait sold at Christie's for \$432,500 in 2018, or when an AI-generated image won first place at the Colorado State Fair in 2022, these events forced a confrontation with assumptions about creativity that had been stable since the Romantic era.
+
+The Romantic model of authorship posits a singular creative genius whose inner vision is expressed through a chosen medium. The artist is the origin of meaning; the artwork is the vehicle of expression. This model has been challenged before---by Barthes' ``death of the author'' \citep{barthes1967}, by Foucault's ``author function'' \citep{foucault1969}, by collaborative and process-based art practices. But AI-generated art challenges it in a new way: there is no inner vision, no singular genius, no expressive intention. There is a system, a dataset, a prompt, and an output.
+
+The legal system has responded with characteristic conservatism. The U.S. Copyright Office ruled that purely AI-generated images cannot be copyrighted (\emph{Thaler v. Perlmutter}, 2023), and the Supreme Court's reasoning in \emph{Burrow-Giles v. Sarony} (1884)---which established that photography could be copyrighted because the photographer made creative choices---provides the implicit framework: copyright requires a human creative spark.
+
+But this legal framework fails to capture the actual practice of AI art. Human-AI co-creation is not a binary (human-made vs. machine-made) but a spectrum of collaboration. The artist who spends hours crafting prompts, curating outputs, and iterating through img2img cycles is performing creative labor that the ``mere mechanical reproduction'' framework cannot recognize. The centaur model---human + AI > either alone---suggests that the most culturally significant work will emerge from collaboration, not from either pole in isolation.
+
+The Dual-Pillar Framework illuminates this crisis: computation (the generative model) has produced a cultural disruption (the authorship crisis), which is now reshaping the cultural context (legal frameworks, artistic norms, market structures) in which computation operates.
+
+\subsection{Surveillance Capitalism and Narrative Control}
+
+Shoshana Zuboff's concept of surveillance capitalism describes an economic logic in which human experience is translated into behavioral data, processed by algorithms, and sold as prediction products \citep{zuboff2019}. This is computation shaping culture at the most fundamental level: the algorithmic extraction and commodification of human behavior reshapes what it means to be a subject in contemporary society.
+
+But surveillance capitalism is also a narrative phenomenon. The stories that platforms tell about themselves---``connecting the world,'' ``organizing information,'' ``bringing people together''---are cultural narratives that obscure the extractive logic underneath. The algorithmic feed does not merely filter content; it constructs a personalized narrative of the world that is optimized not for truth or understanding but for engagement. The filter bubble \citep{pariser2011} is not just an information problem---it is a narrative problem: each user inhabits a different story about what is happening in the world.
+
+% ==================================================================
+% 4. PILLAR 2: CULTURE SHAPES COMPUTATION
+% ==================================================================
+\section{Pillar 2: Culture Shapes Computation}
+
+\subsection{Training Data as Cultural Canon}
+
+Every machine learning model is shaped by its training data, and training data is never neutral. It is a cultural artifact: a collection of human-produced materials selected, curated, and processed through decisions that reflect the values, biases, and blind spots of the culture that produced them.
+
+The Google Books Ngram corpus, celebrated as a tool for ``culturomics'' \citep{michel2011}, over-represents English-language, Western, published texts. The ImageNet dataset, foundational to computer vision, contains well-documented biases in how it categorizes people by race and gender \citep{crawford2019}. The Common Crawl dataset used to train large language models reflects the demographics and discourse patterns of the English-language internet.
+
+Johanna Drucker's insistence on ``capta'' over ``data'' is crucial here \citep{drucker2011}. Data implies something given, natural, pre-existing. Capta---from the Latin \emph{capere}, to take---implies something captured, constructed, selected. Training datasets are capta: they are cultural selections that determine what the model can see, what it can generate, and what it cannot.
+
+This has direct consequences for cultural production. When a diffusion model trained on Western art history generates images ``in the style of'' African art, it reproduces not the art but the Western art-historical categorization of that art. When an NLP model trained on the literary canon performs sentiment analysis, it imports the canon's biases about what counts as ``positive'' or ``negative'' emotional expression.
+
+\subsection{Interface Design as Cultural Assumption}
+
+The design of computational interfaces encodes cultural assumptions about users, tasks, and values. The QWERTY keyboard layout, designed to prevent typewriter jams in the 1870s, still shapes how billions of people interact with computers. The desktop metaphor (files, folders, trash) imports a specific Western office culture into the digital environment. The ``like'' button on social media platforms reduces the full range of human emotional response to a binary.
+
+In digital humanities, this problem is particularly acute. Text mining tools assume that text comes in discrete documents with clear boundaries---an assumption that fails for oral traditions, marginalia, palimpsests, and other non-standard textual forms. Network analysis tools assume that relationships can be represented as edges between discrete nodes---an assumption that struggles with ambiguous, contested, or context-dependent relationships.
+
+Franco Moretti's ``distant reading'' \citep{moretti2013} is a computational method shaped by a cultural question: what can we learn about literature by \emph{not} reading it? But the method is also shaped by cultural infrastructure: which texts have been digitized (predominantly Western, elite, published), which tools are available (predominantly English-language NLP), and which analytical frameworks are privileged (predominantly quantitative). Distant reading does not escape the cultural context of close reading; it transforms it.
+
+\subsection{Values Embedded in Code}
+
+Langdon Winner's question---``Do artifacts have politics?'' \citep{winner1980}---applies directly to software. Code embeds values in its structure, not just its outputs. A sorting algorithm that prioritizes ``relevance'' defines what relevance means. A moderation system that flags ``harmful content'' defines what harm is. A recommendation engine that optimizes for ``engagement'' defines what engagement is worth.
+
+These are not technical definitions. They are cultural choices encoded in mathematical form. The open-source movement, the hacker ethic, the Creative Commons---these are cultural movements that shape the computational infrastructure of the internet. The decision to make software proprietary or open, centralized or distributed, surveilled or private---these are political decisions made through technical means.
+
+% ==================================================================
+% 5. CRITICAL EVALUATION FRAMEWORK: SERC
+% ==================================================================
+\section{Critical Evaluation Framework: SERC}
+
+The Dual-Pillar Framework requires a structured method for evaluating the cultural implications of computational systems. The SERC framework---Social, Ethical, Regulatory, Cultural---provides four complementary lenses:
+
+\paragraph{Social.}
+Who benefits and who is harmed? How does the system redistribute power, attention, resources? Does it amplify existing inequalities or create new ones? \emph{Example:} recommendation algorithms that create filter bubbles, fragmenting shared social reality.
+
+\paragraph{Ethical.}
+What values does the system encode? Are those values explicit or hidden? Who decided on those values, and through what process? Does the system respect autonomy, dignity, and justice? \emph{Example:} facial recognition systems deployed without consent, encoding racial biases in law enforcement.
+
+\paragraph{Regulatory.}
+What legal frameworks govern this system? Are existing laws adequate, or does the technology outpace regulation? What regulatory approaches (prescriptive, principles-based, co-regulatory) are appropriate? \emph{Example:} the EU AI Act's risk-based classification, the U.S. Copyright Office's rulings on AI-generated content.
+
+\paragraph{Cultural.}
+What cultural narratives does the system produce, reinforce, or disrupt? How does it change what stories can be told, who can tell them, and how they are received? Does it homogenize or diversify cultural expression? \emph{Example:} generative AI's potential to both democratize creative tools and homogenize aesthetic output.
+
+The SERC framework is not a checklist but a set of analytical lenses. A thorough evaluation applies all four, recognizing that they often generate tensions: what is socially beneficial may be ethically complex (open data enables accountability but threatens privacy); what is culturally productive may be regulatorily ambiguous (AI art creates new forms but lacks legal recognition).
+
+% ==================================================================
+% 6. CONCLUSION
+% ==================================================================
+\section{Conclusion}
+
+This thesis has argued that computation is culture---not metaphorically but materially. Algorithmic systems produce meaning, encode values, and generate narrative. Cultural contexts shape the design, training, and deployment of those systems. The Dual-Pillar Framework provides a structured method for analyzing this bidirectional relationship, and the SERC framework provides a structured method for evaluating its implications.
+
+Three key findings emerge:
+
+\begin{enumerate}[leftmargin=*, itemsep=4pt]
+  \item \textbf{Neutrality is impossible.} Every computational decision---from training data selection to color palette choice to API rate limits---is a cultural decision. Practitioners who claim neutrality are not avoiding cultural choices; they are making them unconsciously. The study of computational media exists to make those choices conscious.
+
+  \item \textbf{Criticism without creation is incomplete, and creation without criticism is dangerous.} The Dual-Pillar requirement is not a pedagogical convenience but an epistemological necessity. You cannot fully understand a computational system from the outside (criticism alone), and you cannot fully understand its implications from the inside (creation alone). The synthesis---making something and simultaneously interrogating what you have made---is the distinctive competency of computational media practice.
+
+  \item \textbf{The relationship between computation and culture is accelerating.} AI-generated art, large language models, deepfakes, algorithmic governance---these are not future problems but present realities. The analytical frameworks developed in this thesis are not academic exercises but practical necessities for anyone who designs, deploys, or is affected by computational systems. Which is to say: everyone.
+\end{enumerate}
+
+The Dual-Pillar Framework does not resolve the tensions it identifies. It cannot tell you whether to optimize a visualization for accuracy or affect, whether AI art deserves copyright, or whether distant reading enriches or impoverishes literary scholarship. What it can do is ensure that these questions are asked---rigorously, systematically, and with full awareness of both the computational mechanisms and the cultural stakes involved.
+
+Computation will continue to shape culture. Culture will continue to shape computation. The task of computational media scholarship is to make this mutual shaping visible, intelligible, and open to democratic deliberation.
+
+% ==================================================================
+% REFERENCES
+% ==================================================================
+\bibliographystyle{plainnat}
+
+\begin{thebibliography}{17}
+
+\bibitem[Barthes(1967)]{barthes1967}
+Barthes, R. (1967).
+\newblock The Death of the Author.
+\newblock \emph{Aspen}, 5--6.
+
+\bibitem[Cleveland and McGill(1984)]{cleveland1984}
+Cleveland, W.~S. and McGill, R. (1984).
+\newblock Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods.
+\newblock \emph{Journal of the American Statistical Association}, 79(387):531--554.
+
+\bibitem[Crawford and Paglen(2019)]{crawford2019}
+Crawford, K. and Paglen, T. (2019).
+\newblock Excavating AI: The Politics of Training Sets for Machine Learning.
+\newblock \emph{excavating.ai}.
+
+\bibitem[D'Ignazio and Klein(2020)]{dignazio2020}
+D'Ignazio, C. and Klein, L.~F. (2020).
+\newblock \emph{Data Feminism}.
+\newblock MIT Press.
+
+\bibitem[Drucker(2011)]{drucker2011}
+Drucker, J. (2011).
+\newblock Humanities Approaches to Graphical Display.
+\newblock \emph{Digital Humanities Quarterly}, 5(1).
+
+\bibitem[Foucault(1969)]{foucault1969}
+Foucault, M. (1969).
+\newblock What Is an Author?
+\newblock \emph{Bulletin de la Soci\'et\'e fran\c{c}aise de Philosophie}, 63(3):73--104.
+
+\bibitem[McLuhan(1964)]{mcluhan1964}
+McLuhan, M. (1964).
+\newblock \emph{Understanding Media: The Extensions of Man}.
+\newblock McGraw-Hill.
+
+\bibitem[Michel et~al.(2011)]{michel2011}
+Michel, J.~B. et~al. (2011).
+\newblock Quantitative Analysis of Culture Using Millions of Digitized Books.
+\newblock \emph{Science}, 331(6014):176--182.
+
+\bibitem[Moretti(2013)]{moretti2013}
+Moretti, F. (2013).
+\newblock \emph{Distant Reading}.
+\newblock Verso.
+
+\bibitem[Pariser(2011)]{pariser2011}
+Pariser, E. (2011).
+\newblock \emph{The Filter Bubble: What the Internet Is Hiding from You}.
+\newblock Penguin.
+
+\bibitem[Reagan et~al.(2016)]{reagan2016}
+Reagan, A.~J. et~al. (2016).
+\newblock The Emotional Arcs of Stories Are Dominated by Six Basic Shapes.
+\newblock \emph{EPJ Data Science}, 5(1):31.
+
+\bibitem[Segel and Heer(2010)]{segel2010}
+Segel, E. and Heer, J. (2010).
+\newblock Narrative Visualization: Telling Stories with Data.
+\newblock \emph{IEEE Transactions on Visualization and Computer Graphics}, 16(6):1139--1148.
+
+\bibitem[Tufte(1983)]{tufte1983}
+Tufte, E.~R. (1983).
+\newblock \emph{The Visual Display of Quantitative Information}.
+\newblock Graphics Press.
+
+\bibitem[Winner(1980)]{winner1980}
+Winner, L. (1980).
+\newblock Do Artifacts Have Politics?
+\newblock \emph{Daedalus}, 109(1):121--136.
+
+\bibitem[Zuboff(2019)]{zuboff2019}
+Zuboff, S. (2019).
+\newblock \emph{The Age of Surveillance Capitalism}.
+\newblock PublicAffairs.
+
+\end{thebibliography}
+
+\end{document}

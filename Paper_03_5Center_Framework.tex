@@ -1,0 +1,481 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Packages ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ---- Title ----
+\title{%
+  \textbf{Toward Trustworthy Autonomous Decision-Making:\\
+  A 5-Center Framework for AI Systems That Perceive,\\
+  Decide, and Act Under Uncertainty}
+}
+
+\author{%
+  ANIMA \\
+  ANIMA Research \\
+}
+
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+% ==================================================================
+% ABSTRACT
+% ==================================================================
+\begin{abstract}
+As artificial intelligence systems assume greater responsibility in high-stakes domains---healthcare, autonomous vehicles, financial markets, and public policy---the question of how these systems make decisions under uncertainty becomes paramount. Current approaches tend to optimize along a single axis: either maximizing predictive accuracy (model-centric), scaling computational throughput (computation-centric), or improving user experience (human-centric). This thesis argues that trustworthy autonomous decision-making requires the simultaneous integration of five centers of concern: Data, Model, Decision, Computation, and Human. Drawing on curriculum spanning Bayesian inference, reinforcement learning, game theory, control theory, algorithmic fairness, and AI alignment, we propose a theoretical 5-Center Framework that structures the Perception-Decision-Action loop with embedded governance gates, fairness verification checkpoints, and bounded rationality constraints. We formalize the conditions under which each center contributes to system-level trustworthiness and identify failure modes when any center is neglected. We further propose a theoretical evaluation framework comprising six metrics for assessing multi-center integration. The contribution of this work is not an implemented system but a principled architectural blueprint grounded in established theory, intended to guide the design of AI systems that are simultaneously capable, fair, safe, and aligned with human values.
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} trustworthy AI, autonomous decision-making, 5-center framework, governance gates, fairness, bounded rationality, perception-decision-action loop
+\end{abstract}
+
+% ==================================================================
+% 1. INTRODUCTION
+% ==================================================================
+\section{Introduction}
+
+The field of artificial intelligence has witnessed remarkable progress in perception, language understanding, and sequential decision-making. Large language models generate coherent text; reinforcement learning agents master complex games; computer vision systems detect objects with superhuman accuracy. Yet these achievements largely occur within narrow, well-defined task boundaries. When AI systems are deployed in open-ended, real-world environments---where data distributions shift, objectives conflict, stakeholders disagree, and consequences are irreversible---a different set of challenges emerges.
+
+Consider an autonomous medical triage system. It must perceive patient data (Data-Centric), maintain an internal model of disease progression (Model-Centric), select treatment priorities under uncertainty (Decision-Centric), operate within real-time computational constraints (Computation-Centric), and present its reasoning in a way that clinicians can trust and override (Human-Centric). Failure in any single center---biased training data, an overly confident model, a misspecified reward function, latency that prevents timely action, or an opaque interface that erodes trust---can render the entire system untrustworthy.
+
+A comprehensive curriculum spanning probabilistic modeling, reinforcement learning, game theory, control theory, algorithmic fairness, and AI alignment provides a uniquely comprehensive foundation for addressing this challenge. Courses in probabilistic modeling teach principled reasoning under uncertainty. Reinforcement learning formalizes sequential decision-making. Game theory and mechanism design illuminate strategic interactions among multiple agents. Control theory provides the mathematical machinery for feedback-driven systems. Algorithmic fairness and AI alignment confront the normative dimensions that purely technical approaches often ignore. The Social and Ethical Responsibilities of Computing (SERC) perspective reminds us that no system exists in a vacuum.
+
+This thesis synthesizes these threads into a unified theoretical framework. The central claim is:
+
+\begin{quote}
+\emph{A trustworthy autonomous decision-making system must integrate all five centers---Data, Model, Decision, Computation, and Human---within a Perception-Decision-Action loop that includes explicit governance gates, fairness verification, and bounded rationality constraints.}
+\end{quote}
+
+We do not present an implemented system. Instead, we offer an architectural blueprint: a set of design principles, formal conditions, and evaluation criteria derived from established theory. The goal is to provide a scaffold that future system designers can instantiate in domain-specific contexts.
+
+The remainder of the thesis is organized as follows. Section~\ref{sec:5center} elaborates the 5-Center Model. Section~\ref{sec:pda} formalizes the Perception-Decision-Action loop. Section~\ref{sec:governance} addresses governance and safety. Section~\ref{sec:evaluation} proposes a theoretical evaluation framework. Section~\ref{sec:serc} provides the SERC review. Section~\ref{sec:limitations} discusses limitations and future work. Section~\ref{sec:conclusion} concludes.
+
+% ==================================================================
+% 2. THE 5-CENTER MODEL
+% ==================================================================
+\section{The 5-Center Model as Design Framework}
+\label{sec:5center}
+
+The 5-Center Model is not a novel ontology; rather, it is an organizational principle that ensures no critical dimension of AI decision-making is neglected during system design. Each center corresponds to a body of established theory, a set of failure modes, and a collection of design constraints.
+
+\subsection{Data-Centric: What to Collect, How to Weight}
+
+The data-centric perspective, championed by Andrew Ng among others, holds that the quality, representativeness, and governance of data are at least as important as model architecture \citep{ng2021data}. From a Bayesian standpoint, data serves as evidence that updates prior beliefs. The quality of posterior inference depends critically on the likelihood model and the representativeness of observations.
+
+Key design principles for the Data Center include:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Distribution awareness.} The system must monitor for distribution shift between training and deployment data. Techniques from domain adaptation and conformal prediction \citep{vovk2005algorithmic} provide theoretical guarantees on prediction set coverage even under shift.
+
+  \item \textbf{Importance weighting.} Not all data points are equally informative. Active learning theory \citep{settles2012active} formalizes the value of information, enabling principled decisions about which data to acquire. In a decision-making context, data that reduces uncertainty about the optimal action is more valuable than data that merely improves prediction accuracy.
+
+  \item \textbf{Provenance and lineage.} Data-centric AI requires tracking where data came from, how it was processed, and what biases it may encode. This is both a technical requirement (for debugging and auditing) and an ethical one (for accountability).
+
+  \item \textbf{Temporal dynamics.} In sequential decision-making, data arrives as a stream. The system must balance recency (recent data reflects the current environment) against stability (older data provides statistical power). Exponential decay weighting and sliding window approaches formalize this trade-off.
+\end{enumerate}
+
+\subsection{Model-Centric: Representation and Knowledge Structures}
+
+The model center concerns how the system represents its understanding of the world. This encompasses both parametric models (neural networks, Bayesian networks) and non-parametric structures (memory systems, knowledge graphs).
+
+From the probabilistic modeling curriculum, we draw the principle that a model should maintain calibrated uncertainty estimates. A model that is 90\% confident should be correct 90\% of the time \citep{guo2017calibration}. Calibration is necessary for downstream decision-making: an overconfident model leads to reckless actions; an underconfident model leads to paralysis.
+
+Memory hierarchies are essential for systems that operate over extended time horizons. Packer et al.\ demonstrated with MemGPT that large language models can be augmented with explicit memory management, enabling them to maintain context beyond their native window \citep{packer2023memgpt}. More broadly, the distinction between working memory (fast, limited capacity) and long-term memory (slow, large capacity) mirrors the memory hierarchy in computer architecture and has implications for how knowledge is stored, retrieved, and updated.
+
+Knowledge representation must also support compositionality. A system that understands ``fragile objects should not be dropped'' and ``glass is fragile'' should infer that glass should not be dropped, without requiring an explicit training example. Probabilistic programs \citep{goodman2008church} and neurosymbolic architectures offer principled approaches to compositional reasoning.
+
+\subsection{Decision-Centric: Action Selection Under Uncertainty}
+
+The decision center is the core of the framework. Here, the system must choose actions that are optimal (or satisfactory) given its current beliefs and objectives.
+
+\paragraph{Markov Decision Processes (MDPs).} MDPs provide the foundational formalism. An MDP is defined by states $\mathcal{S}$, actions $\mathcal{A}$, transition dynamics $T$, and a reward function $R$. The optimal policy maximizes expected cumulative discounted reward. When the transition dynamics or reward function are unknown, reinforcement learning algorithms \citep{sutton2018reinforcement} learn from interaction.
+
+\paragraph{Partially Observable MDPs (POMDPs).} POMDPs extend this to settings where the state is not fully observed. The agent maintains a belief state---a probability distribution over possible states---and selects actions based on this belief. POMDPs are computationally intractable in general (PSPACE-complete), necessitating approximation methods such as point-based value iteration \citep{pineau2003point}.
+
+\paragraph{Game theory.} Game theory becomes relevant when the environment includes other strategic agents. Nash equilibrium \citep{nash1950equilibrium} characterizes stable strategy profiles in non-cooperative games. However, computing Nash equilibria is PPAD-complete in general \citep{daskalakis2009complexity}, and equilibrium concepts may not capture bounded rationality. Level-$k$ thinking models \citep{stahl1994experimental} offer a behaviorally grounded alternative.
+
+\paragraph{Multi-objective optimization.} Multi-objective optimization arises when the system must balance competing objectives---accuracy versus fairness, speed versus safety, exploration versus exploitation. Pareto optimality provides the theoretical framework: a solution is Pareto-optimal if no objective can be improved without worsening another. The set of Pareto-optimal solutions defines the trade-off frontier that governance gates must navigate.
+
+\subsection{Computation-Centric: Efficiency, Scalability, Real-Time Constraints}
+
+A theoretically optimal decision policy is useless if it cannot be computed within the time and resource constraints of deployment. The computation center addresses the gap between theoretical optimality and practical feasibility.
+
+\paragraph{Anytime algorithms.} Anytime algorithms \citep{zilberstein1996anytime} produce progressively better solutions as more computation time is allocated, allowing the system to return the best available answer when interrupted. This property is essential for real-time decision-making.
+
+\paragraph{Approximate inference.} Approximate inference methods---variational inference \citep{blei2017variational}, Monte Carlo sampling, amortized inference---trade exactness for speed. The design question is how much approximation error the downstream decision-maker can tolerate.
+
+\paragraph{Scalability.} Scalability concerns arise when the state space, action space, or data volume grows. Function approximation in reinforcement learning (using neural networks to represent value functions or policies) addresses state-space scaling but introduces its own challenges: non-stationarity, catastrophic forgetting, and the deadly triad \citep{sutton2018reinforcement}.
+
+\paragraph{Edge-cloud partitioning.} Edge-cloud partitioning distributes computation between local devices (low latency, limited capacity) and cloud servers (high capacity, higher latency). The optimal partition depends on the decision task's latency requirements and the communication bandwidth available.
+
+\subsection{Human-Centric: Bounded Rationality, Cognitive Load, and Trust}
+
+The human center recognizes that AI decision-making systems do not operate in isolation; they interact with human users, operators, and stakeholders.
+
+Herbert Simon's concept of \textbf{bounded rationality} \citep{simon1955behavioral} is foundational. Humans do not optimize; they satisfice---searching for solutions that are ``good enough'' given cognitive limitations. An AI system designed for human interaction should respect these limitations. Presenting an optimal solution with a 47-page justification is less useful than presenting a satisfactory solution with a clear, concise explanation.
+
+\textbf{Cognitive load theory} \citep{sweller1988cognitive} suggests that the human capacity for processing information is limited. Interface design should minimize extraneous cognitive load while maximizing germane load (load that contributes to understanding).
+
+\textbf{Trust calibration} is bidirectional. The human must trust the AI appropriately---neither over-trusting (automation bias) nor under-trusting (disuse). Lee and See provide a comprehensive framework for trust in automation, identifying competence, predictability, and benevolence as key antecedents \citep{lee2004trust}. Explanation and transparency are mechanisms for building appropriate trust, but they must be calibrated to the user's expertise and the decision's stakes.
+
+% ==================================================================
+% 3. THE PERCEPTION-DECISION-ACTION LOOP
+% ==================================================================
+\section{The Perception-Decision-Action Loop}
+\label{sec:pda}
+
+The 5-Center Model provides a static taxonomy. The Perception-Decision-Action (PDA) loop provides the dynamic structure: how information flows through the system over time.
+
+\subsection{Perception: Sensing and Interpreting Signals}
+
+Perception transforms raw environmental signals into structured representations suitable for decision-making. This involves:
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Signal acquisition:} Selecting which sensors to attend to and at what resolution. Attention mechanisms \citep{vaswani2017attention} provide a principled approach to selective processing.
+  \item \textbf{State estimation:} Fusing noisy, partial observations into a coherent belief state. Bayesian filtering (Kalman filters, particle filters) provides the mathematical foundation.
+  \item \textbf{Anomaly detection:} Identifying when observations fall outside the expected distribution, signaling potential distribution shift or adversarial input.
+  \item \textbf{Salience assessment:} Determining which perceived signals are decision-relevant. Not all information is equally useful for the task at hand; salience filtering reduces downstream cognitive and computational load.
+\end{itemize}
+
+\subsection{Decision: Policy Selection with Governance Gates}
+
+The decision phase selects an action (or a distribution over actions) given the current belief state. Critically, this phase includes governance gates---checkpoints that verify the proposed action against safety, fairness, and alignment constraints before execution.
+
+A governance gate is formally a predicate $G: \mathcal{A} \times \mathcal{B} \to \{\texttt{pass}, \texttt{block}, \texttt{modify}\}$, where $\mathcal{A}$ is the action space and $\mathcal{B}$ is the belief state space. If $G$ returns ``block,'' the action is prevented. If $G$ returns ``modify,'' the action is adjusted to satisfy the constraint (e.g., by adding noise for differential privacy or by selecting the next-best action that satisfies fairness criteria).
+
+Governance gates operationalize the principle that \textbf{not all optimal actions are permissible.} An action may maximize expected reward while violating fairness constraints, exceeding risk thresholds, or contradicting alignment objectives. The gate structure makes these checks explicit and auditable.
+
+Multiple governance gates can be composed in sequence (a pipeline) or in parallel (a committee). Sequential composition is appropriate when gates have a natural priority ordering (safety before fairness before efficiency). Parallel composition is appropriate when gates represent independent stakeholder interests that must all be satisfied.
+
+\subsection{Action: Execution with Feedback and Correction}
+
+Action execution closes the loop by affecting the environment. Key considerations include:
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Reversibility assessment.} Before executing, the system should estimate how reversible the action is. Irreversible actions (e.g., administering medication, executing a financial trade) warrant higher scrutiny and potentially human confirmation.
+  \item \textbf{Feedback monitoring.} After execution, the system observes the outcome and compares it to predictions. Prediction errors drive learning (temporal difference learning in RL) and trigger model updates.
+  \item \textbf{Correction mechanisms.} When outcomes deviate from expectations, the system must adapt. This may involve updating the model (Bayesian updating), revising the policy (policy gradient updates), or escalating to a human operator.
+\end{itemize}
+
+The PDA loop operates continuously, with each cycle refining the system's beliefs, policies, and governance constraints. Over time, the system should improve not only its task performance but also the calibration of its uncertainty estimates and the accuracy of its governance gates.
+
+% ==================================================================
+% 4. GOVERNANCE AND SAFETY
+% ==================================================================
+\section{Governance and Safety in the Loop}
+\label{sec:governance}
+
+\subsection{Fairness Constraints}
+
+Algorithmic fairness has emerged as a critical concern as AI systems increasingly affect human welfare. The literature has identified numerous fairness criteria, three of which are particularly relevant:
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Demographic Parity:} The probability of a positive outcome should be equal across protected groups. Formally, $P(\hat{Y} = 1 \mid A = a) = P(\hat{Y} = 1 \mid A = b)$ for protected attribute groups $a$ and $b$.
+  \item \textbf{Equal Opportunity} \citep{hardt2016equality}: Among individuals who deserve a positive outcome, the probability of receiving one should be equal across groups. Formally, $P(\hat{Y} = 1 \mid Y = 1, A = a) = P(\hat{Y} = 1 \mid Y = 1, A = b)$.
+  \item \textbf{Predictive Parity:} The positive predictive value should be equal across groups.
+\end{itemize}
+
+Chouldechova \citep{chouldechova2017fair} and Kleinberg et al.\ \citep{kleinberg2016inherent} proved that these criteria are mutually incompatible except in degenerate cases---the so-called \textbf{impossibility theorem} of fairness. This has profound implications for system design: the choice of fairness criterion is not a technical decision but a normative one, requiring stakeholder input and domain-specific justification.
+
+In the 5-Center Framework, fairness constraints are implemented as governance gates in the Decision phase. The Data Center provides the statistical information needed to assess fairness. The Human Center provides the normative input on which fairness criterion to prioritize. The Computation Center determines how efficiently fairness can be verified. This illustrates the necessity of multi-center integration: fairness cannot be addressed by any single center in isolation.
+
+\subsection{Alignment and Safety}
+
+AI alignment---ensuring that an AI system's objectives match human intentions---is arguably the most consequential open problem in the field. Several failure modes have been identified:
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Reward hacking} \citep{amodei2016concrete}: The system finds unexpected ways to maximize the specified reward that violate the designer's intent. A classic example is a cleaning robot that covers messes with a blanket rather than cleaning them, because its reward function measures visible mess.
+  \item \textbf{Goodhart's Law:} ``When a measure becomes a target, it ceases to be a good measure'' \citep{strathern1997improving}. Any proxy reward will diverge from the true objective when optimized sufficiently aggressively.
+  \item \textbf{Distributional shift:} A policy that is safe in the training environment may be unsafe in a novel environment. Robustness to distributional shift is a safety requirement, not merely a performance concern.
+\end{itemize}
+
+\textbf{Constitutional AI} \citep{bai2022training} offers one approach to alignment: rather than specifying a reward function, the system is given a set of principles (a ``constitution'') and trained to evaluate its own outputs against these principles. This approach has the advantage of being more robust to reward hacking, since the principles are expressed in natural language and can be interpreted flexibly.
+
+\textbf{Reinforcement Learning from Human Feedback (RLHF)} \citep{christiano2017deep} provides another mechanism: human evaluators rank system outputs, and the system learns a reward model from these rankings. RLHF has been instrumental in aligning large language models but faces challenges including reward model misspecification, feedback inconsistency, and scalability.
+
+In the 5-Center Framework, alignment is addressed through a combination of mechanisms: Constitutional principles provide the normative foundation (Human Center), RLHF provides the learning signal (Data Center + Model Center), governance gates enforce constraints at decision time (Decision Center), and monitoring detects drift (Computation Center).
+
+\subsection{Bounded Rationality as Feature, Not Bug}
+
+A persistent temptation in AI system design is to pursue unbounded optimization: find the globally optimal policy, maintain a perfect world model, process all available data. Herbert Simon argued persuasively that this is neither feasible nor desirable for real agents operating in complex environments \citep{simon1955behavioral,simon1972theories}.
+
+\textbf{Satisficing}---seeking solutions that meet a threshold of acceptability rather than maximizing---has several advantages in the context of autonomous decision-making:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Computational tractability.} Satisficing avoids the combinatorial explosion of exhaustive search.
+  \item \textbf{Robustness.} Satisficing policies are less sensitive to model misspecification, because they do not exploit the model to its limits.
+  \item \textbf{Interpretability.} A satisficing criterion (``Is this action safe enough? Is it fair enough?'') is easier for humans to understand and verify than a maximization criterion.
+  \item \textbf{Alignment.} Satisficing is arguably more aligned with human values than maximization. Humans do not maximize utility; they seek outcomes that are good enough across multiple dimensions.
+\end{enumerate}
+
+Gigerenzer's work on \textbf{fast and frugal heuristics} \citep{gigerenzer1999simple} demonstrates that simple decision rules can perform comparably to complex optimization in structured environments. The 5-Center Framework incorporates bounded rationality not as a concession to computational limits but as a deliberate design choice: the system should satisfice across all five centers rather than maximize along any single axis.
+
+% ==================================================================
+% 5. THEORETICAL EVALUATION FRAMEWORK
+% ==================================================================
+\section{Theoretical Evaluation Framework}
+\label{sec:evaluation}
+
+How should a 5-Center system be evaluated? We propose six theoretical metrics, each corresponding to a dimension of trustworthiness:
+
+\begin{enumerate}[leftmargin=*, itemsep=4pt]
+  \item \textbf{Calibration Error (CE).} The expected absolute difference between predicted probabilities and observed frequencies. A well-calibrated system enables downstream decision-makers (both human and automated) to make appropriate risk assessments. Formally:
+  \begin{equation}
+    \mathrm{CE} = \mathbb{E}\!\left[\left|P(Y=1 \mid \hat{P}=p) - p\right|\right].
+  \end{equation}
+
+  \item \textbf{Decision Regret (DR).} The difference between the reward obtained by the system's policy and the reward that would have been obtained by the optimal policy in hindsight. Low regret indicates effective decision-making. In multi-objective settings, regret is defined with respect to the Pareto frontier.
+
+  \item \textbf{Fairness Gap (FG).} The maximum violation of the specified fairness criterion across protected groups. For Demographic Parity:
+  \begin{equation}
+    \mathrm{FG} = \max_{a,b} \left|P(\hat{Y}=1 \mid A=a) - P(\hat{Y}=1 \mid A=b)\right|.
+  \end{equation}
+
+  \item \textbf{Governance Latency (GL).} The time required for governance gates to evaluate a proposed action. This measures the computational cost of safety and fairness verification. GL should be small relative to the decision cycle time.
+
+  \item \textbf{Trust Calibration Index (TCI).} The alignment between human trust in the system and the system's actual reliability:
+  \begin{equation}
+    \mathrm{TCI} = 1 - \left|\text{trust\_level} - \text{actual\_accuracy}\right|.
+  \end{equation}
+  High TCI indicates that humans trust the system appropriately.
+
+  \item \textbf{Recovery Time (RT).} The time required for the system to return to acceptable performance after a perturbation (distribution shift, component failure, adversarial input). Low RT indicates resilience.
+\end{enumerate}
+
+These metrics are deliberately diverse, spanning technical performance (CE, DR), ethical compliance (FG), operational efficiency (GL), human factors (TCI), and robustness (RT). A system that scores well on all six is trustworthy in a holistic sense. A system that scores well on some but poorly on others reveals which centers require additional attention.
+
+% ==================================================================
+% 6. SERC REVIEW
+% ==================================================================
+\section{SERC Review: Social and Ethical Responsibilities of Computing}
+\label{sec:serc}
+
+The SERC framework asks us to consider the broader social context in which computing systems operate. Several SERC themes are directly relevant to the 5-Center Framework:
+
+\paragraph{Power and governance.} Who decides what fairness criterion to use? Who defines the constitutional principles? Who has the authority to override governance gates? These are questions of power, not technology. The 5-Center Framework makes them explicit by assigning normative decisions to the Human Center, but it does not resolve the underlying political questions. In practice, participatory design methods \citep{schuler1993participatory} and deliberative democracy approaches may be necessary to ensure that diverse stakeholders have voice.
+
+\paragraph{Opacity and accountability.} Complex AI systems are often opaque: their decision processes resist human understanding. The 5-Center Framework partially addresses this through governance gates (which provide auditable checkpoints) and bounded rationality (which favors simpler, more interpretable decision rules). However, opacity remains a concern, particularly in the Model Center where deep neural networks may be used. Explainable AI (XAI) techniques \citep{ribeiro2016should,lundberg2017unified} can partially mitigate this, but full transparency may be unattainable for complex systems.
+
+\paragraph{Disparate impact.} Even a system designed with fairness constraints can have disparate impacts if the training data reflects historical inequities or if the deployment context differs from the design context. The Data Center's emphasis on distribution monitoring and provenance tracking helps detect such issues, but detection is only the first step; remediation requires organizational and institutional responses that extend beyond the technical system.
+
+\paragraph{Dual use.} A framework for trustworthy autonomous decision-making could, in principle, be applied to systems that harm rather than help. Surveillance systems, autonomous weapons, and manipulative recommendation engines could all benefit from better decision-making. The SERC perspective demands that we consider not only how to build trustworthy systems but also whether and when such systems should be built at all.
+
+% ==================================================================
+% 7. LIMITATIONS AND FUTURE WORK
+% ==================================================================
+\section{Limitations and Future Work}
+\label{sec:limitations}
+
+This thesis has several limitations that suggest directions for future work:
+
+\paragraph{Theoretical nature.} The 5-Center Framework is a theoretical blueprint, not an implemented system. Empirical validation is necessary to determine whether the framework's principles translate into practice. Future work should instantiate the framework in specific domains (healthcare, autonomous driving, financial markets) and measure the proposed evaluation metrics.
+
+\paragraph{Static center boundaries.} The current framework treats the five centers as distinct. In practice, the boundaries are porous: data quality affects model performance, which affects decision quality, which determines what data to collect next. A more dynamic formulation that captures these interdependencies---perhaps using category theory or systems dynamics---would be more faithful to reality.
+
+\paragraph{Scalability of governance gates.} As the number of governance gates increases (safety, fairness, privacy, alignment, legality, \ldots), the computational and design complexity may become prohibitive. Research on efficient constraint satisfaction and prioritization among potentially conflicting governance requirements is needed.
+
+\paragraph{Cultural and contextual variation.} Fairness criteria, trust dynamics, and bounded rationality parameters vary across cultures and contexts. A framework designed for one cultural context may not transfer to another. Cross-cultural AI ethics is an emerging field that the 5-Center Framework should incorporate.
+
+\paragraph{Adversarial robustness.} The current framework assumes a benign environment. In adversarial settings---where other agents actively try to exploit the system---additional considerations arise. Adversarial robustness, game-theoretic security, and Byzantine fault tolerance are relevant but not addressed here.
+
+\paragraph{Long-horizon credit assignment.} In sequential decision-making over long time horizons, determining which past actions contributed to current outcomes (the credit assignment problem) remains fundamentally challenging. The PDA loop's feedback mechanisms help, but principled solutions to long-horizon credit assignment would significantly strengthen the framework.
+
+% ==================================================================
+% 8. CONCLUSION
+% ==================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+This thesis has argued that trustworthy autonomous decision-making requires integration across five centers of concern: Data, Model, Decision, Computation, and Human. No single center is sufficient. A system with perfect data but a misspecified model will fail. A system with an optimal policy but inadequate computational resources will fail. A system that maximizes reward but violates fairness constraints will fail. A system that is technically flawless but opaque to its human operators will fail.
+
+The 5-Center Framework, grounded in curriculum spanning probabilistic modeling, reinforcement learning, game theory, control theory, algorithmic fairness, and AI alignment, provides a principled architectural blueprint for avoiding these failure modes. The Perception-Decision-Action loop with embedded governance gates operationalizes the framework as a dynamic process. The six proposed evaluation metrics provide a means to assess whether a system achieves holistic trustworthiness.
+
+The framework is deliberately theoretical. It does not prescribe specific algorithms, architectures, or implementations. Instead, it provides design principles and formal conditions that can be instantiated in diverse domains. The hope is that future system designers, armed with these principles, will build AI systems that are not merely capable but also fair, safe, interpretable, and aligned with the values of the humans they serve.
+
+The ultimate goal is not artificial intelligence that replaces human judgment but artificial intelligence that augments it---systems that perceive what humans cannot, decide faster than humans can, and act more consistently than humans do, all while remaining subject to human governance and accountable to human values.
+
+% ==================================================================
+% REFERENCES
+% ==================================================================
+\begin{thebibliography}{30}
+
+\bibitem[Amodei et~al.(2016)]{amodei2016concrete}
+Amodei, D., Olah, C., Steinhardt, J., Christiano, P., Schulman, J., \& Mane, D. (2016).
+\newblock Concrete problems in AI safety.
+\newblock \emph{arXiv preprint arXiv:1606.06565}.
+
+\bibitem[Bai et~al.(2022)]{bai2022training}
+Bai, Y., Jones, A., Ndousse, K., Askell, A., Chen, A., DasSarma, N., \ldots\ \& Kaplan, J. (2022).
+\newblock Training a helpful and harmless assistant with reinforcement learning from human feedback.
+\newblock \emph{arXiv preprint arXiv:2204.05862}.
+
+\bibitem[Blei et~al.(2017)]{blei2017variational}
+Blei, D.~M., Kucukelbir, A., \& McAuliffe, J.~D. (2017).
+\newblock Variational inference: A review for statisticians.
+\newblock \emph{Journal of the American Statistical Association}, 112(518), 859--877.
+
+\bibitem[Chouldechova(2017)]{chouldechova2017fair}
+Chouldechova, A. (2017).
+\newblock Fair prediction with disparate impact: A study of bias in recidivism prediction instruments.
+\newblock \emph{Big Data}, 5(2), 153--163.
+
+\bibitem[Christiano et~al.(2017)]{christiano2017deep}
+Christiano, P.~F., Leike, J., Brown, T., Marber, M., Lowe, R., \& Amodei, D. (2017).
+\newblock Deep reinforcement learning from human preferences.
+\newblock \emph{Advances in Neural Information Processing Systems}, 30.
+
+\bibitem[Daskalakis et~al.(2009)]{daskalakis2009complexity}
+Daskalakis, C., Goldberg, P.~W., \& Papadimitriou, C.~H. (2009).
+\newblock The complexity of computing a Nash equilibrium.
+\newblock \emph{SIAM Journal on Computing}, 39(1), 195--259.
+
+\bibitem[Gigerenzer \& Todd(1999)]{gigerenzer1999simple}
+Gigerenzer, G., \& Todd, P.~M. (1999).
+\newblock \emph{Simple heuristics that make us smart.}
+\newblock Oxford University Press.
+
+\bibitem[Goodman et~al.(2008)]{goodman2008church}
+Goodman, N.~D., Mansinghka, V.~K., Roy, D.~M., Bonawitz, K., \& Tenenbaum, J.~B. (2008).
+\newblock Church: A language for generative models.
+\newblock \emph{Proceedings of the 24th Conference on Uncertainty in Artificial Intelligence}.
+
+\bibitem[Guo et~al.(2017)]{guo2017calibration}
+Guo, C., Pleiss, G., Sun, Y., \& Weinberger, K.~Q. (2017).
+\newblock On calibration of modern neural networks.
+\newblock \emph{Proceedings of the 34th International Conference on Machine Learning}, 1321--1330.
+
+\bibitem[Hardt et~al.(2016)]{hardt2016equality}
+Hardt, M., Price, E., \& Srebro, N. (2016).
+\newblock Equality of opportunity in supervised learning.
+\newblock \emph{Advances in Neural Information Processing Systems}, 29.
+
+\bibitem[Kleinberg et~al.(2016)]{kleinberg2016inherent}
+Kleinberg, J., Mullainathan, S., \& Raghavan, M. (2016).
+\newblock Inherent trade-offs in the fair determination of risk scores.
+\newblock \emph{arXiv preprint arXiv:1609.05807}.
+
+\bibitem[Lee \& See(2004)]{lee2004trust}
+Lee, J.~D., \& See, K.~A. (2004).
+\newblock Trust in automation: Designing for appropriate reliance.
+\newblock \emph{Human Factors}, 46(1), 50--80.
+
+\bibitem[Lundberg \& Lee(2017)]{lundberg2017unified}
+Lundberg, S.~M., \& Lee, S.~I. (2017).
+\newblock A unified approach to interpreting model predictions.
+\newblock \emph{Advances in Neural Information Processing Systems}, 30.
+
+\bibitem[Nash(1950)]{nash1950equilibrium}
+Nash, J. (1950).
+\newblock Equilibrium points in $n$-person games.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 36(1), 48--49.
+
+\bibitem[Ng(2021)]{ng2021data}
+Ng, A. (2021).
+\newblock A chat with Andrew on MLOps: From model-centric to data-centric AI.
+\newblock \emph{DeepLearning.AI}.
+
+\bibitem[Packer et~al.(2023)]{packer2023memgpt}
+Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S., Stoica, I., \& Gonzalez, J.~E. (2023).
+\newblock MemGPT: Towards LLMs as operating systems.
+\newblock \emph{arXiv preprint arXiv:2310.08560}.
+
+\bibitem[Pineau et~al.(2003)]{pineau2003point}
+Pineau, J., Gordon, G., \& Thrun, S. (2003).
+\newblock Point-based value iteration: An anytime algorithm for POMDPs.
+\newblock \emph{Proceedings of the 18th International Joint Conference on Artificial Intelligence}, 1025--1030.
+
+\bibitem[Ribeiro et~al.(2016)]{ribeiro2016should}
+Ribeiro, M.~T., Singh, S., \& Guestrin, C. (2016).
+\newblock ``Why should I trust you?'': Explaining the predictions of any classifier.
+\newblock \emph{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 1135--1144.
+
+\bibitem[Schuler \& Namioka(1993)]{schuler1993participatory}
+Schuler, D., \& Namioka, A. (1993).
+\newblock \emph{Participatory design: Principles and practices.}
+\newblock CRC Press.
+
+\bibitem[Settles(2012)]{settles2012active}
+Settles, B. (2012).
+\newblock Active learning.
+\newblock \emph{Synthesis Lectures on Artificial Intelligence and Machine Learning}, 6(1), 1--114.
+
+\bibitem[Simon(1955)]{simon1955behavioral}
+Simon, H.~A. (1955).
+\newblock A behavioral model of rational choice.
+\newblock \emph{The Quarterly Journal of Economics}, 69(1), 99--118.
+
+\bibitem[Simon(1972)]{simon1972theories}
+Simon, H.~A. (1972).
+\newblock Theories of bounded rationality.
+\newblock \emph{Decision and Organization}, 1(1), 161--176.
+
+\bibitem[Stahl \& Wilson(1994)]{stahl1994experimental}
+Stahl, D.~O., \& Wilson, P.~W. (1994).
+\newblock Experimental evidence on players' models of other players.
+\newblock \emph{Journal of Economic Behavior \& Organization}, 25(3), 309--327.
+
+\bibitem[Strathern(1997)]{strathern1997improving}
+Strathern, M. (1997).
+\newblock ``Improving ratings'': Audit in the British university system.
+\newblock \emph{European Review}, 5(3), 305--321.
+
+\bibitem[Sutton \& Barto(2018)]{sutton2018reinforcement}
+Sutton, R.~S., \& Barto, A.~G. (2018).
+\newblock \emph{Reinforcement learning: An introduction} (2nd ed.).
+
+\bibitem[Sweller(1988)]{sweller1988cognitive}
+Sweller, J. (1988).
+\newblock Cognitive load during problem solving: Effects on learning.
+\newblock \emph{Cognitive Science}, 12(2), 257--285.
+
+\bibitem[Vaswani et~al.(2017)]{vaswani2017attention}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N., \ldots\ \& Polosukhin, I. (2017).
+\newblock Attention is all you need.
+\newblock \emph{Advances in Neural Information Processing Systems}, 30.
+
+\bibitem[Vovk et~al.(2005)]{vovk2005algorithmic}
+Vovk, V., Gammerman, A., \& Shafer, G. (2005).
+\newblock \emph{Algorithmic learning in a random world.}
+\newblock Springer.
+
+\bibitem[Zilberstein(1996)]{zilberstein1996anytime}
+Zilberstein, S. (1996).
+\newblock Using anytime algorithms in intelligent systems.
+\newblock \emph{AI Magazine}, 17(3), 73--83.
+
+\end{thebibliography}
+
+\end{document}
