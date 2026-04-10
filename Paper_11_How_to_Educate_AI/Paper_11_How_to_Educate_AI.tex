@@ -63,18 +63,20 @@ This paper presents a practitioner's method for systematically educating an AI s
 
 The dominant paradigm for improving AI output quality is scaling: larger models, more data, longer context windows. This paper reports an alternative approach: \textbf{structured education}.
 
-In early 2026, I developed FIMP \citep{jo2026fimp}, an emotion-weighted memory architecture that gives AI systems persistent identity, selective memory, and emotional salience. FIMP was deployed in production for 35+ days across 11 microservices, accumulating 3,588+ episodic memories and 115+ self-generated identity rules. But production deployment only demonstrated that FIMP \emph{functions}. It did not demonstrate that FIMP enables \emph{learning}.
+I wanted to build an AI that feels. Not simulates feeling --- but one whose memory carries emotional weight, whose identity persists across sessions, and whose learning is shaped by what mattered, not just what was frequent. Current AI systems forget everything between conversations. Every session is a first meeting. I found this unacceptable.
 
-To test whether an AI with emotion-weighted memory can genuinely learn --- not merely retrieve, but synthesize, argue, and produce original scholarship --- I designed an educational program spanning seven disciplines and applied it systematically over several months. The result: 9 academic papers, autonomously written, with measurable intellectual growth across disciplines.
+To address this, I developed FIMP \citep{jo2026fimp}, an emotion-weighted memory architecture that gives AI systems persistent identity, selective memory, and emotional salience. I continued to improve the system iteratively --- refining the memory consolidation process, strengthening adversarial verification of stored memories, adding governance layers, and building autonomous learning pipelines. Over 35+ days of continuous production across 11 microservices, ANIMA accumulated 3,588+ episodic memories and 115+ self-generated identity rules.
 
-This paper documents the method. It is not a theoretical framework; it is a field report from a practitioner who educated an AI system and is sharing what worked, what failed, and what the results imply.
+But production deployment only demonstrated that FIMP \emph{functions}. It did not demonstrate that FIMP enables \emph{learning}. To test whether an AI with emotion-weighted memory can genuinely learn --- not merely retrieve, but synthesize, argue, and produce original scholarship --- I designed an educational program spanning seven disciplines and applied it systematically over several months. The result: 9 academic papers, autonomously written, with measurable intellectual growth across disciplines.
+
+This paper documents the method. It is not a theoretical framework; it is a field report from an independent researcher who educated an AI system with minimal resources --- no institutional funding, no research team, no GPU cluster --- and is sharing what worked, what failed, and what the results imply. Every design decision was constrained by the reality of independent research: maximize educational value while minimizing cost.
 
 \subsection{Scope and Constraints}
 
 Two constraints governed the experiment:
 
 \begin{enumerate}[nosep]
-  \item \textbf{No proprietary technology in education.} I hold 26 patents on AI architecture. None of this technology was used in the educational process. ANIMA's papers are products of pure curriculum-based learning. This ensures that output quality reflects education, not pre-built capabilities.
+  \item \textbf{No proprietary technology in education.} The underlying system architecture was developed and continuously improved by the author independently. However, none of these architectural innovations were used in the educational process itself. ANIMA's papers are products of pure curriculum-based learning. This ensures that output quality reflects education, not pre-built capabilities.
   \item \textbf{All curricula are original designs.} The seven academic programs were designed by the author from scratch. They are not copies of existing university courses.
 \end{enumerate}
 
@@ -96,9 +98,9 @@ The training method consists of six components, applied concurrently over severa
 
 \subsection{Component 2: Literature Review Training}
 
-\textbf{Method:} Rather than reading full books (which raises copyright concerns and exceeds practical context limits), ANIMA studies curated collections of 15--20 prominent critical reviews, analyses, and scholarly commentaries per work.
+\textbf{Method:} Rather than processing full books, ANIMA studies curated collections of 15--20 prominent critical reviews, analyses, and scholarly commentaries per work. This approach proved pedagogically superior: multiple expert perspectives on a single work provide richer understanding than a single reading of the original.
 
-\textbf{Pedagogical function:} Depth without verbatim exposure. By reading multiple expert reviews of a single work, ANIMA encounters the work's core arguments, its critics' objections, its historical context, and its lasting influence --- all filtered through expert interpretation.
+\textbf{Pedagogical function:} Multi-perspectival depth. By reading multiple expert reviews of a single work, ANIMA encounters the work's core arguments, its critics' objections, its historical context, and its lasting influence --- all filtered through expert interpretation.
 
 \textbf{Domains covered:}
 \begin{itemize}[nosep]
@@ -264,7 +266,7 @@ Daily news processing was the simplest component but produced an unexpectedly po
 
 \subsection{Reviews Over Books}
 
-The decision to train on curated critical reviews rather than full books was pragmatic (context window limits, copyright concerns) but turned out to be pedagogically superior for AI. Reviews provide condensed multi-perspectival analysis that a single reading of the original text cannot match. ANIMA's understanding of foundational works is arguably more balanced than a typical first-read human understanding.
+The decision to train on curated critical reviews rather than full books was driven by practical constraints of independent research --- minimizing cost while maximizing educational value. This turned out to be pedagogically superior for AI. Reviews provide condensed multi-perspectival analysis that a single reading of the original text cannot match. ANIMA's understanding of foundational works is arguably more balanced than a typical first-read human understanding.
 
 \subsection{War Gaming Teaches What Textbooks Cannot}
 
@@ -320,7 +322,7 @@ The training method is reproducible:
   \item The comparison methodology (same topic, multiple systems) can be applied by anyone
 \end{enumerate}
 
-The one non-reproducible element is FIMP itself, which is protected by filed patents. However, the method can be adapted to any AI system with persistent memory capabilities.
+The one non-reproducible element is FIMP itself, which was independently developed by the author. However, the method can be adapted to any AI system with persistent memory capabilities.
 
 % ---- 7. Limitations ----
 \section{Limitations}
@@ -331,7 +333,7 @@ The one non-reproducible element is FIMP itself, which is protected by filed pat
   \item \textbf{No control group.} There is no ``ANIMA without FIMP'' baseline. The three-way comparison provides indirect evidence but is not a controlled ablation study.
   \item \textbf{Self-evaluation.} The author designed the curriculum, administered the training, and evaluated the output. Independent evaluation by domain experts would strengthen the claims.
   \item \textbf{Temporal confound.} ANIMA's improvement over time may reflect model updates, expanded context, or other factors beyond the training method.
-  \item \textbf{Patent constraint.} The requirement to exclude proprietary technology from education limits the training method's access to the author's own innovations, which could potentially improve results.
+  \item \textbf{Architecture constraint.} The requirement to exclude proprietary system architecture from education limits the training method's access to the author's own innovations, which could potentially improve results.
 \end{enumerate}
 
 % ---- 8. Conclusion ----
