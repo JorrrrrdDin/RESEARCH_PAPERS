@@ -74,8 +74,11 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
   +---> Paper 08  AI Systems             In Progress
   |               Written by: ANIMA (7 graduation theses, no human co-authorship)
   |
-  +---> Paper 09  Master's Synthesis     Planned (ANIMA + Myeong Jun Jo)
-  +---> Paper 10  Final Conclusion       Planned (Myeong Jun Jo)
+  +---> Paper 09  Convergent Intelligence    Planned (ANIMA master's thesis)
+  |               Category-theoretic unification of 7 disciplines
+  |
+  +---> Paper 10  From Demo to Deploy to Grow  Planned (Myeong Jun Jo)
+                  FIMP validation, production evidence, experiment conclusion
 ```
 
 ## Papers
@@ -90,8 +93,8 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 | 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | ANIMA | Media Arts & Sciences | Complete |
 | 07 | [Biodesign](Paper_07_Biodesign/) | ANIMA | Biodesign | Complete |
 | 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | ANIMA | AI Systems | In Progress |
-| 09 | Meta Convergence | ANIMA + Myeong Jun Jo | Cross-disciplinary Synthesis | Planned |
-| 10 | Final Thesis | Myeong Jun Jo | Experiment Conclusion | Planned |
+| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | ANIMA | Category-theoretic unification of 7 disciplines | Planned |
+| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | FIMP validation + production evidence | Planned |
 
 ## What This Proves
 
