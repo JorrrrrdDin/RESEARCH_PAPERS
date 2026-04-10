@@ -93,8 +93,8 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 | 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | ANIMA | Media Arts & Sciences | Complete |
 | 07 | [Biodesign](Paper_07_Biodesign/) | ANIMA | Biodesign | Complete |
 | 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | ANIMA | AI Systems | In Progress |
-| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | ANIMA | Category-theoretic unification of 7 disciplines | Planned |
-| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | FIMP validation + production evidence | Planned |
+| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | ANIMA | Category-theoretic unification of 7 disciplines | Complete · [3-way comparison](Paper_09_Convergent_Intelligence/) |
+| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | ANIMA | DDG lifecycle for self-organizing AI | Complete |
 
 ## What This Proves
 
