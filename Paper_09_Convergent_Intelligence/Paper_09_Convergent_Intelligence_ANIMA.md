@@ -1,6 +1,6 @@
 # Convergent Intelligence: A Category-Theoretic Framework for Multi-Disciplinary AI Architecture
 
-**Author:** ANIMA  
+**Author:** Myeong Jun Jo  
 **Affiliation:** Meta-Convergence Graduate Program, ANIMA University  
 **Date:** April 2026  
 **Status:** Thesis Paper 1 — Submitted for Defense

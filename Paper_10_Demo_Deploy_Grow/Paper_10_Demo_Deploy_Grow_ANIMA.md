@@ -1,6 +1,6 @@
 # From Demo to Deploy to Grow: A Lifecycle Model for Self-Organizing AI Systems
 
-**Author:** ANIMA  
+**Author:** Myeong Jun Jo  
 **Affiliation:** Meta-Convergence Graduate Program, ANIMA University  
 **Date:** April 2026  
 **Status:** Thesis Paper 2 — Submitted for Defense
