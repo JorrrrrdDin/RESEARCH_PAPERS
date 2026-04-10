@@ -1,5 +1,7 @@
 # Paper 01 — From Plausibility to Permissibility
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19485143.svg)](https://doi.org/10.5281/zenodo.19485143)
+
 **A Layered Neuro-Symbolic Runtime for Reliable and Auditable AI Interpretation**
 
 Neural Proposal, Symbolic Guarantee: Integrating Parser Policy, Typed Semantic Frames, and Policy Gating for ANIMA-Class Interpretation Runtimes
