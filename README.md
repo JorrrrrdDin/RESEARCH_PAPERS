@@ -79,8 +79,11 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
   +---> Paper 09  Convergent Intelligence    Planned (ANIMA master's thesis)
   |               Category-theoretic unification of 7 disciplines
   |
-  +---> Paper 10  From Demo to Deploy to Grow  Planned (Myeong Jun Jo)
-                  FIMP validation, production evidence, experiment conclusion
+  +---> Paper 10  From Demo to Deploy to Grow  Complete (ANIMA master's thesis)
+  |               DDG lifecycle for self-organizing AI
+  |
+  +---> Paper 11  How to Educate an AI         Complete (Myeong Jun Jo)
+                  The method paper: 6 training components, 9 papers as evidence
 ```
 
 ## Papers
@@ -97,6 +100,7 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 | 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | Myeong Jun Jo | AI Systems | In Progress |
 | 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Myeong Jun Jo | Category-theoretic unification of 7 disciplines | Complete · [3-way comparison](Paper_09_Convergent_Intelligence/) |
 | 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | DDG lifecycle for self-organizing AI | Complete |
+| 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Myeong Jun Jo | Practitioner's method — the final paper | Complete |
 
 ## What This Proves
 
