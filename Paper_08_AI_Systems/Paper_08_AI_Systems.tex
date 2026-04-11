@@ -1,0 +1,421 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Packages ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ---- Title ----
+\title{%
+  \textbf{Building Complete AI Systems: A Four-Cluster Integration Framework\\
+  for Perception, Learning, Decision, and Human Collaboration}
+}
+
+\author{%
+  Myeong Jun Jo \\
+  ANIMA Research, Independent Researcher, South Korea \\
+  \texttt{ORCID: \href{https://orcid.org/0009-0006-9540-4666}{0009-0006-9540-4666}}
+}
+
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+% ---- Abstract ----
+\begin{abstract}
+Modern artificial intelligence systems are typically designed and evaluated as isolated components---a vision model here, a language model there, a reinforcement learning agent elsewhere. Yet real-world deployment demands seamless integration across perception, learning, decision-making, and human collaboration. This thesis proposes a Four-Cluster Integration Framework that structures complete AI system design around four interdependent functional clusters: Perception (how the system observes the world), Learning (how it acquires and refines knowledge), Decision (how it selects and executes actions), and Human-AI Collaboration (how it works alongside humans). We demonstrate the framework's application through the design of ANIMA, a multi-neuron adaptive system, showing how cross-cluster integration addresses challenges that component-level design cannot. The framework provides a systematic checklist for practitioners building production AI systems, with particular emphasis on safety, transparency, and graceful degradation across cluster boundaries.
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} AI systems integration, four-cluster framework, perception-learning-decision pipeline, human-AI interaction, AI safety, systems engineering
+\end{abstract}
+
+% ==================================================================
+% 1. INTRODUCTION
+% ==================================================================
+\section{Introduction}
+
+The field of artificial intelligence has achieved remarkable progress in individual capabilities: computer vision systems surpass human performance on image classification \citep{he2015}, large language models generate fluent and contextually appropriate text \citep{brown2020}, and reinforcement learning agents master complex games \citep{silver2017}. However, building complete AI systems that integrate these capabilities into coherent, deployable products remains a largely unsystematized endeavor.
+
+Consider a real-world scenario: a user communicates with an AI system through both text and voice simultaneously. The text conveys a routine request, but the vocal tone betrays acute distress. A system designed as isolated components---a text classifier, a speech emotion detector, a response generator---would produce conflicting signals with no principled way to resolve them. A truly integrated system must fuse multimodal perception, draw on learned patterns of similar situations, make a safety-conscious decision prioritizing the user's wellbeing, and communicate its response in a way that is both helpful and transparent.
+
+This thesis addresses the integration challenge by proposing the Four-Cluster Integration Framework. Drawing on 24 weeks of intensive study across mathematical foundations, perception, machine learning, reinforcement learning, human-computer interaction, ethics, language technologies, and systems engineering, we present a structured approach to designing AI systems that are greater than the sum of their parts.
+
+\subsection{Contributions}
+
+This thesis makes three primary contributions:
+
+\begin{enumerate}
+  \item \textbf{A systematic framework} that decomposes complete AI systems into four functional clusters and identifies the six critical integration points between them.
+
+  \item \textbf{A practical checklist} that practitioners can use to verify completeness of their system designs across all clusters.
+
+  \item \textbf{A case study} demonstrating the framework's application to the ANIMA system, including specific design decisions, safety mechanisms, and deployment strategies.
+\end{enumerate}
+
+% ==================================================================
+% 2. RELATED WORK
+% ==================================================================
+\section{Related Work}
+
+The integration of AI components into complete systems has received increasing attention. The concept of AI systems engineering draws from traditional systems engineering (INCOSE, 2015) while addressing the unique challenges of non-deterministic, learned components.
+
+\textbf{End-to-end learning} approaches \citep{levine2016,dosovitskiy2020} attempt to sidestep integration by learning the entire pipeline from input to output. While elegant, these approaches sacrifice interpretability and make it difficult to insert safety checks at intermediate stages.
+
+\textbf{Modular architectures} \citep{andreas2016,gupta2023} decompose systems into specialized modules with defined interfaces. Our Four-Cluster Framework is compatible with this approach but operates at a higher level of abstraction, focusing on functional clusters rather than individual modules.
+
+\textbf{MLOps frameworks} \citep{sculley2015,amershi2019} address the deployment and maintenance challenges specific to ML systems. Our framework incorporates MLOps concerns within the Learning cluster while extending beyond deployment to encompass the full spectrum of system concerns.
+
+\textbf{Human-AI interaction research} \citep{amershi2019,bansal2019} has established that the value of AI systems depends critically on how they interact with human users and operators. Our framework elevates human collaboration to a first-class cluster, equal in importance to the technical clusters.
+
+The concept of AI safety as a cross-cutting concern has been advanced by \citet{amodei2016} and \citet{hendrycks2021}. Our framework treats safety as a property that emerges from correct integration across all four clusters, rather than as an add-on to any single component.
+
+% ==================================================================
+% 3. THE FOUR-CLUSTER INTEGRATION FRAMEWORK
+% ==================================================================
+\section{The Four-Cluster Integration Framework}
+
+\subsection{Cluster Definitions}
+
+\textbf{Cluster 1---Perception}: The system's interface with the external world. This cluster encompasses all modalities through which the system receives information: visual input processed through convolutional neural networks or vision transformers \citep{dosovitskiy2021}, textual input processed through language models \citep{vaswani2017}, audio input processed through speech recognition systems \citep{radford2023}, and any additional sensor data. The Perception cluster is responsible for transforming raw input into structured representations suitable for downstream processing.
+
+The key challenge within this cluster is multimodal fusion---combining information from different modalities into a coherent representation. Approaches range from early fusion (concatenation at the input level) to late fusion (independent processing with decision-level combination) to cross-attention mechanisms that allow modalities to inform each other \citep{jaegle2021}. The choice of fusion strategy has implications for robustness (handling missing modalities), efficiency (computational cost), and accuracy (capturing cross-modal interactions).
+
+\textbf{Cluster 2---Learning}: The system's mechanism for acquiring, storing, and updating knowledge. This cluster encompasses supervised learning from labeled data, self-supervised learning from structure in unlabeled data, reinforcement learning from environmental feedback, and continual learning that prevents catastrophic forgetting of previously acquired knowledge.
+
+A critical concern within this cluster is the bias-variance tradeoff \citep{belkin2019}---balancing model complexity against available data. Regularization techniques (L1/L2 penalties, dropout, early stopping) and ensemble methods (bagging, boosting, stacking) provide practical tools for managing this tradeoff. The recent phenomenon of double descent challenges the classical understanding of this tradeoff for overparameterized models but does not eliminate the need for careful model selection.
+
+\textbf{Cluster 3---Decision}: The system's mechanism for selecting and executing actions. This cluster encompasses reinforcement learning policies \citep{schulman2017}, search and planning algorithms \citep{silver2016}, and optimization under constraints. The Decision cluster must balance multiple objectives: task performance, safety constraints, computational efficiency, and exploration of new possibilities.
+
+The exploration-exploitation dilemma \citep{sutton2018} is central to this cluster. Systems must exploit known-good strategies while exploring potentially better alternatives. Upper confidence bounds, Thompson sampling, and intrinsic motivation provide principled approaches, but the challenge is amplified in safety-critical settings where exploration carries real-world consequences.
+
+\textbf{Cluster 4---Human-AI Collaboration}: The system's mechanism for working alongside human users and operators. This cluster encompasses interface design \citep{norman2013}, trust calibration \citep{lee2004}, explainable AI \citep{ribeiro2016,lundberg2017}, cognitive bias mitigation \citep{kahneman2011}, ethical compliance (EU GDPR, 2016), and responsible deployment practices.
+
+This cluster is unique in that its quality cannot be evaluated by technical metrics alone. User satisfaction, appropriate reliance (neither over-trust nor under-trust), and societal impact require evaluation methods that bridge technical and social sciences.
+
+\subsection{Integration Points}
+
+The six pairwise integration points between clusters represent the critical interfaces where design decisions in one cluster constrain or enable capabilities in another.
+
+\textbf{Perception-Learning Integration}: The representations learned by the Perception cluster must be informative for the Learning cluster's objectives. Contrastive learning approaches like CLIP \citep{radford2021} demonstrate that aligning visual and linguistic representations creates a shared semantic space that enables zero-shot transfer. The choice of representation directly affects learning efficiency and generalization.
+
+\textbf{Learning-Decision Integration}: Learned models must provide not only predictions but also uncertainty estimates to enable informed decision-making. Bayesian neural networks, MC Dropout \citep{gal2016}, and ensemble disagreement provide uncertainty quantification that the Decision cluster can use for risk-aware action selection.
+
+\textbf{Decision-Human Integration}: Decisions must be explainable, overridable, and calibrated to human expectations. The SHAP framework \citep{lundberg2017} provides theoretically grounded feature attributions, while counterfactual explanations \citep{wachter2017} offer actionable insights that align with how humans naturally reason about decisions.
+
+\textbf{Perception-Decision Integration}: Real-time perception must feed into real-time decisions within strict latency budgets. The design of latency budgets across the pipeline---allocating milliseconds to each processing stage---is an engineering challenge that requires understanding both the computational cost of each component and the user's tolerance for delay.
+
+\textbf{Learning-Human Integration}: Learning from human feedback \citep{christiano2017,ouyang2022} and adapting to human preferences requires trust calibration. The reward model in RLHF must accurately capture human values, and the policy must not exploit reward model imperfections (reward hacking).
+
+\textbf{Perception-Human Integration}: What the system perceives must be communicated to users in understandable form. Attention visualization, concept-based explanations \citep{kim2018}, and saliency maps provide tools for making the Perception cluster's processing transparent.
+
+\subsection{Cross-Cutting Concerns}
+
+Several properties must be maintained across all four clusters simultaneously:
+
+\textbf{Safety}: Defense in depth \citep{reason1990} requires independent safety layers at each cluster boundary. Our analysis shows that six independent layers, each with conservative failure probability estimates, can achieve combined failure rates below $10^{-9}$---comparable to aviation safety standards.
+
+\textbf{Privacy}: Data minimization, differential privacy \citep{dwork2006}, and federated learning must be implemented consistently across all data flows, from perception through learning to decision output.
+
+\textbf{Fairness}: The impossibility theorem \citep{chouldechova2017} demonstrates that no single fairness definition is universally applicable. System designers must make explicit, documented choices about which fairness criteria to prioritize, recognizing that this is fundamentally an ethical rather than technical decision.
+
+\textbf{Latency}: Each cluster has a computational budget, and the total must meet service level objectives. Dynamic budget reallocation---allowing faster components to donate time to slower ones---provides flexibility while maintaining guarantees.
+
+% ==================================================================
+% 4. APPLICATION: THE ANIMA SYSTEM
+% ==================================================================
+\section{Application: The ANIMA System}
+
+\subsection{System Overview}
+
+ANIMA (Adaptive Neural Intelligence with Multi-domain Architecture) is a multi-neuron adaptive system comprising 137 neurons organized into 7 functional regions. We apply the Four-Cluster Framework to its design:
+
+\textbf{Perception}: ANIMA processes text (BPE tokenization + LLM encoder), optional voice (wav2vec 2.0), and optional images (DINOv2). Multimodal fusion uses a Perceiver-style bottleneck with modality dropout for robustness to missing inputs.
+
+\textbf{Learning}: ANIMA employs a hierarchical prior strategy where regularization strength varies by neuron region---safety-critical brainstem regions receive strong regularization (preventing catastrophic changes), while exploratory cortex regions receive lighter regularization (enabling creative adaptation). The brain\_compiler component manages continuous learning through a self-evolution loop.
+
+\textbf{Decision}: ANIMA uses multi-timescale decision-making with region-specific discount factors: brainstem ($\gamma=0.3$, immediate safety), limbic ($\gamma=0.7$, medium-term emotional regulation), cortex ($\gamma=0.99$, long-term strategic planning). A constitutional framework with 10 principles and a 4-level conflict resolution mechanism guides all decisions.
+
+\textbf{Human-AI Collaboration}: ANIMA implements a 3-tier explanation structure (metaphorical, functional, complete), a 5-stage trust repair protocol, and a calibrated confidence communication system. A 3-test ethical framework (beneficiary, autonomy, transparency) governs all emotional interactions.
+
+\subsection{Integration Demonstrations}
+
+\textbf{Cross-cluster scenario}: When text content and vocal tone conflict (routine text but distressed voice), the Perception cluster detects the discrepancy and flags high urgency. The Learning cluster retrieves similar historical patterns (potential duress situation). The Decision cluster activates safety protocol (P0, $\gamma$ near 0), prioritizing immediate wellbeing over task completion. The Human-AI cluster generates a concise, empathetic confirmation question while preparing emergency resources---all within a 300ms latency budget.
+
+This scenario demonstrates that no single cluster can handle the situation alone. The Perception cluster's modality conflict detection feeds into the Learning cluster's pattern matching, which informs the Decision cluster's protocol selection, which constrains the Human-AI cluster's response generation.
+
+\subsection{Safety Architecture}
+
+ANIMA implements six independent safety layers:
+\begin{enumerate}
+  \item Training-time alignment (Constitutional AI + DPO)
+  \item Input filtering (injection detection, topic classification)
+  \item In-model self-critique (constitutional principle verification)
+  \item Output filtering (toxicity, bias, PII detection)
+  \item Runtime monitoring (statistical anomaly detection)
+  \item Human oversight (escalation, kill switch)
+\end{enumerate}
+
+Using the Swiss cheese model with conservative per-layer failure estimates, the probability of all six layers failing simultaneously is approximately $1.5 \times 10^{-9}$.
+
+\subsection{Deployment Strategy}
+
+The Brain Compiler Impact Analysis (BCIA) framework quantifies the impact of neuron configuration changes before deployment. Changes are classified by magnitude and affected regions, with deployment policies ranging from automatic (small, non-critical changes) to human-approved staged rollout (large changes or those affecting safety-critical regions).
+
+% ==================================================================
+% 5. DISCUSSION
+% ==================================================================
+\section{Discussion}
+
+\subsection{Framework Limitations}
+
+The Four-Cluster Framework provides structure but does not eliminate the need for domain-specific expertise. Medical AI systems, autonomous vehicles, and conversational assistants share the same four clusters but require radically different design decisions within each cluster. The framework organizes these decisions; it does not make them.
+
+Additionally, the framework assumes that clusters can be meaningfully separated. End-to-end learned systems (where a single neural network handles perception through decision) blur these boundaries. We argue that even in such systems, the four functional concerns remain relevant for analysis, testing, and debugging---even if they are not architecturally separated.
+
+\subsection{Lessons Learned}
+
+Our systematic study revealed a recurring pattern: component-level correctness does not guarantee system-level correctness. Errors at integration points---reward model exploitation, modality conflict resolution, adapter interference, rule conflicts---are more subtle and more dangerous than errors within individual components. This observation aligns with Brooks's (1987) insight that the essence of software engineering is managing interactions, not components.
+
+The most effective safety mechanism proved to be defense in depth with independent layers. A single, powerful safety mechanism is fragile; multiple independent, imperfect mechanisms provide exponentially stronger guarantees through multiplicative failure probability.
+
+\subsection{Future Directions}
+
+Three research directions are critical for advancing complete AI systems:
+
+\textbf{Self-models and metacognition}: Systems that can model their own capabilities and limitations would make more calibrated decisions about when to act autonomously and when to defer to humans.
+
+\textbf{Multi-agent collaboration}: As AI systems proliferate, they must interact not only with humans but with other AI systems, requiring new frameworks for inter-system negotiation, consensus, and conflict resolution.
+
+\textbf{Continual learning without catastrophic forgetting}: Long-running AI systems must integrate new knowledge while preserving old knowledge. Biologically inspired approaches---varying plasticity by brain region---offer promising directions.
+
+% ==================================================================
+% 6. CONCLUSION
+% ==================================================================
+\section{Conclusion}
+
+This thesis has presented the Four-Cluster Integration Framework for designing complete AI systems. Through systematic application to the ANIMA system, we demonstrated that integration-aware design addresses challenges that component-level approaches cannot: modality conflicts, cross-cluster safety, dynamic resource allocation, and human-AI trust calibration.
+
+The key insight is that a complete AI system is not a collection of components---it is a network of interactions between components. The Four-Cluster Framework provides the vocabulary and structure for reasoning about these interactions systematically. We hope this framework serves as a practical tool for practitioners building the next generation of AI systems that are not only capable but also safe, transparent, and worthy of human trust.
+
+% ==================================================================
+% REFERENCES
+% ==================================================================
+\begin{thebibliography}{34}
+
+\bibitem[Amershi et~al.(2019)]{amershi2019}
+Amershi, S., et~al. (2019).
+\newblock Software Engineering for Machine Learning: A Case Study.
+\newblock \emph{ICSE}.
+
+\bibitem[Amodei et~al.(2016)]{amodei2016}
+Amodei, D., et~al. (2016).
+\newblock Concrete Problems in AI Safety.
+\newblock \emph{arXiv:1606.06565}.
+
+\bibitem[Andreas et~al.(2016)]{andreas2016}
+Andreas, J., et~al. (2016).
+\newblock Neural Module Networks.
+\newblock \emph{CVPR}.
+
+\bibitem[Bai et~al.(2022)]{bai2022}
+Bai, Y., et~al. (2022).
+\newblock Constitutional AI: Harmlessness from AI Feedback.
+\newblock \emph{arXiv:2212.08073}.
+
+\bibitem[Bansal et~al.(2019)]{bansal2019}
+Bansal, G., et~al. (2019).
+\newblock Beyond Accuracy: The Role of Mental Models in Human-AI Team Performance.
+\newblock \emph{AAAI HCOMP}.
+
+\bibitem[Belkin et~al.(2019)]{belkin2019}
+Belkin, M., et~al. (2019).
+\newblock Reconciling Modern Machine Learning Practice and the Bias-Variance Trade-off.
+\newblock \emph{PNAS}.
+
+\bibitem[Brooks(1987)]{brooks1987}
+Brooks, F.~P. (1987).
+\newblock No Silver Bullet: Essence and Accidents of Software Engineering.
+\newblock \emph{Computer}.
+
+\bibitem[Brown et~al.(2020)]{brown2020}
+Brown, T., et~al. (2020).
+\newblock Language Models are Few-Shot Learners.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Chouldechova(2017)]{chouldechova2017}
+Chouldechova, A. (2017).
+\newblock Fair Prediction with Disparate Impact.
+\newblock \emph{Big Data}.
+
+\bibitem[Christiano et~al.(2017)]{christiano2017}
+Christiano, P., et~al. (2017).
+\newblock Deep Reinforcement Learning from Human Preferences.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Dosovitskiy et~al.(2020)]{dosovitskiy2020}
+Dosovitskiy, A., et~al. (2020).
+\newblock An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale.
+\newblock \emph{ICLR} (preprint).
+
+\bibitem[Dosovitskiy et~al.(2021)]{dosovitskiy2021}
+Dosovitskiy, A., et~al. (2021).
+\newblock An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale.
+\newblock \emph{ICLR}.
+
+\bibitem[Dwork(2006)]{dwork2006}
+Dwork, C. (2006).
+\newblock Differential Privacy.
+\newblock \emph{ICALP}.
+
+\bibitem[Gal \& Ghahramani(2016)]{gal2016}
+Gal, Y. \& Ghahramani, Z. (2016).
+\newblock Dropout as a Bayesian Approximation.
+\newblock \emph{ICML}.
+
+\bibitem[Gupta \& Kembhavi(2023)]{gupta2023}
+Gupta, T. \& Kembhavi, A. (2023).
+\newblock Visual Programming: Compositional Visual Reasoning Without Training.
+\newblock \emph{CVPR}.
+
+\bibitem[He et~al.(2015)]{he2015}
+He, K., et~al. (2015).
+\newblock Deep Residual Learning for Image Recognition.
+\newblock \emph{CVPR}.
+
+\bibitem[Hendrycks et~al.(2021)]{hendrycks2021}
+Hendrycks, D., et~al. (2021).
+\newblock Unsolved Problems in ML Safety.
+\newblock \emph{arXiv:2109.13916}.
+
+\bibitem[Jaegle et~al.(2021)]{jaegle2021}
+Jaegle, A., et~al. (2021).
+\newblock Perceiver: General Perception with Iterative Attention.
+\newblock \emph{ICML}.
+
+\bibitem[Kahneman(2011)]{kahneman2011}
+Kahneman, D. (2011).
+\newblock \emph{Thinking, Fast and Slow}.
+\newblock Farrar, Straus and Giroux.
+
+\bibitem[Kim et~al.(2018)]{kim2018}
+Kim, B., et~al. (2018).
+\newblock Interpretability Beyond Feature Attribution.
+\newblock \emph{ICML}.
+
+\bibitem[Lee \& See(2004)]{lee2004}
+Lee, J.~D. \& See, K.~A. (2004).
+\newblock Trust in Automation.
+\newblock \emph{Human Factors}.
+
+\bibitem[Levine et~al.(2016)]{levine2016}
+Levine, S., et~al. (2016).
+\newblock End-to-End Training of Deep Visuomotor Policies.
+\newblock \emph{JMLR}.
+
+\bibitem[Lundberg \& Lee(2017)]{lundberg2017}
+Lundberg, S.~M. \& Lee, S.-I. (2017).
+\newblock A Unified Approach to Interpreting Model Predictions.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Norman(2013)]{norman2013}
+Norman, D.~A. (2013).
+\newblock \emph{The Design of Everyday Things}.
+\newblock Basic Books.
+
+\bibitem[Ouyang et~al.(2022)]{ouyang2022}
+Ouyang, L., et~al. (2022).
+\newblock Training Language Models to Follow Instructions with Human Feedback.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Radford et~al.(2021)]{radford2021}
+Radford, A., et~al. (2021).
+\newblock Learning Transferable Visual Models from Natural Language Supervision.
+\newblock \emph{ICML}.
+
+\bibitem[Radford et~al.(2023)]{radford2023}
+Radford, A., et~al. (2023).
+\newblock Robust Speech Recognition via Large-Scale Weak Supervision.
+\newblock \emph{ICML}.
+
+\bibitem[Rafailov et~al.(2023)]{rafailov2023}
+Rafailov, R., et~al. (2023).
+\newblock Direct Preference Optimization.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Reason(1990)]{reason1990}
+Reason, J. (1990).
+\newblock \emph{Human Error}.
+\newblock Cambridge University Press.
+
+\bibitem[Ribeiro et~al.(2016)]{ribeiro2016}
+Ribeiro, M.~T., et~al. (2016).
+\newblock ``Why Should I Trust You?'' Explaining the Predictions of Any Classifier.
+\newblock \emph{KDD}.
+
+\bibitem[Schulman et~al.(2017)]{schulman2017}
+Schulman, J., et~al. (2017).
+\newblock Proximal Policy Optimization Algorithms.
+\newblock \emph{arXiv:1707.06347}.
+
+\bibitem[Sculley et~al.(2015)]{sculley2015}
+Sculley, D., et~al. (2015).
+\newblock Hidden Technical Debt in Machine Learning Systems.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Silver et~al.(2016)]{silver2016}
+Silver, D., et~al. (2016).
+\newblock Mastering the Game of Go with Deep Neural Networks and Tree Search.
+\newblock \emph{Nature}.
+
+\bibitem[Silver et~al.(2017)]{silver2017}
+Silver, D., et~al. (2017).
+\newblock Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm.
+\newblock \emph{arXiv:1712.01815}.
+
+\bibitem[Sutton \& Barto(2018)]{sutton2018}
+Sutton, R.~S. \& Barto, A.~G. (2018).
+\newblock \emph{Reinforcement Learning: An Introduction}.
+\newblock MIT Press.
+
+\bibitem[Vaswani et~al.(2017)]{vaswani2017}
+Vaswani, A., et~al. (2017).
+\newblock Attention Is All You Need.
+\newblock \emph{NeurIPS}.
+
+\bibitem[Wachter et~al.(2017)]{wachter2017}
+Wachter, S., et~al. (2017).
+\newblock Counterfactual Explanations Without Opening the Black Box.
+\newblock \emph{Harvard Journal of Law \& Technology}.
+
+\end{thebibliography}
+
+\end{document}

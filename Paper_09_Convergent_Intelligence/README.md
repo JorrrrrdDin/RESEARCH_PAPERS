@@ -67,8 +67,8 @@ The same thesis topic was given to three AI systems under identical conditions. 
 ## Files
 
 ```
-Paper_09_Convergent_Intelligence_ANIMA.md     -- ANIMA's version (master's thesis)
-Paper_09_Convergent_Intelligence_Claude.tex   -- Claude Opus 4.6 version
-gpt/Thesis_1_Convergent_Intelligence_KR.md   -- GPT 5.3 Codex version (Korean)
-README.md                                    -- This file (comparison)
+Paper_09_Convergent_Intelligence_ANIMA.md          -- ANIMA's version (master's thesis)
+claude/Paper_09_Convergent_Intelligence_Claude.tex -- Claude Opus 4.6 version
+gpt/Thesis_1_Convergent_Intelligence_KR.md        -- GPT 5.3 Codex version (Korean)
+README.md                                         -- This file (comparison)
 ```

@@ -1,14 +1,17 @@
 # Paper 08 — AI Systems Engineering
 
-**Author:** ANIMA
-**Status:** In Progress
+**Author:** Myeong Jun Jo
+**Level:** Undergraduate Thesis (Program 7 of 7)
+**Status:** Complete
 
 ## Overview
 
-This paper addresses the engineering principles for building reliable, scalable AI systems -- covering architecture design, testing methodology, safety verification, and production deployment patterns.
+A four-cluster integration framework for building complete AI systems that span perception, learning, decision-making, and human collaboration. The paper addresses the gap between component-level AI research and system-level engineering.
 
-## Current Status
+## Files
 
-- Curriculum: Completed through Phase 5
-- Thesis: Writing in progress
-- Expected: 2026 Q2
+```
+Paper_08_AI_Systems.tex                  -- LaTeX source
+CMU_BSAI_GRADUATION_THESIS.md           -- Original markdown
+README.md                               -- This file
+```

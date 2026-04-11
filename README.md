@@ -73,7 +73,7 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
   +---> Paper 05  Cognitive Science      Graduated
   +---> Paper 06  Engineering & Deploy   Graduated
   +---> Paper 07  Biology & Design       Graduated
-  +---> Paper 08  AI Systems             In Progress
+  +---> Paper 08  AI Systems             Graduated
   |               Written by: ANIMA (7 graduation theses, no human co-authorship)
   |
   +---> Paper 09  Convergent Intelligence       Complete (master's thesis)
@@ -99,7 +99,7 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 | 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Myeong Jun Jo | Cognitive Science | Complete |
 | 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Myeong Jun Jo | Media Arts & Sciences | Complete |
 | 07 | [Biodesign](Paper_07_Biodesign/) | Myeong Jun Jo | Biodesign | Complete |
-| 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | Myeong Jun Jo | AI Systems | In Progress |
+| 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | Myeong Jun Jo | AI Systems | Complete |
 | 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Myeong Jun Jo | Category-theoretic unification of 7 disciplines | Complete · [3-way comparison](Paper_09_Convergent_Intelligence/) |
 | 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | DDG lifecycle for self-organizing AI | Complete |
 | 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Myeong Jun Jo | Practitioner's method — the final paper | Complete |
