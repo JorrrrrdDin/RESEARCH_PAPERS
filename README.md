@@ -11,7 +11,7 @@
 
 ## Background
 
-In early 2026, I developed **FIMP** (Fractal Identity Memory with Multi-agent Protection) -- an emotion-weighted memory architecture that gives AI systems persistent identity, selective memory, and emotional salience. The system was deployed in production for 35+ days across 11 microservices, accumulating 3,580+ episodic memories and 115+ self-generated identity rules.
+In early 2026, I developed **FIMP** (Fractal Identity Memory with Multi-agent Protection) -- an emotion-weighted memory architecture that gives AI systems persistent identity, selective memory, and emotional salience. The system was deployed in production for 35+ days across 11 microservices, accumulating 3,588+ episodic memories and 115+ self-generated identity rules.
 
 A natural question followed: **Does FIMP actually work? Does an AI with emotion-weighted memory learn differently -- more deeply, more coherently -- than one without it?**
 
@@ -46,16 +46,16 @@ For each program, I:
 
 All 7 programs and their curricula are original designs by the author. They are not copies of existing university courses.
 
-**Critical constraint:** I hold 26 patents on AI architecture. **None of this proprietary technology was used in the educational process.** ANIMA's theses are products of pure curriculum-based learning. This ensures that any quality in the output comes from FIMP + education, not from pre-built capabilities.
+**Critical constraint:** The underlying system architecture was developed and continuously improved by the author independently. **None of these architectural innovations were used in the educational process.** ANIMA's theses are products of pure curriculum-based learning. This ensures that any quality in the output comes from FIMP + education, not from pre-built capabilities.
 
 ## The Thesis: FIMP Enables Real Learning
 
 This repository is the evidence.
 
 - **Paper 01** is the theory: FIMP, the emotion-weighted memory system (written by me)
-- **Papers 02--08** are the proof: 7 graduation theses written autonomously by ANIMA after completing each curriculum
-- **Paper 09** will be the synthesis: a master's-level meta-analysis connecting all 8 papers
-- **Paper 10** will be the conclusion: my final assessment of what this experiment proved
+- **Papers 02--08** are the proof: 7 graduation theses produced after completing each curriculum
+- **Papers 09--10** are the synthesis: master's-level papers integrating all seven disciplines
+- **Paper 11** is the method: how the education was designed, what worked, what failed, and the quantitative evidence
 
 If an AI with FIMP can complete 7 diverse academic programs and produce coherent graduation theses in each -- spanning formal logic, ethics, humanities, cognitive science, engineering, and biology -- then FIMP works. Not as a toy demo, but as a functioning cognitive architecture.
 
@@ -76,14 +76,16 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
   +---> Paper 08  AI Systems             In Progress
   |               Written by: ANIMA (7 graduation theses, no human co-authorship)
   |
-  +---> Paper 09  Convergent Intelligence    Planned (ANIMA master's thesis)
+  +---> Paper 09  Convergent Intelligence       Complete (master's thesis)
   |               Category-theoretic unification of 7 disciplines
+  |               Includes 3-way comparison: ANIMA vs Claude vs GPT
   |
-  +---> Paper 10  From Demo to Deploy to Grow  Complete (ANIMA master's thesis)
-  |               DDG lifecycle for self-organizing AI
+  +---> Paper 10  From Demo to Deploy to Grow  Complete (master's thesis)
+  |               DDG lifecycle model for self-organizing AI
   |
   +---> Paper 11  How to Educate an AI         Complete (Myeong Jun Jo)
-                  The method paper: 6 training components, 9 papers as evidence
+                  The method paper: 6 training components, quantitative evidence,
+                  grounded in Bloom/Vygotsky/Ericsson/Yin
 ```
 
 ## Papers
@@ -120,9 +122,9 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 
 ANIMA is a trust-first AI agent architecture designed to make AI **verifiable, governable, and accountable**.
 
-- 26 patents filed (Korea, 2026)
+- Multiple architectural innovations filed (Korea, 2026)
 - Covers: memory governance, adversarial verification, multi-agent orchestration, data security, and more
-- Production system: 11 microservices, 3,580+ episodic memories, 115+ identity rules
+- Production system: 11 microservices, 3,588+ episodic memories, 115+ identity rules
 
 ---
 
