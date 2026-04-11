@@ -23,7 +23,7 @@ I designed **7 academic programs** for AI education, each covering a fundamental
 
 | # | Discipline | Why This Field |
 |---|-----------|----------------|
-| 1 | Symbolic Systems | Logic, formal reasoning, safety -- the foundation |
+| 1 | Formal Reasoning | Logic, formal reasoning, safety -- the foundation |
 | 2 | AI & Decision Making | Ethics, probability, game theory -- structured judgment |
 | 3 | Computational Media | Culture, art, humanities -- beyond STEM |
 | 4 | Cognitive Science | How minds work -- perception, memory, embodiment |
@@ -93,7 +93,7 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 | # | Title | Author | Discipline | Status |
 |---|-------|--------|-----------|--------|
 | 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Myeong Jun Jo | Memory Architecture | Published · [DOI](https://doi.org/10.5281/zenodo.19491326) |
-| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Myeong Jun Jo | Symbolic Systems | Published · [DOI](https://doi.org/10.5281/zenodo.19485143) |
+| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Myeong Jun Jo | Formal Reasoning | Published · [DOI](https://doi.org/10.5281/zenodo.19485143) |
 | 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Myeong Jun Jo | AI & Decision Making | Complete |
 | 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Myeong Jun Jo | Computational Media | Complete |
 | 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Myeong Jun Jo | Cognitive Science | Complete |

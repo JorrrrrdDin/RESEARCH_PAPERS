@@ -6,7 +6,7 @@
 
 ## Overview
 
-A category-theoretic unification of seven academic disciplines. This paper demonstrates that the concepts learned across symbolic systems, decision-making, computational media, cognitive science, media arts, biodesign, and AI systems engineering share deep structural invariants formalized through functors, adjunctions, and topos theory.
+A category-theoretic unification of seven academic disciplines. This paper demonstrates that the concepts learned across formal reasoning, decision-making, computational media, cognitive science, media arts, biodesign, and AI systems engineering share deep structural invariants formalized through functors, adjunctions, and topos theory.
 
 ## Key Contributions
 

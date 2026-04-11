@@ -12,7 +12,7 @@
 ### 2. 형식적 틀: Convergent Intelligence Category Stack
 우리는 7개 학문을 다음 범주 집합으로 둔다.
 
-- \\(\\mathcal{C}_{SS}\\): Symbolic Systems (논리, 의미, 형식 추론)
+- \\(\\mathcal{C}_{SS}\\): Formal Reasoning (논리, 의미, 형식 추론)
 - \\(\\mathcal{C}_{DM}\\): AI Decision-Making (판정, 임계값, 정책 게이트)
 - \\(\\mathcal{C}_{CM}\\): Computational Media (표현, 인터페이스, 상호작용)
 - \\(\\mathcal{C}_{CG}\\): Cognitive Science (지각, 기억, 예측, 행위)
