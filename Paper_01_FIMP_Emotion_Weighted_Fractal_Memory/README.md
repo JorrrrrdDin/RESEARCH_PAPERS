@@ -1,4 +1,4 @@
-# Paper 02 — Emotion-Weighted Fractal Memory (FIMP)
+# Paper 01 — Emotion-Weighted Fractal Memory (FIMP)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19491326.svg)](https://doi.org/10.5281/zenodo.19491326)
 

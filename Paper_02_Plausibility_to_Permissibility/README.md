@@ -1,4 +1,4 @@
-# Paper 01 — From Plausibility to Permissibility
+# Paper 02 — From Plausibility to Permissibility
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19485143.svg)](https://doi.org/10.5281/zenodo.19485143)
 
