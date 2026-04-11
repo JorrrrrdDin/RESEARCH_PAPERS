@@ -92,17 +92,17 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 
 | # | Title | Author | Discipline | Status |
 |---|-------|--------|-----------|--------|
-| 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Myeong Jun Jo | Memory Architecture | Published · [DOI](https://doi.org/10.5281/zenodo.19491326) |
-| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Myeong Jun Jo | Formal Reasoning | Published · [DOI](https://doi.org/10.5281/zenodo.19485143) |
-| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Myeong Jun Jo | AI & Decision Making | Complete |
-| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Myeong Jun Jo | Computational Media | Complete |
-| 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Myeong Jun Jo | Cognitive Science | Complete |
-| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Myeong Jun Jo | Media Arts & Sciences | Complete |
-| 07 | [Biodesign](Paper_07_Biodesign/) | Myeong Jun Jo | Biodesign | Complete |
-| 08 | [AI Systems Engineering](Paper_08_AI_Systems/) | Myeong Jun Jo | AI Systems | Complete |
-| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Myeong Jun Jo | Category-theoretic unification of 7 disciplines | Complete · [3-way comparison](Paper_09_Convergent_Intelligence/) |
-| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | DDG lifecycle for self-organizing AI | Complete |
-| 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Myeong Jun Jo | Practitioner's method — the final paper | Complete |
+| 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Myeong Jun Jo | Memory Architecture | [DOI](https://doi.org/10.5281/zenodo.19491326) |
+| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Myeong Jun Jo | Formal Reasoning | [DOI](https://doi.org/10.5281/zenodo.19516962) |
+| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Myeong Jun Jo | AI & Decision Making | [DOI](https://doi.org/10.5281/zenodo.19508891) |
+| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Myeong Jun Jo | Computational Media | [DOI](https://doi.org/10.5281/zenodo.19509059) |
+| 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Myeong Jun Jo | Cognitive Science | [DOI](https://doi.org/10.5281/zenodo.19517327) |
+| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Myeong Jun Jo | Media Arts & Sciences | [DOI](https://doi.org/10.5281/zenodo.19517456) |
+| 07 | [Grow or Die](Paper_07_Biodesign/) | Myeong Jun Jo | Biodesign | [DOI](https://doi.org/10.5281/zenodo.19517523) |
+| 08 | [Four-Cluster Integration Framework](Paper_08_AI_Systems/) | Myeong Jun Jo | AI Systems | [DOI](https://doi.org/10.5281/zenodo.19517947) |
+| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Myeong Jun Jo | Cross-disciplinary Synthesis | [DOI](https://doi.org/10.5281/zenodo.19518032) · [3-way comparison](Paper_09_Convergent_Intelligence/) |
+| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | DDG Lifecycle | [DOI](https://doi.org/10.5281/zenodo.19518110) |
+| 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Myeong Jun Jo | Method Paper | [DOI](https://doi.org/10.5281/zenodo.19518129) |
 
 ## What This Proves
 
