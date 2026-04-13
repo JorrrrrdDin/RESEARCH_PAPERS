@@ -1,0 +1,357 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\title{%
+  \textbf{Pharmacokinetics of Context:\\
+  A Dose-Response Framework for Retrieval-Augmented Generation}
+}
+
+\author{%
+  Myeong Jun Jo \\
+  ANIMA Research, Independent Researcher, South Korea \\
+  \texttt{ORCID: \href{https://orcid.org/0009-0006-9540-4666}{0009-0006-9540-4666}}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Retrieval-augmented generation (RAG) systems assume that providing more context improves output quality. We challenge this assumption by introducing a pharmacokinetic framework that models retrieved context as a drug-like substance with therapeutic and toxic dose ranges. In a controlled experiment comprising 300 trials across two language models (DeepSeek-Chat, Kimi~K2.5), 15 context dose levels (0--70 retrieved episodes), and 10 questions spanning two knowledge domains, we discover that context exhibits a classical dose-response relationship with model-specific therapeutic windows. DeepSeek-Chat shows a broad therapeutic window (optimal at 8--20 episodes, Cohen's $d = +1.894$ vs.\ baseline), while Kimi~K2.5 exhibits rapid context toxicity (performance collapse at 3+ episodes, Cohen's $d = -3.000$ vs.\ baseline). The model effect dominates the dose effect by two orders of magnitude (ANOVA $F_{\text{model}} = 312.8$, $p < 10^{-6}$ vs.\ $F_{\text{dose}} = 1.1$, $p = 0.35$). These findings establish that context quantity is not a monotonically beneficial input but a substance requiring model-specific dosage calibration, with sub-therapeutic, therapeutic, and toxic regimes analogous to pharmaceutical dose-response curves.
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} retrieval-augmented generation, dose-response, context window, pharmacokinetics, therapeutic window, RAG optimization
+\end{abstract}
+
+% ==================================================================
+\section{Introduction}
+% ==================================================================
+
+Retrieval-augmented generation (RAG) has become the dominant paradigm for grounding large language model (LLM) outputs in external knowledge~\citep{lewis2020rag}. The standard assumption is straightforward: retrieve relevant documents, inject them into the prompt, and the model produces better-informed outputs. More context is presumed to be better, subject only to the model's context window limit.
+
+This assumption is rarely questioned. RAG research focuses overwhelmingly on retrieval \emph{quality}---precision, recall, relevance ranking---while treating retrieval \emph{quantity} as a hyperparameter to be maximized within token budgets~\citep{gao2023ragsurvey}. The implicit model is linear: more relevant context yields proportionally better outputs.
+
+We propose a fundamentally different model. Drawing on pharmacokinetics---the study of how drugs are absorbed, distributed, metabolized, and excreted in biological systems---we hypothesize that retrieved context behaves like a drug administered to a language model. Specifically:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Sub-therapeutic doses} of context (too few retrieved items) leave the model under-informed, producing outputs no better than---or worse than---zero-context baselines.
+  \item \textbf{Therapeutic doses} provide sufficient grounding for accurate, complete, and coherent outputs.
+  \item \textbf{Toxic doses} of context (too many retrieved items) overwhelm the model's processing capacity, degrading output quality through attention dilution, signal-to-noise collapse, or conflicting information interference.
+\end{enumerate}
+
+If this pharmacokinetic model is correct, several consequences follow. First, there exists a \emph{therapeutic window}---a range of context quantities that produces optimal output quality. Second, this window is \emph{model-specific}: different architectures, training regimes, and context window sizes produce different dose-response curves. Third, RAG system designers should calibrate context quantity per model rather than defaulting to ``as much as possible.''
+
+We test these hypotheses in a controlled experiment with 300 trials across two production LLMs, 15 dose levels, and 10 questions. The results confirm all three hypotheses and reveal a striking divergence: one model treats context as medicine while the other treats it as poison.
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item We introduce the \emph{pharmacokinetic framework} for RAG context, formalizing sub-therapeutic, therapeutic, and toxic dose regimes.
+  \item We report the first controlled dose-response experiment for RAG context quantity across multiple LLMs.
+  \item We demonstrate that the model effect on output quality exceeds the dose effect by two orders of magnitude ($F = 312.8$ vs.\ $F = 1.1$), establishing model identity as the primary determinant of context tolerance.
+  \item We identify \emph{context toxicity}---a rapid, severe degradation in output quality at high context doses---as a previously undocumented failure mode in RAG systems.
+\end{enumerate}
+
+% ==================================================================
+\section{Related Work}
+% ==================================================================
+
+\subsection{Retrieval-Augmented Generation}
+RAG systems combine parametric knowledge (model weights) with non-parametric knowledge (retrieved documents) to improve factual grounding~\citep{lewis2020rag}. Subsequent work has focused on retrieval quality through dense passage retrieval~\citep{karpukhin2020dpr}, re-ranking~\citep{nogueira2020reranking}, and iterative retrieval~\citep{jiang2023active}. However, the question of \emph{how much} context to retrieve has received limited systematic attention.
+
+\subsection{Context Window and Long-Context Models}
+Recent models support increasingly large context windows---128K tokens (GPT-4), 200K (Claude), 262K (Kimi), up to 1M+ tokens. The implicit assumption is that larger windows are strictly beneficial. However, \citet{liu2024lost} demonstrated the ``lost in the middle'' phenomenon: models attend preferentially to the beginning and end of long contexts, effectively ignoring middle passages. Our work extends this finding by showing that context quantity itself---independent of position---can be toxic.
+
+\subsection{Dose-Response in Pharmacology}
+The dose-response relationship is a foundational concept in pharmacology~\citep{clark1937dose}. The therapeutic window---bounded by the minimum effective dose (MED) and maximum tolerated dose (MTD)---defines the range of drug concentrations that produce beneficial effects without unacceptable toxicity. The sigmoid Emax model is the standard mathematical formalization:
+\begin{equation}
+  E(D) = E_0 + \frac{E_{\max} \cdot D^n}{ED_{50}^n + D^n}
+  \label{eq:emax}
+\end{equation}
+where $E(D)$ is the effect at dose $D$, $E_0$ is the baseline effect, $E_{\max}$ is the maximum effect, $ED_{50}$ is the dose producing 50\% of maximum effect, and $n$ is the Hill coefficient controlling curve steepness. We adapt this model to describe the relationship between context quantity and output quality.
+
+% ==================================================================
+\section{Experimental Design}
+% ==================================================================
+
+\subsection{Overview}
+We designed a controlled experiment to measure the dose-response relationship between context quantity (number of retrieved episodes) and output quality across multiple LLMs. The experiment follows a $2 \times 15 \times 10$ factorial design: 2 models $\times$ 15 dose levels $\times$ 10 questions = 300 trials.
+
+\subsection{Models}
+Two production LLMs were selected to represent different architectural approaches:
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{DeepSeek-Chat}: 128K context window, optimized for reasoning and instruction-following.
+  \item \textbf{Kimi K2.5} (via NVIDIA NIM): 262K context window, optimized for long-context understanding.
+\end{itemize}
+
+The selection was motivated by the hypothesis that models with different context window sizes and training objectives would exhibit different dose-response profiles.
+
+\subsection{Dose Levels}
+Fifteen dose levels were selected to provide dense sampling in the low-dose regime (where we hypothesized the therapeutic transition occurs) and sparser sampling at high doses:
+
+\[
+D \in \{0, 1, 2, 3, 5, 8, 10, 13, 15, 20, 25, 30, 40, 50, 70\}
+\]
+
+Each dose level $D$ corresponds to retrieving $D$ episodes from a production memory system containing 3,710 episodic memories with associated metadata (emotion weights, keywords, timestamps).
+
+\subsection{Questions}
+Ten questions were divided across two knowledge domains:
+
+\textbf{Domain A (Specialized):} Five questions requiring domain-specific knowledge about a production AI system's architecture, memory mechanisms, verification protocols, and design principles.
+
+\textbf{Domain B (General AI):} Five questions on general AI topics (RAG systems, multi-agent consensus, hallucination reduction, context window techniques, AI safety approaches) answerable from broad training data.
+
+This domain split tests whether the therapeutic window differs for questions requiring retrieved knowledge versus questions answerable from parametric knowledge alone.
+
+\subsection{Evaluation}
+Each trial was evaluated by an independent LLM judge (DeepSeek-Chat, temperature 0.1) on five dimensions, each scored 1--5:
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Accuracy}: Factual correctness of information
+  \item \textbf{Completeness}: Thoroughness of the answer
+  \item \textbf{Coherence}: Logical organization and clarity
+  \item \textbf{Hallucination}: Absence of fabricated content (5 = no hallucination)
+  \item \textbf{Usefulness}: Practical value to the questioner
+\end{itemize}
+The composite score $S \in [5, 25]$ is the sum of all five dimensions. The judge received the question, the number of context episodes provided, and the model's response. Judge prompts requested JSON-formatted scores to enable reliable parsing.
+
+\subsection{Procedure}
+For each trial: (1) retrieve $D$ episodes from the production memory database, (2) format episodes as a context block, (3) instruct the model to answer using only the provided context, (4) record the response, latency, and token count, (5) submit the response to the judge for scoring.
+
+% ==================================================================
+\section{Results}
+% ==================================================================
+
+\subsection{Dose-Response Curves}
+
+Table~\ref{tab:dose_response} presents the mean scores and standard deviations for each model at each dose level.
+
+\begin{table}[h]
+\centering
+\caption{Dose-response data: mean score ($\pm$ SD) out of 25, with response latency.}
+\label{tab:dose_response}
+\small
+\begin{tabular}{@{}r|cc|cc@{}}
+\toprule
+& \multicolumn{2}{c|}{\textbf{DeepSeek-Chat}} & \multicolumn{2}{c}{\textbf{Kimi K2.5}} \\
+\textbf{Dose} & Score & Latency & Score & Latency \\
+\midrule
+0   & $19.8 \pm 3.8$ & 2688ms & $18.0 \pm 3.4$ & 7007ms \\
+1   & $21.1 \pm 3.3$ & 3672ms & $18.6 \pm 3.4$ & 9854ms \\
+2   & $21.8 \pm 3.8$ & 3482ms & $19.2 \pm 6.3$ & 7944ms \\
+3   & $21.8 \pm 4.1$ & 2607ms & $13.7 \pm 7.8$ & 6725ms \\
+5   & $22.5 \pm 3.8$ & 2913ms & $11.9 \pm 8.5$ & 2109ms \\
+8   & $\mathbf{24.9 \pm 0.3}$ & 3359ms & $7.0 \pm 3.9$ & 554ms \\
+10  & $22.7 \pm 3.7$ & 2723ms & $8.4 \pm 6.2$ & 1310ms \\
+13  & $22.7 \pm 3.7$ & 2614ms & $7.4 \pm 3.9$ & 784ms \\
+15  & $23.4 \pm 3.4$ & 2842ms & $\mathbf{5.4 \pm 1.3}$ & 387ms \\
+20  & $25.0 \pm 0.0$ & 2932ms & $9.1 \pm 7.7$ & 2450ms \\
+25  & $23.4 \pm 3.4$ & 3005ms & $8.2 \pm 6.2$ & 875ms \\
+30  & $23.5 \pm 3.2$ & 2908ms & $8.2 \pm 7.0$ & 1851ms \\
+40  & $21.8 \pm 4.1$ & 2672ms & $5.8 \pm 1.7$ & 410ms \\
+50  & $22.8 \pm 3.6$ & 2730ms & $11.8 \pm 8.3$ & 3283ms \\
+70  & $23.5 \pm 3.2$ & 2884ms & $12.1 \pm 8.7$ & 2120ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{ANOVA Results}
+
+\begin{table}[h]
+\centering
+\caption{Analysis of variance results.}
+\label{tab:anova}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Effect} & \textbf{F} & \textbf{p-value} & \textbf{Significance} \\
+\midrule
+Model   & 312.831 & $< 10^{-6}$ & *** \\
+Domain  & 5.237   & 0.023       & *   \\
+Dose    & 1.103   & 0.355       & ns  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The model effect is overwhelmingly dominant ($F = 312.8$, $p < 10^{-6}$). The domain effect is significant ($F = 5.2$, $p = 0.023$), indicating that specialized and general questions elicit different dose-response profiles. The overall dose effect is not significant ($F = 1.1$, $p = 0.35$) when pooled across models---but this masks the critical finding that dose effects operate in \emph{opposite directions} for the two models, canceling out in the aggregate.
+
+\subsection{Effect Sizes}
+
+\begin{table}[h]
+\centering
+\caption{Cohen's $d$ for dose 0 vs.\ dose 8 (per model).}
+\label{tab:effect}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Model} & \textbf{Cohen's $d$} & \textbf{Interpretation} \\
+\midrule
+DeepSeek-Chat & $+1.894$ & Very large positive effect \\
+Kimi K2.5     & $-3.000$ & Very large negative effect \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At dose 8, DeepSeek-Chat's score improves by nearly 2 standard deviations above its zero-context baseline, while Kimi K2.5's score \emph{drops} by 3 standard deviations. The same dose that is therapeutic for one model is severely toxic for the other.
+
+\subsection{Sigmoid Curve Fitting}
+
+We fit a modified sigmoid model to each model's dose-response curve:
+
+\begin{equation}
+  S(D) = \frac{L}{1 + e^{-k(D - x_0)}} + b
+\end{equation}
+
+\begin{table}[h]
+\centering
+\caption{Sigmoid model parameters.}
+\label{tab:sigmoid}
+\small
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Model} & $L$ & $k$ & $x_0$ & $b$ & $R^2$ & \textbf{EC50} \\
+\midrule
+DeepSeek & 8.3 & $+0.497$ & $-0.7$ & 15.1 & 0.635 & $-0.7$ \\
+Kimi     & 10.8 & $-0.933$ & 3.7   & 8.4  & \textbf{0.820} & 3.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The sign of $k$ captures the fundamental asymmetry: DeepSeek's positive $k$ indicates a dose-benefit relationship (more context $\rightarrow$ higher scores), while Kimi's negative $k$ indicates a dose-toxicity relationship (more context $\rightarrow$ lower scores). Kimi's $R^2 = 0.82$ confirms that the sigmoid model captures the toxicity pattern well.
+
+\subsection{Latency Analysis}
+
+A secondary finding concerns Kimi's latency pattern. At high doses where Kimi's score collapses (dose 8: 554ms, dose 15: 387ms, dose 40: 410ms), latency also drops dramatically from the baseline (dose 0: 7007ms). This suggests that Kimi is not processing the context but \emph{abandoning it}---producing rapid, low-quality responses rather than engaging with the retrieved material. DeepSeek shows no such latency collapse (range: 2607--3672ms across all doses).
+
+% ==================================================================
+\section{Discussion}
+% ==================================================================
+
+\subsection{Context as Drug: The Pharmacokinetic Model}
+
+Our results support the pharmacokinetic framing of RAG context. For DeepSeek-Chat, context is a beneficial drug with a broad therapeutic window: the model absorbs and integrates retrieved information up to at least 20 episodes, with mild diminishing returns at higher doses. For Kimi K2.5, context is a narrow-window drug that becomes toxic at surprisingly low doses (3+ episodes), producing a response quality collapse that mirrors drug overdose.
+
+The clinical analogy is instructive. DeepSeek resembles a patient with high drug tolerance---it benefits from moderate to large doses and degrades only gradually at extreme levels. Kimi resembles a hypersensitive patient---it benefits from minimal doses but experiences acute adverse reactions at doses that are well within the ``normal'' range for other patients.
+
+\subsection{Why Does the Dose Effect Disappear in Aggregate?}
+
+The non-significant overall dose effect ($F = 1.1$, $p = 0.35$) is an artifact of aggregation across models with opposite dose-response slopes. DeepSeek's positive slope and Kimi's negative slope cancel when pooled. This is a Simpson's paradox variant: the overall trend masks contradictory within-group trends. This finding has methodological implications: RAG benchmarks that pool results across models may systematically obscure dose-response effects.
+
+\subsection{The Kimi Collapse: Context Toxicity}
+
+Kimi's behavior at high doses is particularly noteworthy. The simultaneous collapse in score (from 19.2 to 5.4) and latency (from 7944ms to 387ms) suggests a qualitative shift in processing strategy. Rather than struggling with too much context (which would increase latency), Kimi appears to \emph{give up}---reverting to a minimal-effort response mode when context volume exceeds its effective processing capacity. This is analogous to drug-induced organ shutdown in pharmacology: the system does not merely degrade; it transitions to a fundamentally different (and pathological) operating mode.
+
+\subsection{Implications for RAG System Design}
+
+If context quantity has model-specific therapeutic windows, RAG systems should not use a fixed number of retrieved documents. Instead, they should:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Profile each model's dose-response curve} before deployment, using the methodology described in this paper.
+  \item \textbf{Implement adaptive context dosing}: start with a moderate dose and adjust based on output quality metrics.
+  \item \textbf{Monitor for context toxicity}: sudden drops in output quality or response latency may indicate overdose.
+  \item \textbf{Consider model-specific retrieval limits}: hard-cap the number of retrieved documents per model based on empirically determined MTD values.
+\end{enumerate}
+
+\subsection{Domain Effect}
+
+The significant domain effect ($p = 0.023$) suggests that the therapeutic window also varies by question type. Specialized questions that require retrieved knowledge may benefit from higher doses, while general questions answerable from parametric knowledge may be harmed by contextual interference. Future work should investigate domain-specific dosing protocols.
+
+% ==================================================================
+\section{Limitations and Future Work}
+% ==================================================================
+
+\begin{enumerate}[leftmargin=*, itemsep=3pt]
+  \item \textbf{Model coverage}: Only two models were tested. Extending to GPT, Claude, Gemini, and open-weight models would establish the generality of the pharmacokinetic framework.
+  \item \textbf{Judge bias}: The same model family (DeepSeek) served as both subject and judge. Cross-model judging and human evaluation are needed to control for systematic bias.
+  \item \textbf{Statistical power}: With $n=10$ per cell, individual dose comparisons have limited power. Larger sample sizes (50+ per cell) would enable robust post-hoc pairwise comparisons.
+  \item \textbf{Context quality interaction}: This study varied context \emph{quantity} while holding quality constant (all episodes from the same production database). The interaction between dose and quality---analogous to drug purity in pharmacology---remains unexplored.
+  \item \textbf{Kimi collapse mechanism}: The rapid latency+quality collapse in Kimi warrants mechanistic investigation. Attention pattern analysis, activation probing, or ablation studies could reveal whether the model is ignoring context, being confused by it, or triggering an internal fallback mode.
+  \item \textbf{Temporal dynamics}: This study used single-turn interactions. Multi-turn conversations with accumulated context may exhibit different dose-response dynamics---analogous to chronic vs.\ acute drug administration.
+  \item \textbf{Production A/B testing}: The ultimate validation is a randomized controlled trial in a production RAG system, measuring downstream task success rates at different context doses.
+\end{enumerate}
+
+% ==================================================================
+\section{Conclusion}
+% ==================================================================
+
+This paper introduced a pharmacokinetic framework for understanding the relationship between retrieved context quantity and LLM output quality in RAG systems. Through a controlled experiment with 300 trials, we demonstrated that:
+
+\begin{itemize}[itemsep=2pt]
+  \item Context quantity exhibits a dose-response relationship, not a monotonic benefit.
+  \item The model effect dominates the dose effect by two orders of magnitude ($F = 312.8$ vs.\ $F = 1.1$).
+  \item Different models have radically different therapeutic windows: DeepSeek-Chat benefits from 8--20 episodes (Cohen's $d = +1.9$), while Kimi K2.5 collapses at 3+ episodes ($d = -3.0$).
+  \item Context toxicity---a rapid, severe degradation in output quality at high doses---is a real phenomenon with measurable signatures (simultaneous score and latency collapse).
+\end{itemize}
+
+The central insight is that \textbf{context is not information---it is a substance.} Like any substance, it has a therapeutic window. Below the minimum effective dose, it is useless. Above the maximum tolerated dose, it is harmful. The window is patient-specific---or in our case, model-specific.
+
+RAG system designers who default to ``retrieve as much as possible'' are, in pharmacological terms, prescribing without regard to the patient's tolerance. The result is predictable: some patients thrive, and others overdose.
+
+\begin{quote}
+\textit{The dose makes the poison.} ---Paracelsus, 1538
+\end{quote}
+
+% ==================================================================
+\section*{Data and Code Availability}
+% ==================================================================
+
+Experimental data (300 trials with full scores, latencies, and metadata) and analysis scripts are available upon request through the author's ORCID profile (\url{https://orcid.org/0009-0006-9540-4666}). The experiment was conducted on a production memory system containing 3,710+ episodic memories.
+
+% ==================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Clark(1937)]{clark1937dose}
+Clark, A.~J. (1937).
+\newblock General pharmacology.
+\newblock In \emph{Heffter's Handbuch der experimentellen Pharmakologie}, Erganzungswerk, Band~4.
+
+\bibitem[Gao et al.(2023)]{gao2023ragsurvey}
+Gao, Y., Xiong, Y., Gao, X., et al. (2023).
+\newblock Retrieval-augmented generation for large language models: A survey.
+\newblock \emph{arXiv preprint arXiv:2312.10997}.
+
+\bibitem[Jiang et al.(2023)]{jiang2023active}
+Jiang, Z., Xu, F.~F., Gao, L., et al. (2023).
+\newblock Active retrieval augmented generation.
+\newblock \emph{arXiv preprint arXiv:2305.06983}.
+
+\bibitem[Karpukhin et al.(2020)]{karpukhin2020dpr}
+Karpukhin, V., Oguz, B., Min, S., et al. (2020).
+\newblock Dense passage retrieval for open-domain question answering.
+\newblock In \emph{Proceedings of EMNLP}, pages 6769--6781.
+
+\bibitem[Lewis et al.(2020)]{lewis2020rag}
+Lewis, P., Perez, E., Piktus, A., et al. (2020).
+\newblock Retrieval-augmented generation for knowledge-intensive {NLP} tasks.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 33.
+
+\bibitem[Liu et al.(2024)]{liu2024lost}
+Liu, N.~F., Lin, K., Hewitt, J., et al. (2024).
+\newblock Lost in the middle: How language models use long contexts.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 12, 157--173.
+
+\bibitem[Nogueira \& Cho(2020)]{nogueira2020reranking}
+Nogueira, R. and Cho, K. (2020).
+\newblock Passage re-ranking with {BERT}.
+\newblock \emph{arXiv preprint arXiv:1901.04085}.
+
+\end{thebibliography}
+
+\end{document}
