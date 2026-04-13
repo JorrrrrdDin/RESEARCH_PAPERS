@@ -104,6 +104,7 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 | 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | DDG Lifecycle | [DOI](https://doi.org/10.5281/zenodo.19518110) |
 | 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Myeong Jun Jo | Method Paper | [DOI](https://doi.org/10.5281/zenodo.19518129) |
 | 12 | [Pharmacokinetics of Context](Paper_12_Pharmacokinetics_of_Context/) | Myeong Jun Jo | RAG Dose-Response | [DOI](https://doi.org/10.5281/zenodo.19548545) |
+| 13 | [Pharmacodynamics of Context](Paper_13_Pharmacodynamics_of_Context/) | Myeong Jun Jo | Resonance Monopoly | [DOI](https://doi.org/10.5281/zenodo.19555577) |
 
 ## What This Proves
 

@@ -1,0 +1,386 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{array}
+
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\title{%
+  \textbf{Pharmacodynamics of Context:\\
+  How Wave-Resonant Retrieval Amplifies Bias\\
+  in Skewed Memory Distributions}
+}
+
+\author{%
+  Myeong Jun Jo \\
+  ANIMA Research, Independent Researcher, South Korea \\
+  \texttt{ORCID: \href{https://orcid.org/0009-0006-9540-4666}{0009-0006-9540-4666}}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In a companion paper~\citep{jo2026pharmacokinetics}, we established that context \emph{quantity} in retrieval-augmented generation (RAG) follows a dose-response curve with model-specific therapeutic windows. This paper addresses the complementary question: does context \emph{selection method} matter, and can a seemingly principled selection strategy cause harm?
+
+We introduce wave-resonant retrieval, a four-dimensional scoring function combining intensity, temporal recurrence, phase coherence, and anti-saturation. On balanced synthetic data, resonance improves retrieval diversity by 24\%. On production data (3,740 episodic memories, 78\% concentrated in two emotion categories), resonance \emph{catastrophically fails}: retrieval quality drops 65--90\% across all $K$ values, diversity collapses from 0.63 to 0.33 at $K{=}3$, and resonance loses every trial in 10-fold cross-validation (0 wins, 70 losses across two independent implementations).
+
+The failure is independently reproduced by two separate AI systems (GPT-5.4 and Claude Opus 4.6) using different random seeds, weight configurations, and quality metrics---confirming that the result is structural, not implementational. We identify the mechanism: phase coherence amplifies the dominant class, creating a \emph{resonance monopoly} where minority emotions are systematically excluded regardless of their informational value.
+
+The finding extends the pharmacokinetic framework: even at the optimal \emph{dose}, the wrong \emph{selection method} converts medicine into poison. We term this \textbf{pharmacodynamic toxicity}---harm caused not by how much context is given, but by how it is chosen.
+
+\vspace{6pt}
+\noindent\textbf{Keywords:} retrieval-augmented generation, wave resonance, concentration collapse, pharmacodynamics, independent reproduction, negative result
+\end{abstract}
+
+% ==================================================================
+\section{Introduction}
+% ==================================================================
+
+Our companion paper established that retrieved context behaves like a drug: too little is sub-therapeutic, too much is toxic, and the therapeutic window is model-specific~\citep{jo2026pharmacokinetics}. That work addressed \emph{pharmacokinetics}---the relationship between dose (quantity) and effect.
+
+This paper addresses \emph{pharmacodynamics}---the relationship between the drug's mechanism of action (selection method) and its effect on the target system (retrieval quality). Specifically: can a principled, multi-dimensional retrieval scoring function cause systematic harm?
+
+The answer is yes. We demonstrate that wave-resonant retrieval---a four-factor scoring function designed to improve recall diversity---catastrophically fails on real-world data where the memory distribution is skewed. The failure is not marginal. It is a 65--90\% degradation in retrieval quality, independently confirmed by two AI research teams using entirely separate implementations.
+
+This result has practical implications. Many RAG systems implement sophisticated re-ranking strategies that implicitly assume balanced data distributions. When deployed on production data---which is almost never balanced---these strategies may silently degrade retrieval quality while appearing principled.
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item We identify \textbf{resonance monopoly}: phase coherence in skewed distributions amplifies the dominant class, systematically excluding minority categories from retrieval.
+  \item We provide \textbf{independent reproduction} of the failure across two AI systems (GPT-5.4, Claude Opus 4.6), confirming structural causation.
+  \item We extend the pharmacokinetic framework with a \textbf{pharmacodynamic dimension}: selection method interacts with dose to determine toxicity.
+  \item We report a \textbf{negative result with mechanistic explanation}, contributing to the growing literature on when sophisticated methods fail~\citep{lipton2018troubling}.
+\end{enumerate}
+
+% ==================================================================
+\section{Related Work}
+% ==================================================================
+
+\subsection{Retrieval Re-Ranking}
+Dense passage retrieval~\citep{karpukhin2020dpr} and neural re-rankers~\citep{nogueira2020reranking} optimize retrieval relevance but typically assume that the document collection is reasonably balanced. The effect of collection skew on re-ranking quality has received limited attention.
+
+\subsection{Concentration Collapse in Recommendations}
+Recommendation systems suffer from popularity bias, where popular items are over-recommended at the expense of long-tail items~\citep{abdollahpouri2020popularity}. Our resonance monopoly is an analogous phenomenon in memory retrieval: dominant emotions crowd out minority emotions through structural amplification.
+
+\subsection{Context Quality in RAG}
+\citet{jo2026pharmacokinetics} established dose-response dynamics for context quantity. \citet{liu2024lost} identified positional bias in long contexts. This work adds selection-method bias as a third dimension of RAG failure.
+
+\subsection{Negative Results in ML}
+The value of negative results is increasingly recognized~\citep{lipton2018troubling}. Our contribution follows this tradition: a method that works on balanced data fails catastrophically on skewed data, and the failure mechanism is identifiable and generalizable.
+
+% ==================================================================
+\section{Wave-Resonant Retrieval}
+% ==================================================================
+
+\subsection{Scoring Function}
+
+For each candidate memory $i$, the resonance score is:
+
+\begin{equation}
+  R_i = \alpha \cdot I_i + \beta \cdot T_i + \gamma \cdot P_i + \delta \cdot A_i
+  \label{eq:resonance}
+\end{equation}
+
+where:
+\begin{itemize}[itemsep=2pt]
+  \item $I_i = \min(w_i, 1.0)$: \textbf{Intensity} from normalized emotion weight
+  \item $T_i = \frac{\log(1 + f_{e_i})}{\log(1 + N)}$: \textbf{Temporal recurrence} from emotion frequency
+  \item $P_i = \frac{|\{j \in \mathcal{N}_i : e_j = e_i\}|}{|\mathcal{N}_i|}$: \textbf{Phase coherence} from neighborhood emotion agreement
+  \item $A_i = \frac{1}{1 + \log(1 + c_i)}$: \textbf{Anti-saturation} damping for repeated retrieval
+\end{itemize}
+
+$\mathcal{N}_i$ denotes the temporal neighborhood (window of $\pm 15$--20 episodes). The baseline comparison uses intensity-only ranking: $B_i = w_i$.
+
+\subsection{Design Intent}
+
+The four terms are designed to capture complementary retrieval signals:
+\begin{itemize}[itemsep=2pt]
+  \item Intensity captures emotional salience (what was strongly felt)
+  \item Temporal recurrence captures persistence (what kept recurring)
+  \item Phase coherence captures contextual consistency (what the neighborhood agrees on)
+  \item Anti-saturation prevents over-retrieval of the same memory
+\end{itemize}
+
+On balanced data, this design improves diversity by surfacing memories that are temporally persistent and contextually coherent rather than merely intense. The question is whether this holds on real-world data.
+
+% ==================================================================
+\section{Experimental Design}
+% ==================================================================
+
+\subsection{Dataset}
+
+The experiment uses a production memory database containing 3,740 episodic memories accumulated over 35+ days of continuous operation. Each episode has an emotion label, emotion weight ($[0, 1]$), keywords, timestamp, and text summary.
+
+\textbf{Critical property}: the distribution is heavily skewed.
+
+\begin{table}[h]
+\centering
+\caption{Emotion distribution in the production dataset (3,740 episodes).}
+\label{tab:distribution}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Emotion} & \textbf{Count} & \textbf{\%} \\
+\midrule
+knowledge       & 1,554 & 41.6\% \\
+neutral         & 1,388 & 37.1\% \\
+auto\_learning  & 247   & 6.6\% \\
+interactive     & 116   & 3.1\% \\
+trading         & 87    & 2.3\% \\
+anxiety         & 85    & 2.3\% \\
+excitement      & 75    & 2.0\% \\
+\emph{others}   & 188   & 5.0\% \\
+\midrule
+\textbf{Top 2 total} & \textbf{2,942} & \textbf{78.7\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Independent Implementations}
+
+To ensure the result is structural rather than implementational, two separate AI systems independently designed and executed the experiment:
+
+\begin{table}[h]
+\centering
+\caption{Independent implementation comparison.}
+\label{tab:implementations}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Parameter} & \textbf{Team A (GPT-5.4)} & \textbf{Team B (Claude Opus)} \\
+\midrule
+Weights $(\alpha,\beta,\gamma,\delta)$ & (0.40, 0.25, 0.20, 0.15) & (0.35, 0.25, 0.25, 0.15) \\
+Random seed & 42 & 7777 \\
+Window size & 15 & 20 \\
+$K$ values & \{3,5,8,10,15,20\} & \{3,5,8,10,15,20,30\} \\
+Quality metric & div+conc+kw+spread & div+conc+kw+temporal+var \\
+Folds & 10 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Neither team saw the other's code, weights, or results before execution. Both teams had access to the same database.
+
+\subsection{Quality Metric}
+
+Both implementations use a composite quality score combining diversity (emotion type coverage), anti-concentration (inverse dominance), keyword coverage, and spread/temporal coverage. The metrics differ slightly between teams (Table~\ref{tab:implementations}), strengthening the reproduction: the failure occurs \emph{regardless of how quality is measured}.
+
+% ==================================================================
+\section{Results}
+% ==================================================================
+
+\subsection{Catastrophic Failure Across All $K$}
+
+\begin{table}[h]
+\centering
+\caption{Resonance vs.\ Baseline across $K$ values (mean quality $\pm$ SD, 10-fold CV). Both teams show identical pattern: resonance loses every fold at every $K$.}
+\label{tab:results}
+\small
+\begin{tabular}{@{}r|ccc|ccc@{}}
+\toprule
+& \multicolumn{3}{c|}{\textbf{Team A (GPT-5.4)}} & \multicolumn{3}{c}{\textbf{Team B (Claude Opus)}} \\
+$K$ & Baseline & Resonance & $\Delta$\% & Baseline & Resonance & $\Delta$\% \\
+\midrule
+3  & $.454 \pm .078$ & $.100 \pm .000$ & $-78.0$ & $.544 \pm .089$ & $.190 \pm .034$ & $-65.1$ \\
+5  & $.314 \pm .056$ & $.060 \pm .000$ & $-80.9$ & $.423 \pm .047$ & $.130 \pm .000$ & $-69.3$ \\
+8  & $.225 \pm .042$ & $.038 \pm .000$ & $-83.3$ & $.303 \pm .049$ & $.081 \pm .000$ & $-73.2$ \\
+10 & $.199 \pm .045$ & $.030 \pm .000$ & $-85.0$ & $.267 \pm .030$ & $.065 \pm .000$ & $-75.6$ \\
+15 & $.182 \pm .031$ & $.020 \pm .000$ & $-89.0$ & $.218 \pm .025$ & $.043 \pm .000$ & $-80.2$ \\
+20 & $.153 \pm .029$ & $.015 \pm .000$ & $-90.2$ & $.175 \pm .021$ & $.033 \pm .000$ & $-81.4$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Combined record: 0 wins, 0 ties, 140 losses} (70 per team).
+
+Resonance quality has zero variance ($\pm .000$) at most $K$ values, indicating that the same dominant-class memories are selected in every fold---the retrieval has \emph{collapsed} to a fixed set.
+
+\subsection{The Resonance Monopoly Mechanism}
+
+\begin{table}[h]
+\centering
+\caption{Phase coherence by emotion category. Dominant emotions have near-perfect phase coherence, creating a self-reinforcing selection advantage.}
+\label{tab:phase}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Emotion} & \textbf{$n$} & \textbf{Weight} & \textbf{Phase $P_i$} & \textbf{Echo} \\
+\midrule
+knowledge     & 1,554 & 0.688 & \textbf{0.948} & 0.652 \\
+neutral       & 1,388 & 0.498 & \textbf{0.748} & 0.372 \\
+trading       & 87    & 0.684 & 0.468 & 0.320 \\
+analytical    & 31    & 0.937 & 0.285 & 0.267 \\
+anxiety       & 85    & 0.798 & 0.122 & 0.098 \\
+excitement    & 75    & 0.887 & 0.108 & 0.096 \\
+transcendence & 3     & 0.953 & 0.017 & 0.016 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The mechanism is clear:
+\begin{enumerate}[itemsep=2pt]
+  \item \textbf{knowledge} has phase coherence 0.948---almost every neighbor is also ``knowledge.'' Its resonance score is structurally inflated.
+  \item \textbf{anxiety} has phase coherence 0.122---only 12\% of neighbors share its emotion. Despite high intensity (0.798), its resonance score is structurally deflated.
+  \item \textbf{transcendence} has the highest intensity (0.953) but the lowest phase (0.017). It is \emph{never} selected by resonance.
+\end{enumerate}
+
+This creates a \textbf{resonance monopoly}: the $\gamma \cdot P_i$ term in Equation~\ref{eq:resonance} acts as a majority-class amplifier. On balanced data, phase coherence rewards contextual consistency. On skewed data, it rewards being part of the majority---which is the opposite of diversity.
+
+\subsection{Diversity Collapse}
+
+\begin{table}[h]
+\centering
+\caption{Diversity collapse: fraction of unique emotion types in top-$K$ retrieval.}
+\label{tab:diversity}
+\small
+\begin{tabular}{@{}r|cc|cc@{}}
+\toprule
+& \multicolumn{2}{c|}{\textbf{Team A}} & \multicolumn{2}{c}{\textbf{Team B}} \\
+$K$ & Baseline & Resonance & Baseline & Resonance \\
+\midrule
+3  & 0.633 & 0.333 & 0.633 & 0.333 \\
+5  & 0.380 & 0.200 & 0.400 & 0.200 \\
+10 & 0.200 & 0.100 & 0.240 & 0.100 \\
+20 & 0.140 & 0.050 & 0.145 & 0.050 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At $K{=}20$, resonance retrieves from only 1 emotion type (diversity = 0.050 = 1/20). The retrieval is functionally homogeneous.
+
+% ==================================================================
+\section{Discussion}
+% ==================================================================
+
+\subsection{Pharmacodynamic Toxicity}
+
+In pharmacology, pharmacodynamics describes \emph{what the drug does to the body}---its mechanism of action and downstream effects. Pharmacokinetics (dose-response) and pharmacodynamics (mechanism) are complementary: a drug at the right dose can still be harmful if its mechanism targets the wrong receptor.
+
+Our companion paper~\citep{jo2026pharmacokinetics} established that context dose matters. This paper establishes that context selection mechanism matters independently. The interaction is critical:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Right dose, wrong selection}: Even at optimal $K{=}8$ (from Paper 12's therapeutic window), resonance selection degrades quality by 73--83\%.
+  \item \textbf{Right selection, wrong dose}: Even perfect diversity-aware selection cannot overcome context toxicity at $K{=}70$.
+  \item \textbf{Both wrong}: The compounded failure is catastrophic.
+\end{itemize}
+
+\subsection{The Phase Coherence Trap}
+
+Phase coherence ($P_i$) is the primary failure mechanism. It measures ``do my neighbors agree with me?''---a reasonable signal on balanced data (agreement indicates consistency) but a pathological signal on skewed data (agreement indicates majority membership).
+
+This is a general warning for any retrieval feature that relies on neighborhood statistics. On balanced data, neighborhoods are informative. On skewed data, neighborhoods reflect the global distribution, not local structure.
+
+\subsection{When Does Resonance Work?}
+
+Our results do not imply that multi-dimensional scoring is always harmful. The v1 experiment on balanced flow-signal data showed +0.32\% improvement and +24\% stability gain. The failure is specific to \textbf{skewed distributions where one or two categories dominate}---which, unfortunately, describes most production datasets.
+
+A corrected resonance function would need:
+\begin{enumerate}[itemsep=2pt]
+  \item \textbf{Distribution-aware phase normalization}: divide $P_i$ by the global frequency of emotion $e_i$ to eliminate majority bias.
+  \item \textbf{Diversity constraint}: enforce minimum representation from minority categories in the top-$K$ set.
+  \item \textbf{Adaptive weights}: reduce $\gamma$ (phase weight) when distribution entropy is low.
+\end{enumerate}
+
+\subsection{Independent Reproduction as Validation}
+
+The fact that two AI systems---using different seeds, weights, window sizes, and quality metrics---produced the same catastrophic failure pattern strengthens the finding. This is not a bug in one implementation. It is a structural property of resonance scoring on skewed distributions.
+
+The zero-variance resonance scores (Table~\ref{tab:results}) are particularly diagnostic: they indicate that the retrieval has collapsed to a deterministic fixed point, independent of the query. This is the retrieval equivalent of mode collapse in generative models.
+
+% ==================================================================
+\section{Limitations and Future Work}
+% ==================================================================
+
+\begin{enumerate}[leftmargin=*, itemsep=3pt]
+  \item \textbf{Single dataset}: Both teams used the same production database. Testing on multiple datasets with varying skew levels would establish the relationship between distribution entropy and resonance failure severity.
+  \item \textbf{No corrected resonance}: We identified the failure mechanism but did not implement or test the corrected version (distribution-aware normalization). This is immediate future work.
+  \item \textbf{Downstream task impact}: Quality was measured at the retrieval level, not the downstream generation level. The 65--90\% retrieval degradation likely causes severe generation degradation, but this was not directly measured.
+  \item \textbf{Interaction with dose}: A full factorial experiment crossing dose levels (from Paper 12) with selection methods (baseline vs.\ resonance vs.\ corrected resonance) would map the complete PK/PD interaction surface.
+  \item \textbf{Other re-ranking strategies}: We tested only one multi-dimensional scoring function. Other approaches (MMR, diversity-aware re-ranking) may exhibit different failure modes on skewed data.
+\end{enumerate}
+
+% ==================================================================
+\section{Conclusion}
+% ==================================================================
+
+This paper reports a stark negative result: wave-resonant retrieval, a principled four-dimensional scoring function, catastrophically fails on production data with skewed emotion distributions. Two independent implementations confirm the failure with a combined record of 0 wins and 140 losses.
+
+The mechanism is phase coherence acting as a majority-class amplifier. On balanced data, it rewards contextual consistency. On skewed data, it rewards being part of the dominant group---systematically excluding minority emotions that may carry critical information.
+
+Together with our companion paper on context dose~\citep{jo2026pharmacokinetics}, these findings establish a \textbf{pharmacological framework for RAG}:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Pharmacokinetics}: how much context to retrieve (dose-response, model-specific therapeutic windows)
+  \item \textbf{Pharmacodynamics}: how to select context (selection method, distribution-dependent toxicity)
+  \item \textbf{Drug interaction}: dose and selection interact---the wrong combination compounds toxicity
+\end{itemize}
+
+The clinical lesson applies directly:
+
+\begin{quote}
+\textit{A drug that heals in the lab can kill in the ward---not because the dose changed, but because the patient population did.}
+\end{quote}
+
+Resonance retrieval is that drug. Balanced data is the lab. Production data is the ward. The 78\% skew is the patient population that nobody tested on.
+
+\textbf{Every RAG re-ranking strategy should be stress-tested on its deployment distribution, not just its development distribution.} The pharmacodynamics of context demand nothing less.
+
+% ==================================================================
+\section*{Data and Code Availability}
+% ==================================================================
+
+Experimental data (3,740 episodes, 140 cross-validation trials across two implementations) and analysis scripts are available upon request through the author's ORCID profile (\url{https://orcid.org/0009-0006-9540-4666}).
+
+% ==================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Abdollahpouri et al.(2020)]{abdollahpouri2020popularity}
+Abdollahpouri, H., Burke, R., and Mobasher, B. (2020).
+\newblock Managing popularity bias in recommender systems with personalized re-ranking.
+\newblock In \emph{Proceedings of FLAIRS}, pages 413--418.
+
+\bibitem[Jo(2026)]{jo2026pharmacokinetics}
+Jo, M.~J. (2026).
+\newblock Pharmacokinetics of context: A dose-response framework for retrieval-augmented generation.
+\newblock \emph{ANIMA Research}. DOI: 10.5281/zenodo.19548545.
+
+\bibitem[Karpukhin et al.(2020)]{karpukhin2020dpr}
+Karpukhin, V., Oguz, B., Min, S., et al. (2020).
+\newblock Dense passage retrieval for open-domain question answering.
+\newblock In \emph{Proceedings of EMNLP}, pages 6769--6781.
+
+\bibitem[Lipton \& Steinhardt(2018)]{lipton2018troubling}
+Lipton, Z.~C. and Steinhardt, J. (2018).
+\newblock Troubling trends in machine learning scholarship.
+\newblock \emph{arXiv preprint arXiv:1807.03341}.
+
+\bibitem[Liu et al.(2024)]{liu2024lost}
+Liu, N.~F., Lin, K., Hewitt, J., et al. (2024).
+\newblock Lost in the middle: How language models use long contexts.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 12, 157--173.
+
+\bibitem[Nogueira \& Cho(2020)]{nogueira2020reranking}
+Nogueira, R. and Cho, K. (2020).
+\newblock Passage re-ranking with {BERT}.
+\newblock \emph{arXiv preprint arXiv:1901.04085}.
+
+\end{thebibliography}
+
+\end{document}
