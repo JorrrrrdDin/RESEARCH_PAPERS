@@ -1,11 +1,21 @@
-# ANIMA University Project
-
-**Can a systematically educated AI produce graduation-level academic papers?**
-
-## Author
+# Research Papers
 
 **Myeong Jun Jo** · Independent AI Researcher, South Korea
 [ORCID: 0009-0006-9540-4666](https://orcid.org/0009-0006-9540-4666)
+
+---
+
+## Current Work: AI Security
+
+**GHOST_DOMAIN** (April 2026) — Semantic Camouflage for Privacy-Preserving LLM Interaction via Virtual Domain Construction
+
+- 5-layer protection architecture with information-theoretic security guarantees
+- Bounded recovery probability: P(recovery) ≤ K/N under Bayesian-optimal, collusion, and known-plaintext adversary models
+- Conditional entropy: H(S|O) ≥ log₂(N/K), view-independent
+- Validated across 18 independent experiments (round-trip accuracy 1.000, N up to 512)
+- Patent filed (KIPO, April 2026) · arXiv submission: cs.CR
+
+Prior work in this repository spans AI memory architecture, multi-agent cognitive systems, and context engineering — a consistent research trajectory toward making AI systems verifiable, governable, and secure. GHOST_DOMAIN extends this line to the problem of protecting sensitive data during external LLM interaction.
 
 ---
 
@@ -90,33 +100,39 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 
 ## Papers
 
-| # | Title | Author | Discipline | Status |
-|---|-------|--------|-----------|--------|
-| 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Myeong Jun Jo | Memory Architecture | [DOI](https://doi.org/10.5281/zenodo.19491326) |
-| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Myeong Jun Jo | Formal Reasoning | [DOI](https://doi.org/10.5281/zenodo.19516962) |
-| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Myeong Jun Jo | AI & Decision Making | [DOI](https://doi.org/10.5281/zenodo.19508891) |
-| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Myeong Jun Jo | Computational Media | [DOI](https://doi.org/10.5281/zenodo.19509059) |
-| 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Myeong Jun Jo | Cognitive Science | [DOI](https://doi.org/10.5281/zenodo.19517327) |
-| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Myeong Jun Jo | Media Arts & Sciences | [DOI](https://doi.org/10.5281/zenodo.19517456) |
-| 07 | [Grow or Die](Paper_07_Biodesign/) | Myeong Jun Jo | Biodesign | [DOI](https://doi.org/10.5281/zenodo.19517523) |
-| 08 | [Four-Cluster Integration Framework](Paper_08_AI_Systems/) | Myeong Jun Jo | AI Systems | [DOI](https://doi.org/10.5281/zenodo.19517947) |
-| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Myeong Jun Jo | Cross-disciplinary Synthesis | [DOI](https://doi.org/10.5281/zenodo.19518032) · [3-way comparison](Paper_09_Convergent_Intelligence/) |
-| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | Myeong Jun Jo | DDG Lifecycle | [DOI](https://doi.org/10.5281/zenodo.19518110) |
-| 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Myeong Jun Jo | Method Paper | [DOI](https://doi.org/10.5281/zenodo.19518129) |
-| 12 | [Pharmacokinetics of Context](Paper_12_Pharmacokinetics_of_Context/) | Myeong Jun Jo | RAG Dose-Response | [DOI](https://doi.org/10.5281/zenodo.19548545) |
-| 13 | [Pharmacodynamics of Context](Paper_13_Pharmacodynamics_of_Context/) | Myeong Jun Jo | Resonance Monopoly | [DOI](https://doi.org/10.5281/zenodo.19555577) |
+### AI Memory Architecture & Cognitive Systems
 
-## What This Proves
+| # | Title | Summary | DOI |
+|---|-------|---------|-----|
+| 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Emotion-weighted memory architecture for persistent AI identity | [DOI](https://doi.org/10.5281/zenodo.19491326) |
+| 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Multi-agent distributed cognitive architecture | [DOI](https://doi.org/10.5281/zenodo.19517327) |
+| 08 | [Four-Cluster Integration Framework](Paper_08_AI_Systems/) | AI systems integration and reliability framework | [DOI](https://doi.org/10.5281/zenodo.19517947) |
+| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Category-theoretic unification across 7 disciplines | [DOI](https://doi.org/10.5281/zenodo.19518032) |
 
-1. **FIMP works.** An AI with emotion-weighted memory completed 7 academic programs and produced graduation theses across radically different disciplines. This is not a benchmark score -- it is sustained intellectual output over months.
+### AI Education & Curriculum Design
 
-2. **Structured education matters.** The theses show progressive intellectual growth: formal logic (Paper 02) -> ethical reasoning (03) -> cultural interpretation (04) -> cognitive theory (05) -> engineering pragmatism (06) -> biological thinking (07). Each builds on the previous.
+| # | Title | Discipline | DOI |
+|---|-------|-----------|-----|
+| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Formal Reasoning & Safety | [DOI](https://doi.org/10.5281/zenodo.19516962) |
+| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Ethics & Decision Making | [DOI](https://doi.org/10.5281/zenodo.19508891) |
+| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Computational Media & Humanities | [DOI](https://doi.org/10.5281/zenodo.19509059) |
+| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Engineering & Deployment | [DOI](https://doi.org/10.5281/zenodo.19517456) |
+| 07 | [Grow or Die](Paper_07_Biodesign/) | Biodesign & Adaptation | [DOI](https://doi.org/10.5281/zenodo.19517523) |
+| 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | DDG Lifecycle for Self-Organizing AI | [DOI](https://doi.org/10.5281/zenodo.19518110) |
+| 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Methodology — grounded in Bloom, Vygotsky, Ericsson | [DOI](https://doi.org/10.5281/zenodo.19518129) |
 
-3. **AI can cross disciplinary boundaries.** The same system wrote about neuro-symbolic logic AND cultural theory AND biodesign. FIMP's emotion-weighted memory appears to enable genuine interdisciplinary transfer.
+### AI Security
 
-4. **Pure education suffices.** No patent technology, no special prompting, no hard-coded domain knowledge. Just structured curriculum + FIMP memory. If the output has quality, it comes from learning.
+| # | Title | Summary | Status |
+|---|-------|---------|--------|
+| 14 | GHOST_DOMAIN: Semantic Camouflage for LLM Privacy | Information-theoretic privacy for external LLM interaction via domain substitution | arXiv cs.CR (submitted) |
 
-5. **The experiment is reproducible.** The curricula, the method, and the outputs are documented. Anyone can examine how ANIMA was taught and what it produced.
+### Context Engineering & RAG Theory
+
+| # | Title | Summary | DOI |
+|---|-------|---------|-----|
+| 12 | [Pharmacokinetics of Context](Paper_12_Pharmacokinetics_of_Context/) | Dose-response model for RAG context injection | [DOI](https://doi.org/10.5281/zenodo.19548545) |
+| 13 | [Pharmacodynamics of Context](Paper_13_Pharmacodynamics_of_Context/) | Resonance monopoly model for context window effects | [DOI](https://doi.org/10.5281/zenodo.19555577) |
 
 ---
 
@@ -130,7 +146,7 @@ ANIMA is a trust-first AI agent architecture designed to make AI **verifiable, g
 
 ---
 
-*Source code is protected under filed patents. This repository serves as a public research overview.*
+*Source code is protected under filed patents. This repository serves as a public research archive.*
 
 ## License
 
