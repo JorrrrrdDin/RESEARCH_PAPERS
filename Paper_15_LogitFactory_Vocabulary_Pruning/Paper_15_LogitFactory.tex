@@ -1,0 +1,19 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, booktabs, hyperref, url}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\title{\bfseries LogitFactory: Training-Free Vocabulary Pruning\for Large-Language-Model Inference}
+\author{Myeong Jun Jo\\small ANIMA Research, Independent Researcher, South Korea\\small ORCID: \href{https://orcid.org/0009-0006-9540-4666}{0009-0006-9540-4666}}
+\date{}
+\begin{document}\maketitle
+
+\begin{abstract}
+Autoregressive LLM inference multiplies the final hidden state against the entire output embedding matrix at every step, producing a logit vector of size $V$ where over 99.99\% of entries are discarded. LogitFactory is a training-free method that prunes the vocabulary before logit computation using PCA-based cluster alignment and dual-directional filtering. Achieves 96--100\% top-1 accuracy on GPT-2 with 70--99\% FLOP reduction. Two essential implementation choices: dot-product on PCA-clustered centroids in original embedding space (vs cosine, which yields 0\% accuracy), and cluster-first execution order ($9.6\times$ improvement over sample-first). In pure PyTorch, reaches $2.59\times$ wall-clock speedup at $V=500{,}000, d=16{,}384$.
+\end{abstract}
+
+\section*{Note}
+Full paper text available on request. See README.md for results summary, Kaggle link for experimental notebook.
+\end{document}
