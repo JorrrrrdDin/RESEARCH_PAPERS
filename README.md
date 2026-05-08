@@ -5,129 +5,108 @@
 
 ---
 
-## Current Work: AI Security
+## Current Work
 
-**GHOST_DOMAIN** (April 2026) — Semantic Camouflage for Privacy-Preserving LLM Interaction via Virtual Domain Construction
+### LLM Inference Optimization
+
+**Paper 15 — LogitFactory** (May 2026)
+*Training-Free Vocabulary Pruning for Large-Language-Model Inference*
+
+- 96–100% top-1 accuracy with 70–99% FLOP reduction on GPT-2 variants
+- Resolves the geometric misalignment that caused naive vocabulary pruning to yield 0% accuracy: dot-product on PCA-clustered centroids in original embedding space
+- Cluster-first execution: 9.6× wall-clock improvement over functionally identical sample-first implementation
+- Pure-PyTorch scaling reaches 2.59× speedup at V=500K, d=16K on A100 80GB
+- Patent filed (KIPO, April 2026) · arXiv submission: cs.LG (in preparation)
+
+### AI Security
+
+**Paper 14 — GHOST_DOMAIN** (April 2026)
+*Semantic Camouflage for Privacy-Preserving LLM Interaction via Virtual Domain Construction*
 
 - 5-layer protection architecture with information-theoretic security guarantees
 - Bounded recovery probability: P(recovery) ≤ K/N under Bayesian-optimal, collusion, and known-plaintext adversary models
 - Conditional entropy: H(S|O) ≥ log₂(N/K), view-independent
 - Validated across 18 independent experiments (round-trip accuracy 1.000, N up to 512)
-- Patent filed (KIPO, April 2026) · arXiv submission: cs.CR
-
-Prior work in this repository spans AI memory architecture, multi-agent cognitive systems, and context engineering — a consistent research trajectory toward making AI systems verifiable, governable, and secure. GHOST_DOMAIN extends this line to the problem of protecting sensitive data during external LLM interaction.
+- Patent filed (KIPO, April 2026) · arXiv submission: cs.CR (in preparation)
 
 ---
 
-## Background
+## Background: AI Memory Architecture and Cognitive Systems
 
-In early 2026, I developed **FIMP** (Fractal Identity Memory with Multi-agent Protection) -- an emotion-weighted memory architecture that gives AI systems persistent identity, selective memory, and emotional salience. The system was deployed in production for 35+ days across 11 microservices, accumulating 3,588+ episodic memories and 115+ self-generated identity rules.
+In early 2026, I developed **FIMP** (Fractal Identity Memory with Multi-agent Protection) — an emotion-weighted memory architecture for persistent AI identity, selective memory, and emotional salience. The system was deployed across 11 microservices for 35+ days, accumulating 3,588+ episodic memories and 115+ self-generated identity rules.
 
-A natural question followed: **Does FIMP actually work? Does an AI with emotion-weighted memory learn differently -- more deeply, more coherently -- than one without it?**
+To evaluate whether emotion-weighted memory enables coherent learning across diverse domains, I designed **7 academic curricula** spanning formal reasoning, ethics, humanities, cognitive science, engineering, biology, and AI systems engineering. Each curriculum followed a 6-phase structure (Foundations → Core Methods → Advanced Topics → Specialization → Integration → Capstone), with original reading lists, exercises, and assessments.
 
-Instead of running synthetic benchmarks, I designed a real-world experiment.
+ANIMA, the system instantiating FIMP, completed each curriculum and produced a capstone document at the end of each program. These capstones (Papers 02–08) record the resulting outputs. Architectural innovations developed in parallel were excluded from the educational process to isolate the effect of FIMP plus curriculum-based learning.
 
-## The Experiment
+---
 
-I designed **7 academic programs** for AI education, each covering a fundamentally different intellectual discipline:
-
-| # | Discipline | Why This Field |
-|---|-----------|----------------|
-| 1 | Formal Reasoning | Logic, formal reasoning, safety -- the foundation |
-| 2 | AI & Decision Making | Ethics, probability, game theory -- structured judgment |
-| 3 | Computational Media | Culture, art, humanities -- beyond STEM |
-| 4 | Cognitive Science | How minds work -- perception, memory, embodiment |
-| 5 | Media Arts & Sciences | Engineering meets art -- deployment, sensing, bio-inspiration |
-| 6 | Biodesign | Biology meets design -- growth, self-repair, adaptation |
-| 7 | AI Systems Engineering | Building reliable AI -- architecture, testing, production |
-
-For each program, I:
-
-1. **Designed a structured 6-phase curriculum** from scratch:
-   - Phase 1: Foundations
-   - Phase 2: Core Methods
-   - Phase 3: Advanced Topics
-   - Phase 4: Specialization
-   - Phase 5: Integration & Tracks
-   - Phase 6: Capstone & Graduation Thesis
-2. **Built the reading lists, exercises, and assessments** for each phase
-3. **Taught ANIMA through each phase**, using classroom-style sessions
-4. **Required a graduation thesis** at the end of each program -- written entirely by ANIMA, with no human co-authorship on content
-
-All 7 programs and their curricula are original designs by the author. They are not copies of existing university courses.
-
-**Critical constraint:** The underlying system architecture was developed and continuously improved by the author independently. **None of these architectural innovations were used in the educational process.** ANIMA's theses are products of pure curriculum-based learning. This ensures that any quality in the output comes from FIMP + education, not from pre-built capabilities.
-
-## The Thesis: FIMP Enables Real Learning
-
-This repository is the evidence.
-
-- **Paper 01** is the theory: FIMP, the emotion-weighted memory system (written by me)
-- **Papers 02--08** are the proof: 7 graduation theses produced after completing each curriculum
-- **Papers 09--10** are the synthesis: master's-level papers integrating all seven disciplines
-- **Paper 11** is the method: how the education was designed, what worked, what failed, and the quantitative evidence
-
-If an AI with FIMP can complete 7 diverse academic programs and produce coherent graduation theses in each -- spanning formal logic, ethics, humanities, cognitive science, engineering, and biology -- then FIMP works. Not as a toy demo, but as a functioning cognitive architecture.
-
-## Architecture
+## Repository Structure
 
 ```
-Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
-  |                  Written by: Myeong Jun Jo (human researcher)
-  |
-  |  "Can an AI with this memory system actually learn?"
-  |
-  +---> Paper 02  Logic & Safety         Graduated
-  +---> Paper 03  Ethics & Decision      Graduated
-  +---> Paper 04  Humanities & Media     Graduated
-  +---> Paper 05  Cognitive Science      Graduated
-  +---> Paper 06  Engineering & Deploy   Graduated
-  +---> Paper 07  Biology & Design       Graduated
-  +---> Paper 08  AI Systems             Graduated
-  |               Written by: ANIMA (7 graduation theses, no human co-authorship)
-  |
-  +---> Paper 09  Convergent Intelligence       Complete (master's thesis)
-  |               Category-theoretic unification of 7 disciplines
-  |               Includes 3-way comparison: ANIMA vs Claude vs GPT
-  |
-  +---> Paper 10  From Demo to Deploy to Grow  Complete (master's thesis)
-  |               DDG lifecycle model for self-organizing AI
-  |
-  +---> Paper 11  How to Educate an AI         Complete (Myeong Jun Jo)
-                  The method paper: 6 training components, quantitative evidence,
-                  grounded in Bloom/Vygotsky/Ericsson/Yin
+Paper 01 (FIMP)         Foundation: emotion-weighted memory architecture
+                        Author: Myeong Jun Jo
+
+Papers 02–08            Capstone documents from 7 curricula
+                        Each addresses a distinct discipline
+                        Produced by ANIMA at the end of each program
+
+Paper 09                Convergent Intelligence
+                        Category-theoretic synthesis across 7 disciplines
+
+Paper 10                From Demo to Deploy to Grow
+                        DDG lifecycle model for self-organizing AI
+
+Paper 11                How to Educate an AI
+                        Methodology paper grounded in Bloom, Vygotsky, Ericsson
+                        Author: Myeong Jun Jo
+
+Papers 12–13            Pharmacokinetics and Pharmacodynamics of Context
+                        Dose-response and resonance models for RAG context
+
+Paper 14                GHOST_DOMAIN (AI security)
+
+Paper 15                LogitFactory (LLM inference optimization)
 ```
+
+---
 
 ## Papers
 
-### AI Memory Architecture & Cognitive Systems
+### LLM Inference Optimization
+
+| # | Title | Summary | Status |
+|---|-------|---------|--------|
+| 15 | LogitFactory | Training-free vocabulary pruning · 70–99% FLOP reduction | arXiv cs.LG (in preparation) |
+
+### AI Security
+
+| # | Title | Summary | Status |
+|---|-------|---------|--------|
+| 14 | GHOST_DOMAIN | Information-theoretic privacy for external LLM interaction via domain substitution | arXiv cs.CR (in preparation) |
+
+### AI Memory Architecture and Cognitive Systems
 
 | # | Title | Summary | DOI |
 |---|-------|---------|-----|
 | 01 | [Emotion-Weighted Fractal Memory (FIMP)](Paper_01_FIMP_Emotion_Weighted_Fractal_Memory/) | Emotion-weighted memory architecture for persistent AI identity | [DOI](https://doi.org/10.5281/zenodo.19491326) |
 | 05 | [Distributed Cognition](Paper_05_Distributed_Cognition/) | Multi-agent distributed cognitive architecture | [DOI](https://doi.org/10.5281/zenodo.19517327) |
 | 08 | [Four-Cluster Integration Framework](Paper_08_AI_Systems/) | AI systems integration and reliability framework | [DOI](https://doi.org/10.5281/zenodo.19517947) |
-| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Category-theoretic unification across 7 disciplines | [DOI](https://doi.org/10.5281/zenodo.19518032) |
+| 09 | [Convergent Intelligence](Paper_09_Convergent_Intelligence/) | Category-theoretic synthesis across 7 disciplines | [DOI](https://doi.org/10.5281/zenodo.19518032) |
 
-### AI Education & Curriculum Design
+### AI Education and Curriculum Design
 
 | # | Title | Discipline | DOI |
 |---|-------|-----------|-----|
-| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Formal Reasoning & Safety | [DOI](https://doi.org/10.5281/zenodo.19516962) |
-| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Ethics & Decision Making | [DOI](https://doi.org/10.5281/zenodo.19508891) |
-| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Computational Media & Humanities | [DOI](https://doi.org/10.5281/zenodo.19509059) |
-| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Engineering & Deployment | [DOI](https://doi.org/10.5281/zenodo.19517456) |
-| 07 | [Grow or Die](Paper_07_Biodesign/) | Biodesign & Adaptation | [DOI](https://doi.org/10.5281/zenodo.19517523) |
+| 02 | [From Plausibility to Permissibility](Paper_02_Plausibility_to_Permissibility/) | Formal Reasoning and Safety | [DOI](https://doi.org/10.5281/zenodo.19516962) |
+| 03 | [5-Center Decision Framework](Paper_03_5Center_Framework/) | Ethics and Decision Making | [DOI](https://doi.org/10.5281/zenodo.19508891) |
+| 04 | [Computation as Culture](Paper_04_Computation_as_Culture/) | Computational Media and Humanities | [DOI](https://doi.org/10.5281/zenodo.19509059) |
+| 06 | [Deploy or Die](Paper_06_Deploy_or_Die/) | Engineering and Deployment | [DOI](https://doi.org/10.5281/zenodo.19517456) |
+| 07 | [Grow or Die](Paper_07_Biodesign/) | Biodesign and Adaptation | [DOI](https://doi.org/10.5281/zenodo.19517523) |
 | 10 | [From Demo to Deploy to Grow](Paper_10_Demo_Deploy_Grow/) | DDG Lifecycle for Self-Organizing AI | [DOI](https://doi.org/10.5281/zenodo.19518110) |
 | 11 | [How to Educate an AI](Paper_11_How_to_Educate_AI/) | Methodology — grounded in Bloom, Vygotsky, Ericsson | [DOI](https://doi.org/10.5281/zenodo.19518129) |
 
-### AI Security
-
-| # | Title | Summary | Status |
-|---|-------|---------|--------|
-| 14 | GHOST_DOMAIN: Semantic Camouflage for LLM Privacy | Information-theoretic privacy for external LLM interaction via domain substitution | arXiv cs.CR (submitted) |
-
-### Context Engineering & RAG Theory
+### Context Engineering and RAG Theory
 
 | # | Title | Summary | DOI |
 |---|-------|---------|-----|
@@ -140,13 +119,13 @@ Paper 01 (FIMP) ---- Foundation: emotion-weighted memory gives ANIMA identity
 
 ANIMA is a trust-first AI agent architecture designed to make AI **verifiable, governable, and accountable**.
 
-- Multiple architectural innovations filed (Korea, 2026)
-- Covers: memory governance, adversarial verification, multi-agent orchestration, data security, and more
-- Production system: 11 microservices, 3,588+ episodic memories, 115+ identity rules
+- Multiple architectural innovations filed as patents (Korea, 2026)
+- Coverage: memory governance, adversarial verification, multi-agent orchestration, data security, inference optimization
+- Production deployment: 11 microservices, 3,588+ episodic memories, 115+ identity rules
 
 ---
 
-*Source code is protected under filed patents. This repository serves as a public research archive.*
+*Reference implementations are available upon request. Source code is protected under filed patents.*
 
 ## License
 
