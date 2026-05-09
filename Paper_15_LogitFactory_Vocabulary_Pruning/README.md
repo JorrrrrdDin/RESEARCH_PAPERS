@@ -1,5 +1,7 @@
 # Paper 15 — LogitFactory: Training-Free Vocabulary Pruning for LLM Inference
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20098005.svg)](https://doi.org/10.5281/zenodo.20098005)
+
 **Author:** Myeong Jun Jo · [ORCID: 0009-0006-9540-4666](https://orcid.org/0009-0006-9540-4666)
 
 > Companion to the FIMP framework (Paper 01 onwards). This paper addresses the **logit computation bottleneck** at the LLM's final layer — the single largest discarded computation in modern inference.

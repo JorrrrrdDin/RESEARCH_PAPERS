@@ -16,7 +16,7 @@
 - Resolves the geometric misalignment that caused naive vocabulary pruning to yield 0% accuracy: dot-product on PCA-clustered centroids in original embedding space
 - Cluster-first execution: 9.6× wall-clock improvement over functionally identical sample-first implementation
 - Pure-PyTorch scaling reaches 2.59× speedup at V=500K, d=16K on A100 80GB
-- Patent filed (KIPO, April 2026) · arXiv submission: cs.LG (in preparation)
+- Patent filed (KIPO, April 2026) · [DOI: 10.5281/zenodo.20098005](https://doi.org/10.5281/zenodo.20098005) · arXiv submission: cs.LG (in preparation)
 
 ### AI Security
 
