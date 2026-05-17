@@ -13,7 +13,7 @@
 *Local Execution of Large MoE Models on Consumer 8GB VRAM Devices*
 
 - Public technical note + Rotary GPU demo binary
-- User supplies the validation model file; model weights are not redistributed
+- User supplies the validation model file; Rotary GPU is not a model and model weights are not redistributed
 - 10/10 short smoke-set pass rate in the tested 8GB VRAM laptop environment
 - Thinking on/off user modes and local benchmark command
 - Patent-related public validation package; internal implementation details are not disclosed

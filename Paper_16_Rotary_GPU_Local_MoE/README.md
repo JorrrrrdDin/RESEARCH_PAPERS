@@ -2,14 +2,15 @@
 
 **Local Execution of Large MoE Models on Consumer 8GB VRAM Devices**
 
-This folder provides a public demonstration package for **Rotary GPU**, a local
-execution approach for running large MoE language models on consumer
-laptop-class machines.
+**Rotary GPU is not a model.** It is a local execution demonstration for
+bringing large MoE models closer to ordinary machines. This folder provides a
+public validation package for running a large MoE language model on a consumer
+laptop-class machine.
 
-The included validation target is a user-supplied Qwen 3.6-class 35B-A3B MoE
-GGUF model. The model weights are **not** included. To use this demo, download
-the model yourself from an official or permitted source, then provide the local
-model path during setup.
+The included demo uses a user-supplied Qwen 3.6-class 35B-A3B MoE GGUF model
+as one validation target. The model weights are **not** included. To use this
+demo, download the validation model yourself from an official or permitted
+source, then provide the local model path during setup.
 
 ## Contents
 
@@ -48,7 +49,7 @@ implementation details are not disclosed in this public release.
 - NVIDIA RTX-class GPU with 8GB VRAM or compatible
 - About 32GB system RAM recommended
 - About 20GB free disk space for the model file
-- A Qwen 3.6-class GGUF model file obtained by you
+- A compatible GGUF validation model file obtained by you
 - A local OpenAI-compatible inference server binary available on `PATH` or via
   `LLAMA_SERVER_PATH`
 
@@ -56,7 +57,9 @@ implementation details are not disclosed in this public release.
 
 ### 1. Prepare the model
 
-Download a Qwen 3.6-class GGUF model from an official or permitted source.
+Download a compatible GGUF validation model from an official or permitted
+source. The tested validation target was a Qwen 3.6-class 35B-A3B MoE GGUF
+model.
 
 Example local path:
 
@@ -65,6 +68,10 @@ D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf
 ```
 
 ### 2. Setup
+
+Prepare a local OpenAI-compatible inference server binary such as
+`llama-server.exe`. Put it on `PATH`, or set `LLAMA_SERVER_PATH` to its full
+path before running the demo.
 
 Run setup once:
 
