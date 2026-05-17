@@ -9,6 +9,15 @@
 
 ### LLM Inference Optimization
 
+**Paper 16 — Qwen 3.6 Laptop Demo** (May 2026)
+*Local Execution of a 35B-A3B MoE Model on an 8GB VRAM Consumer Laptop*
+
+- Public technical note + Qwen Accelerator demo binary
+- User supplies the Qwen 3.6-class GGUF model file; model weights are not redistributed
+- 10/10 short smoke-set pass rate in the tested 8GB VRAM laptop environment
+- Thinking on/off user modes and local benchmark command
+- Patent-related public validation package; internal implementation details are not disclosed
+
 **Paper 15 — LogitFactory** (May 2026)
 *Training-Free Vocabulary Pruning for Large-Language-Model Inference*
 
@@ -67,6 +76,8 @@ Papers 12–13            Pharmacokinetics and Pharmacodynamics of Context
 Paper 14                GHOST_DOMAIN (AI security)
 
 Paper 15                LogitFactory (LLM inference optimization)
+
+Paper 16                Qwen 3.6 Laptop Demo (technical note + accelerator)
 ```
 
 ---
@@ -77,6 +88,7 @@ Paper 15                LogitFactory (LLM inference optimization)
 
 | # | Title | Summary | Status |
 |---|-------|---------|--------|
+| 16 | [Qwen 3.6 Laptop Demo](Paper_16_Qwen36_Laptop_Demo/) | Public technical note + accelerator demo for user-supplied 35B-A3B MoE local execution | public validation package |
 | 15 | LogitFactory | Training-free vocabulary pruning · 70–99% FLOP reduction | arXiv cs.LG (in preparation) |
 
 ### AI Security
