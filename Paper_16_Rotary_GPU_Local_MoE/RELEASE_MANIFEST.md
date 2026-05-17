@@ -19,6 +19,7 @@
 |---|---|
 | `anima-run.exe` | the CLI binary |
 | `README.md` | how to install and use |
+| `README_KOR.md` | Korean usage guide |
 | `EXECUTIVE_SUMMARY.md` | one-page outcome summary |
 | `LIMITATIONS.md` | honest boundaries |
 | `Paper_16_Rotary_GPU_Local_MoE.tex` | technical note (LaTeX source) |

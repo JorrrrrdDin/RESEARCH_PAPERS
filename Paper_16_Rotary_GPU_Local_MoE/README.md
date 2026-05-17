@@ -18,6 +18,7 @@ source, then provide the local model path during setup.
 |---|---|
 | `Paper_16_Rotary_GPU_Local_MoE.tex` | Technical note source |
 | `anima-run.exe` | Rotary GPU demo CLI binary |
+| `README_KOR.md` | Korean usage guide |
 | `EXECUTIVE_SUMMARY.md` | Short public summary |
 | `LIMITATIONS.md` | Honest boundaries and hardware caveats |
 | `RELEASE_MANIFEST.md` | Release contents and excluded files |
