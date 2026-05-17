@@ -22,9 +22,10 @@
 | `EXECUTIVE_SUMMARY.md` | one-page outcome summary |
 | `LIMITATIONS.md` | honest boundaries |
 | `Paper_16_Rotary_GPU_Local_MoE.tex` | technical note (LaTeX source) |
-| `Paper_16_Rotary_GPU_Local_MoE.pdf` | technical note PDF (present only if the build host had a LaTeX toolchain) |
 | `RELEASE_MANIFEST.md` | this file |
 | `CHECKSUMS.txt` | SHA-256 of every release file (except itself) |
+
+Optional PDF output may be added later if a LaTeX toolchain is available.
 
 ## Files explicitly NOT included
 
