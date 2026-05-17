@@ -1,0 +1,211 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\title{Local Execution of a 35B-A3B MoE Model on an 8GB VRAM Consumer Laptop}
+\author{Myeong Jun Jo}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This technical note reports a small validation of local inference for a user-supplied 35B-A3B-class large language model on a consumer laptop equipped with an 8GB VRAM GPU. The model weights are not included in this work. The user supplies the model file, and the demonstration tool provides a minimal interface for setup, prompting, thinking-mode selection, and benchmarking.
+
+In a short 10-item smoke set, the system achieved 10/10 successful responses. For external reporting, the conservative throughput statement is 20 tokens/s or higher. In a separate warm-state timing measurement, decode-only throughput above 30 tokens/s was observed. This note reports the externally visible result and validation flow only. Internal implementation details, configuration choices, execution procedure, and protection measures are outside the public scope of this document.
+\end{abstract}
+
+\section{Introduction}
+
+Since GPT-2, the progress of language models has followed a powerful direction: larger datasets, larger models, and larger infrastructure tend to produce stronger capabilities. I do not reject that direction. It has produced much of what makes modern language models useful.
+
+But I think another question is now necessary. Once models have become large, how can they be brought closer to ordinary devices, smaller machines, and more people?
+
+The usual way of thinking about large-model execution sometimes feels like trying to deliver an entire warehouse. If one item is needed, the whole warehouse is moved. I do not believe that this should remain the only imagination for the future. If the needed part can arrive like a motorcycle courier, at the right time and in the right amount, then large models can live much closer to the user.
+
+This note is a small validation of that possibility. It is not a claim that the problem is solved. I believe better methods will be found. Still, someone has to ask the question on a real device: must a large model always remain inside a large machine?
+
+\section{Motivation}
+
+Clouds and data centers will remain important. The point of this work is not to deny them. The point is that not every model should be imagined as living only there. Some models should be able to move closer to the user, using smaller resources, when the task allows it.
+
+Large models are a useful place to ask this question. Their total size can be far beyond what a small device appears to hold comfortably. Yet what the user needs at any given moment is not always the same as the whole. This suggests a different engineering attitude: instead of asking only how to make the warehouse larger, we can also ask how to move only what is needed.
+
+The practical question of this note is simple: can a 35B-A3B-class model respond locally on an 8GB VRAM consumer laptop? The answer observed here is yes, under the tested conditions.
+
+\section{Relation to Filed Patent Direction}
+
+This note is a public validation document related to an already filed intellectual-property direction by the author. It is not a disclosure of the detailed method, internal execution procedure, or implementation choices.
+
+The broad direction of the filing concerns the possibility of making large models usable under limited local device resources. This demonstration is one public validation example in that direction.
+
+This document should not be read as a full implementation disclosure of the filed claims. It reports only externally observable behavior and user-level validation.
+
+\section{Experimental Goal}
+
+The goals of this validation are:
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Run a user-supplied 35B-A3B-class model locally.
+  \item Confirm response generation on a consumer laptop GPU with 8GB VRAM.
+  \item Verify basic behavior on a short smoke set.
+  \item Provide both ordinary response mode and thinking mode.
+  \item Avoid redistribution of model weights.
+\end{enumerate}
+
+\section{Public Demonstration Design}
+
+The public demonstration is designed around a minimal user-facing flow rather than a disclosure of the internal method.
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item The user prepares the model file separately.
+  \item The user runs a setup command with the model path.
+  \item The user sends a short prompt in ordinary response mode.
+  \item The user sends a longer prompt in thinking mode.
+  \item The user runs a benchmark command to check the smoke set.
+\end{enumerate}
+
+The public interface exposes only:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item model path selection,
+  \item prompting,
+  \item thinking on/off selection,
+  \item benchmarking.
+\end{itemize}
+
+Internal details and execution procedures are not part of the public interface.
+
+\section{Experimental Environment}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+Item & Description \\
+\midrule
+Device & Consumer laptop \\
+GPU & Laptop GPU with 8GB VRAM class \\
+Model & User-supplied 35B-A3B-class large language model \\
+Execution & Local inference \\
+Model distribution & Not included \\
+Evaluation & 10-item smoke set \\
+\bottomrule
+\end{tabular}
+\caption{Validation environment}
+\end{table}
+
+This note reports reproducible external observations while omitting internal settings and implementation details.
+
+\section{Results}
+
+\subsection{Correctness}
+
+The short 10-item smoke set produced the following result.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+Metric & Result \\
+\midrule
+Total items & 10 \\
+Passed items & 10 \\
+Pass rate & 1.0 \\
+Termination & All completed normally \\
+Response channel & Final response channel for all items \\
+\bottomrule
+\end{tabular}
+\caption{Smoke-set result}
+\end{table}
+
+The actual answer text is not included in this public note.
+
+\subsection{Throughput}
+
+Throughput is reported in two ways.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Statement & Meaning & Observation \\
+\midrule
+Conservative public statement & Stable external reporting & 20 tokens/s or higher \\
+Warm timing observation & Decode-only warm-state measurement & Above 30 tokens/s observed \\
+\bottomrule
+\end{tabular}
+\caption{Throughput reporting}
+\end{table}
+
+The conservative statement is the recommended external figure. The warm timing observation measures the generation phase after the model is already ready, and should not be treated as identical to full user-perceived latency.
+
+\section{Thinking Mode}
+
+The public demonstration provides two response modes.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+Mode & Purpose \\
+\midrule
+Ordinary response mode & Short, stable responses \\
+Thinking mode & Longer reasoning-style responses \\
+\bottomrule
+\end{tabular}
+\caption{Public response modes}
+\end{table}
+
+Ordinary response mode is suited for short prompts and benchmarking. Thinking mode is provided for users who want to observe longer reasoning-style behavior. This document does not describe the internal implementation of either mode.
+
+\section{Significance}
+
+This validation is meaningful for five reasons.
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item It shows local execution of a large model on a consumer laptop.
+  \item It does not require redistribution of model weights.
+  \item It confirms 10/10 success on a short smoke set in the tested environment.
+  \item It exposes both ordinary response and thinking modes as user choices.
+  \item It demonstrates a local path that does not depend on cloud inference.
+\end{enumerate}
+
+The result is not meant to embarrass any model provider or reject existing infrastructure. It is closer to a proposal: large models already exist, and we should keep searching for ways to make them usable in more places.
+
+\section{Limitations}
+
+This validation has important limitations.
+
+\begin{itemize}[leftmargin=1.5em]
+  \item It was performed on a single laptop environment.
+  \item The smoke set contains only 10 short items.
+  \item Long-duration load, multi-turn dialogue, and harder reasoning benchmarks require separate validation.
+  \item Initial preparation time and ready-state throughput should be treated separately.
+  \item Independent reproduction on other 8GB GPUs and other operating systems remains future work.
+  \item This public note does not disclose internal implementation details or execution procedures.
+\end{itemize}
+
+\section{Conclusion}
+
+This note reports a small validation that a user-supplied 35B-A3B-class model can run locally on an 8GB VRAM consumer laptop under the tested conditions. The 10-item smoke set achieved 10/10 successful responses, and the conservative external throughput statement is 20 tokens/s or higher.
+
+This does not end the problem. Other devices, longer conversations, and harder benchmarks still need to be tested. Better approaches will almost certainly appear.
+
+But one thing was confirmed: large models do not have to be imagined only inside clouds and large GPUs. With the right preparation, they can respond locally even on a limited laptop environment.
+
+Engineering becomes real only after someone imagines it first. This note is a record of one such imagination tested on a small machine.
+
+\end{document}
