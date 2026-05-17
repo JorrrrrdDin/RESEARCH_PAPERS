@@ -13,7 +13,7 @@
   citecolor=black
 }
 
-\title{Local Execution of a 35B-A3B MoE Model on an 8GB VRAM Consumer Laptop}
+\title{Rotary GPU: Local Execution of Large MoE Models on Consumer 8GB VRAM Devices}
 \author{Myeong Jun Jo}
 \date{May 2026}
 
@@ -22,7 +22,7 @@
 \maketitle
 
 \begin{abstract}
-This technical note reports a small validation of local inference for a user-supplied 35B-A3B-class large language model on a consumer laptop equipped with an 8GB VRAM GPU. The model weights are not included in this work. The user supplies the model file, and the demonstration tool provides a minimal interface for setup, prompting, thinking-mode selection, and benchmarking.
+This technical note reports a small validation of Rotary GPU, a local execution approach for large MoE language models on consumer devices. The validation target is a user-supplied 35B-A3B-class model on a consumer laptop equipped with an 8GB VRAM GPU. The model weights are not included in this work. The user supplies the model file, and the demonstration tool provides a minimal interface for setup, prompting, thinking-mode selection, and benchmarking.
 
 In a short 10-item smoke set, the system achieved 10/10 successful responses. For external reporting, the conservative throughput statement is 20 tokens/s or higher. In a separate warm-state timing measurement, decode-only throughput above 30 tokens/s was observed. This note reports the externally visible result and validation flow only. Internal implementation details, configuration choices, execution procedure, and protection measures are outside the public scope of this document.
 \end{abstract}
@@ -43,7 +43,7 @@ Clouds and data centers will remain important. The point of this work is not to 
 
 Large models are a useful place to ask this question. Their total size can be far beyond what a small device appears to hold comfortably. Yet what the user needs at any given moment is not always the same as the whole. This suggests a different engineering attitude: instead of asking only how to make the warehouse larger, we can also ask how to move only what is needed.
 
-The practical question of this note is simple: can a 35B-A3B-class model respond locally on an 8GB VRAM consumer laptop? The answer observed here is yes, under the tested conditions.
+The practical question of this note is simple: can a large 35B-A3B-class MoE model respond locally on an 8GB VRAM consumer laptop? The answer observed here is yes, under the tested conditions.
 
 \section{Relation to Filed Patent Direction}
 
@@ -200,7 +200,7 @@ This validation has important limitations.
 
 \section{Conclusion}
 
-This note reports a small validation that a user-supplied 35B-A3B-class model can run locally on an 8GB VRAM consumer laptop under the tested conditions. The 10-item smoke set achieved 10/10 successful responses, and the conservative external throughput statement is 20 tokens/s or higher.
+This note reports a small validation that Rotary GPU can run a user-supplied 35B-A3B-class MoE model locally on an 8GB VRAM consumer laptop under the tested conditions. The 10-item smoke set achieved 10/10 successful responses, and the conservative external throughput statement is 20 tokens/s or higher.
 
 This does not end the problem. Other devices, longer conversations, and harder benchmarks still need to be tested. Better approaches will almost certainly appear.
 

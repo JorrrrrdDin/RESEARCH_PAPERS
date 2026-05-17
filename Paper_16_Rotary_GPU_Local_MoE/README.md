@@ -1,20 +1,22 @@
-# Paper 16 — Qwen 3.6 Laptop Demo
+# Paper 16 — Rotary GPU
 
-**Local Execution of a 35B-A3B MoE Model on an 8GB VRAM Consumer Laptop**
+**Local Execution of Large MoE Models on Consumer 8GB VRAM Devices**
 
-This folder provides a public demonstration package for running a user-supplied
-Qwen 3.6-class 35B-A3B MoE model on a consumer laptop-class machine.
+This folder provides a public demonstration package for **Rotary GPU**, a local
+execution approach for running large MoE language models on consumer
+laptop-class machines.
 
-The model weights are **not** included. To use this demo, download the model
-yourself from an official or permitted source, then provide the local model path
-during setup.
+The included validation target is a user-supplied Qwen 3.6-class 35B-A3B MoE
+GGUF model. The model weights are **not** included. To use this demo, download
+the model yourself from an official or permitted source, then provide the local
+model path during setup.
 
 ## Contents
 
 | File | Purpose |
 |---|---|
-| `Paper_16_Qwen36_Laptop_Demo.tex` | Technical note source |
-| `anima-run.exe` | Qwen Accelerator CLI binary |
+| `Paper_16_Rotary_GPU_Local_MoE.tex` | Technical note source |
+| `anima-run.exe` | Rotary GPU demo CLI binary |
 | `EXECUTIVE_SUMMARY.md` | Short public summary |
 | `LIMITATIONS.md` | Honest boundaries and hardware caveats |
 | `RELEASE_MANIFEST.md` | Release contents and excluded files |
@@ -22,7 +24,8 @@ during setup.
 
 ## What This Demonstrates
 
-- User-supplied Qwen 3.6-class 35B-A3B MoE model
+- Rotary GPU local execution concept
+- User-supplied Qwen 3.6-class 35B-A3B MoE model as one validation target
 - Local execution on an 8GB VRAM consumer laptop-class GPU
 - Thinking on/off user modes
 - 10/10 pass rate on the internal short smoke set in the tested environment
@@ -31,10 +34,10 @@ during setup.
 
 This is a validation package, not a model redistribution.
 
-## Qwen Accelerator and QwenGhostDomain Runtime
+## Rotary GPU Demo Runtime
 
-The public package contains the Qwen Accelerator CLI (`anima-run.exe`) and its
-QwenGhostDomain runtime component.
+The public package contains the Rotary GPU demo CLI (`anima-run.exe`) and its
+packaged runtime component.
 
 The runtime component is included as part of the executable package. Internal
 implementation details are not disclosed in this public release.

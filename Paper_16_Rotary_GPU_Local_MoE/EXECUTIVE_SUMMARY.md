@@ -1,16 +1,16 @@
-# Executive Summary — Qwen Accelerator (public)
+# Executive Summary — Rotary GPU (public)
 
 > One-page, public-safe summary of what the binary does and what it does not.
 
 ## What this is
 
-A local-execution accelerator that lets a user run a **35-billion-parameter MoE language model (Qwen3.6 35B-A3B)** on a **single 8 GB VRAM consumer laptop GPU (RTX 4060 Laptop)** while running the entire serving stack on-device. No external license server. No cloud inference. The user supplies their own model weights from the official upstream; the accelerator does not redistribute them.
+Rotary GPU is a local-execution approach that lets a user run a **35-billion-parameter MoE language model** on a **single 8 GB VRAM consumer laptop GPU (RTX 4060 Laptop)** while running the entire serving stack on-device. No external license server. No cloud inference. In this public validation, the demonstration target is a user-supplied Qwen 3.6-class 35B-A3B GGUF model. The accelerator does not redistribute model weights.
 
 ## What we proved (local-only, locally measured)
 
 | Claim | Observed |
 |---|---|
-| User-supplied 35B/3B-active MoE model loads on 8 GB consumer GPU | ✅ |
+| User-supplied 35B/3B-active MoE validation model loads on 8 GB consumer GPU | ✅ |
 | 10/10 smoke prompts answered correctly (multi-category, multi-language) | ✅ |
 | Decode throughput observed under warm reuse (decode-only timing) | **33–34 tokens/sec** (3-run mean, variance < 4%) |
 | Conservative external claim retained | **20+ t/s** (matches earlier F-EXP-A5 evidence 22.7 t/s mean N=2) |
@@ -36,9 +36,9 @@ See [LIMITATIONS.md](LIMITATIONS.md).
 
 ## Distribution status
 
-No public upload. Any external citation should treat the numbers above as observed-once-locally; broader claims require additional independent reproduction.
+Public validation package for Paper 16. Any external citation should treat the numbers above as observed-once-locally; broader claims require additional independent reproduction.
 
 ---
 
 **Prepared:** 2026-05-17
-**Push status:** NOT PUSHED
+**Status:** public validation package

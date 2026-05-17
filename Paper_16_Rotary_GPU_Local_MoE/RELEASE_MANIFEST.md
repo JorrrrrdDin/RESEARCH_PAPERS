@@ -1,4 +1,4 @@
-# Release Manifest — Qwen Accelerator (public release candidate)
+# Release Manifest — Rotary GPU (public release package)
 
 > Single source of truth for what this release folder contains and what
 > it deliberately does **not** contain.
@@ -7,8 +7,8 @@
 
 | Field | Value |
 |---|---|
-| Product name | Qwen Accelerator |
-| Runtime / package name | QwenGhostDomain runtime |
+| Product name | Rotary GPU |
+| Runtime / package name | Rotary GPU demo runtime |
 | Release date | 2026-05-17 |
 | Target platform | Windows 11, NVIDIA 8 GB VRAM-class GPU |
 | Publication status | Prepared for GitHub release |
@@ -21,8 +21,8 @@
 | `README.md` | how to install and use |
 | `EXECUTIVE_SUMMARY.md` | one-page outcome summary |
 | `LIMITATIONS.md` | honest boundaries |
-| `Paper_16_Qwen36_Laptop_Demo.tex` | technical note (LaTeX source) |
-| `Paper_16_Qwen36_Laptop_Demo.pdf` | technical note PDF (present only if the build host had a LaTeX toolchain) |
+| `Paper_16_Rotary_GPU_Local_MoE.tex` | technical note (LaTeX source) |
+| `Paper_16_Rotary_GPU_Local_MoE.pdf` | technical note PDF (present only if the build host had a LaTeX toolchain) |
 | `RELEASE_MANIFEST.md` | this file |
 | `CHECKSUMS.txt` | SHA-256 of every release file (except itself) |
 
