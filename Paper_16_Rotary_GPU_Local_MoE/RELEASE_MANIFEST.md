@@ -22,7 +22,9 @@
 | `README_KOR.md` | Korean usage guide |
 | `EXECUTIVE_SUMMARY.md` | one-page outcome summary |
 | `LIMITATIONS.md` | honest boundaries |
+| `README_CN.md` | Chinese usage guide |
 | `Paper_16_Rotary_GPU_Local_MoE.tex` | technical note (LaTeX source) |
+| `KIPO_10-2026-0070380.pdf` | KIPO published patent gazette (reference) |
 | `RELEASE_MANIFEST.md` | this file |
 | `CHECKSUMS.txt` | SHA-256 of every release file (except itself) |
 
