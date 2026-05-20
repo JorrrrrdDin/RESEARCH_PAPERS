@@ -67,7 +67,7 @@ model.
 Example local path:
 
 ```text
-D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf
+D:\models\Qwen3.6-35B-A3B.gguf
 ```
 
 ### 2. Setup
@@ -79,7 +79,7 @@ path before running the demo.
 Run setup once:
 
 ```powershell
-.\anima-run.exe --setup --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf"
+.\anima-run.exe --setup --model "D:\models\Qwen3.6-35B-A3B.gguf"
 ```
 
 Setup prepares local runtime data for your machine. Model weights are not copied
@@ -88,19 +88,19 @@ or redistributed by this repository.
 ### 3. Run a prompt
 
 ```powershell
-.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf" --prompt "Hello" --thinking off
+.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B.gguf" --prompt "Hello" --thinking off
 ```
 
 ### 4. Run with thinking mode
 
 ```powershell
-.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf" --prompt "Think through this problem." --thinking on
+.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B.gguf" --prompt "Think through this problem." --thinking on
 ```
 
 ### 5. Run the benchmark
 
 ```powershell
-.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf" --bench
+.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B.gguf" --bench
 ```
 
 Expected successful benchmark shape:
