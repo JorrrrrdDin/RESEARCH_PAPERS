@@ -59,7 +59,7 @@
 本地路径示例:
 
 ```text
-D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf
+D:\models\Qwen3.6-35B-A3B.gguf
 ```
 
 ### 2. 设置
@@ -69,7 +69,7 @@ D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf
 运行一次设置:
 
 ```powershell
-.\anima-run.exe --setup --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf"
+.\anima-run.exe --setup --model "D:\models\Qwen3.6-35B-A3B.gguf"
 ```
 
 设置为您的机器准备本地运行时数据。**模型权重不会被本仓库复制或再分发**。
@@ -77,19 +77,19 @@ D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf
 ### 3. 运行 prompt
 
 ```powershell
-.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf" --prompt "你好" --thinking off
+.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B.gguf" --prompt "你好" --thinking off
 ```
 
 ### 4. 使用 thinking 模式运行
 
 ```powershell
-.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf" --prompt "请逐步思考这个问题。" --thinking on
+.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B.gguf" --prompt "请逐步思考这个问题。" --thinking on
 ```
 
 ### 5. 运行基准测试
 
 ```powershell
-.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B-Q4_K_M.gguf" --bench
+.\anima-run.exe --model "D:\models\Qwen3.6-35B-A3B.gguf" --bench
 ```
 
 预期成功的基准测试输出形式:
